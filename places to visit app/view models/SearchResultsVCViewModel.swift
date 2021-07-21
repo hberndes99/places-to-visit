@@ -10,6 +10,7 @@ import MapKit
 
 class SearchResultsVCViewModel {
     var delegate: SearchResultsViewControllerDelegate?
+    var searchResults: [MKMapItem] = []
     
     func performSearch(mapView: MKMapView, searchText: String) {
         /// perform search
@@ -17,15 +18,13 @@ class SearchResultsVCViewModel {
         request.naturalLanguageQuery = searchText
         request.region  = mapView.region
         let search = MKLocalSearch(request: request)
-        search.start { response, error in
+        search.start { [weak self] response, error in
             guard let response = response else {
                 return
             }
-            // self.searchResults = response.mapItems
-            // self.searchResultsTable.reloadData()
-            // this print works so the search request works
             print(response.mapItems)
-            self.delegate?.updateTableWithSearch(response: response.mapItems)
+            self?.searchResults = response.mapItems
+            self?.delegate?.updateTableWithSearch()
         }
     }
 }

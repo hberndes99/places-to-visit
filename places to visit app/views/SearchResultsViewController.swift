@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 
 protocol SearchResultsViewControllerDelegate {
-    func updateTableWithSearch(response: [MKMapItem])
+    func updateTableWithSearch()
 }
 
 class SearchResultsViewController: UIViewController {
@@ -83,12 +83,12 @@ extension SearchResultsViewController: UITableViewDelegate {
 
 extension SearchResultsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.count
+        return searchResultsVCViewModel.searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = searchResultsTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PlaceOfInterestTableViewCell
-        let place = searchResults[indexPath.row]
+        let place = searchResultsVCViewModel.searchResults[indexPath.row]
         cell.configureMKMapItem(mapItem: place)
         return cell
     }
@@ -97,8 +97,7 @@ extension SearchResultsViewController: UITableViewDataSource {
 
 
 extension SearchResultsViewController: SearchResultsViewControllerDelegate {
-    func updateTableWithSearch(response: [MKMapItem]) {
-        searchResults = response
+    func updateTableWithSearch() {
         searchResultsTable.reloadData()
     }
     
