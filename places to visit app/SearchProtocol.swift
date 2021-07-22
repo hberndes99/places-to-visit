@@ -9,5 +9,8 @@ import Foundation
 import MapKit
 
 protocol SearchProtocol {
-    func startSearch(mapView: MKMapView, searchText: String, completion: @escaping ([MKMapItem]) -> Void)
+    func startSearch(mapView: MKMapView,
+                     searchText: String,
+                     factory: MKLocalSearchFactoryProtocol,
+                     completion: @escaping ([MKMapItem]) -> Void)
 }

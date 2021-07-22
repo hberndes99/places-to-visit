@@ -9,10 +9,10 @@ import Foundation
 import MapKit
 @testable import places_to_visit_app
 
-class MockSearchNetworkManager: SearchProtocol {
-    func startSearch(mapView: MKMapView, searchText: String, completion: @escaping ([MKMapItem]) -> Void) {
-        //
-    }
-    
-
-}
+//class MockSearchNetworkManager: SearchProtocol {
+//    func startSearch(mapView: MKMapView, searchText: String, completion: @escaping ([MKMapItem]) -> Void) {
+//        //
+//    }
+//
+//
+//}

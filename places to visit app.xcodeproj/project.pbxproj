@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4526049026A9895B00D2B950 /* SearchNetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4526048F26A9895B00D2B950 /* SearchNetworkManagerTests.swift */; };
 		E477EC2726A839FB00EA3B1B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC2626A839FB00EA3B1B /* AppDelegate.swift */; };
 		E477EC2926A839FB00EA3B1B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC2826A839FB00EA3B1B /* SceneDelegate.swift */; };
 		E477EC2B26A839FB00EA3B1B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC2A26A839FB00EA3B1B /* MapViewController.swift */; };
@@ -16,7 +17,6 @@
 		E477EC5826A863D200EA3B1B /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC5726A863D200EA3B1B /* SearchResultsViewController.swift */; };
 		E477EC5A26A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC5926A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift */; };
 		E477EC5D26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC5C26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift */; };
-		E477EC6026A96AF600EA3B1B /* LocalSearchRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC5E26A96AEE00EA3B1B /* LocalSearchRequestTest.swift */; };
 		E477EC6226A96BFA00EA3B1B /* SearchNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6126A96BFA00EA3B1B /* SearchNetworkManager.swift */; };
 		E477EC6426A96EA700EA3B1B /* SearchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6326A96EA700EA3B1B /* SearchProtocol.swift */; };
 		E477EC6A26A97A4800EA3B1B /* MockSearchNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6926A97A4800EA3B1B /* MockSearchNetworkManager.swift */; };
@@ -40,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4526048F26A9895B00D2B950 /* SearchNetworkManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNetworkManagerTests.swift; sourceTree = "<group>"; };
 		E477EC2326A839FB00EA3B1B /* places to visit app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "places to visit app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E477EC2626A839FB00EA3B1B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E477EC2826A839FB00EA3B1B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,7 +56,6 @@
 		E477EC5726A863D200EA3B1B /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		E477EC5926A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceOfInterestTableViewCell.swift; sourceTree = "<group>"; };
 		E477EC5C26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVCViewModel.swift; sourceTree = "<group>"; };
-		E477EC5E26A96AEE00EA3B1B /* LocalSearchRequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSearchRequestTest.swift; sourceTree = "<group>"; };
 		E477EC6126A96BFA00EA3B1B /* SearchNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNetworkManager.swift; sourceTree = "<group>"; };
 		E477EC6326A96EA700EA3B1B /* SearchProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProtocol.swift; sourceTree = "<group>"; };
 		E477EC6926A97A4800EA3B1B /* MockSearchNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchNetworkManager.swift; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				E477EC3F26A839FD00EA3B1B /* Info.plist */,
-				E477EC5E26A96AEE00EA3B1B /* LocalSearchRequestTest.swift */,
+				4526048F26A9895B00D2B950 /* SearchNetworkManagerTests.swift */,
 				E477EC6926A97A4800EA3B1B /* MockSearchNetworkManager.swift */,
 			);
 			path = "places to visit appTests";
@@ -304,6 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4526049026A9895B00D2B950 /* SearchNetworkManagerTests.swift in Sources */,
 				E477EC6A26A97A4800EA3B1B /* MockSearchNetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,7 +314,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E477EC4926A839FD00EA3B1B /* places_to_visit_appUITests.swift in Sources */,
-				E477EC6026A96AF600EA3B1B /* LocalSearchRequestTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
