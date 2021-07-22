@@ -21,6 +21,6 @@ class SearchResultsVCViewModel {
         searchNetworkManager.startSearch(mapView: mapView, searchText: searchText, factory: MKLocalSearchFactory()) { [weak self] searchResults in
             self?.searchResults = searchResults
             self?.delegate?.updateTableWithSearch()
-        }
+        } 
     }
 }

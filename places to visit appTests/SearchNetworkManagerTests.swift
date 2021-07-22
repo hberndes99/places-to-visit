@@ -66,6 +66,7 @@ class SearchNetworkManagerTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
+    /*
     func testStartSearch_failure_returnsError() {
         let mapView = MKMapView()
         let mockMKLocalSearchFactory = MockMKLocalSearchFactory()
@@ -75,12 +76,13 @@ class SearchNetworkManagerTests: XCTestCase {
         mockLocalSearch.error = SearchNetworkManagerError.generalError
         
     }
+ */
 }
-
+/*
 enum SearchNetworkManagerError: Error {
     case generalError
 }
-
+ */
 
 // MARK: - mocks
 

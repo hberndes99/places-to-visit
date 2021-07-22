@@ -34,6 +34,7 @@ class SearchResultsViewController: UIViewController {
         super.viewDidLoad()
 
         title = "Search for places to visit"
+        view.accessibilityIdentifier = "search for place of interest screen"
         searchResultsVCViewModel = SearchResultsVCViewModel(searchNetworkManager: SearchNetworkManager())
         searchResultsVCViewModel.delegate = self
         

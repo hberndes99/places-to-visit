@@ -17,6 +17,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Saved places"
+        view.accessibilityIdentifier = "Saved places map view"
         
         mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,6 +32,7 @@ class MapViewController: UIViewController {
         setUpConstraints()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped(mapView: )))
+        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "add place of interest button"
     }
     
     func setUpConstraints() {

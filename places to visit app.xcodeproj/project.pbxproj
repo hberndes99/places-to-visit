@@ -13,12 +13,12 @@
 		E477EC2B26A839FB00EA3B1B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC2A26A839FB00EA3B1B /* MapViewController.swift */; };
 		E477EC3026A839FC00EA3B1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E477EC2F26A839FC00EA3B1B /* Assets.xcassets */; };
 		E477EC3326A839FC00EA3B1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E477EC3126A839FC00EA3B1B /* LaunchScreen.storyboard */; };
-		E477EC4926A839FD00EA3B1B /* places_to_visit_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC4826A839FD00EA3B1B /* places_to_visit_appUITests.swift */; };
 		E477EC5826A863D200EA3B1B /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC5726A863D200EA3B1B /* SearchResultsViewController.swift */; };
 		E477EC5A26A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC5926A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift */; };
 		E477EC5D26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC5C26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift */; };
 		E477EC6226A96BFA00EA3B1B /* SearchNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6126A96BFA00EA3B1B /* SearchNetworkManager.swift */; };
 		E477EC6426A96EA700EA3B1B /* SearchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6326A96EA700EA3B1B /* SearchProtocol.swift */; };
+		E477EC6C26A9BD0000EA3B1B /* NavigationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6B26A9BD0000EA3B1B /* NavigationUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,13 +50,13 @@
 		E477EC3926A839FD00EA3B1B /* places to visit appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "places to visit appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E477EC3F26A839FD00EA3B1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E477EC4426A839FD00EA3B1B /* places to visit appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "places to visit appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E477EC4826A839FD00EA3B1B /* places_to_visit_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = places_to_visit_appUITests.swift; sourceTree = "<group>"; };
 		E477EC4A26A839FD00EA3B1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E477EC5726A863D200EA3B1B /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		E477EC5926A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceOfInterestTableViewCell.swift; sourceTree = "<group>"; };
 		E477EC5C26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVCViewModel.swift; sourceTree = "<group>"; };
 		E477EC6126A96BFA00EA3B1B /* SearchNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNetworkManager.swift; sourceTree = "<group>"; };
 		E477EC6326A96EA700EA3B1B /* SearchProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProtocol.swift; sourceTree = "<group>"; };
+		E477EC6B26A9BD0000EA3B1B /* NavigationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,8 +132,8 @@
 		E477EC4726A839FD00EA3B1B /* places to visit appUITests */ = {
 			isa = PBXGroup;
 			children = (
-				E477EC4826A839FD00EA3B1B /* places_to_visit_appUITests.swift */,
 				E477EC4A26A839FD00EA3B1B /* Info.plist */,
+				E477EC6B26A9BD0000EA3B1B /* NavigationUITests.swift */,
 			);
 			path = "places to visit appUITests";
 			sourceTree = "<group>";
@@ -231,6 +231,7 @@
 					};
 					E477EC4326A839FD00EA3B1B = {
 						CreatedOnToolsVersion = 12.5;
+						LastSwiftMigration = 1250;
 						TestTargetID = E477EC2226A839FB00EA3B1B;
 					};
 				};
@@ -309,7 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E477EC4926A839FD00EA3B1B /* places_to_visit_appUITests.swift in Sources */,
+				E477EC6C26A9BD0000EA3B1B /* NavigationUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,6 +546,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y82RUDS2MS;
 				INFOPLIST_FILE = "places to visit appUITests/Info.plist";
@@ -555,6 +557,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "BrightNetworkTraining.places-to-visit-appUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "places to visit app";
@@ -565,6 +568,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y82RUDS2MS;
 				INFOPLIST_FILE = "places to visit appUITests/Info.plist";
