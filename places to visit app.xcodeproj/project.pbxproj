@@ -19,7 +19,6 @@
 		E477EC5D26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC5C26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift */; };
 		E477EC6226A96BFA00EA3B1B /* SearchNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6126A96BFA00EA3B1B /* SearchNetworkManager.swift */; };
 		E477EC6426A96EA700EA3B1B /* SearchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6326A96EA700EA3B1B /* SearchProtocol.swift */; };
-		E477EC6A26A97A4800EA3B1B /* MockSearchNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6926A97A4800EA3B1B /* MockSearchNetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +57,6 @@
 		E477EC5C26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVCViewModel.swift; sourceTree = "<group>"; };
 		E477EC6126A96BFA00EA3B1B /* SearchNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNetworkManager.swift; sourceTree = "<group>"; };
 		E477EC6326A96EA700EA3B1B /* SearchProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProtocol.swift; sourceTree = "<group>"; };
-		E477EC6926A97A4800EA3B1B /* MockSearchNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchNetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +125,6 @@
 			children = (
 				E477EC3F26A839FD00EA3B1B /* Info.plist */,
 				4526048F26A9895B00D2B950 /* SearchNetworkManagerTests.swift */,
-				E477EC6926A97A4800EA3B1B /* MockSearchNetworkManager.swift */,
 			);
 			path = "places to visit appTests";
 			sourceTree = "<group>";
@@ -305,7 +302,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4526049026A9895B00D2B950 /* SearchNetworkManagerTests.swift in Sources */,
-				E477EC6A26A97A4800EA3B1B /* MockSearchNetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

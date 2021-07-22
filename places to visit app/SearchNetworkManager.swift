@@ -22,6 +22,7 @@ class SearchNetworkManager: SearchProtocol {
         let search = factory.buildMKLocalSearch(with: request)
         search.start { response, error in
             guard let response = response else {
+                completion([])
                 return
             }
             completion(response.mapItems)

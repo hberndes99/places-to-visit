@@ -50,10 +50,37 @@ class SearchNetworkManagerTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-    func testStartSearch_failure_returnsError() {
+    func testStartSearch_failure_returnsNoResponse() {
         // todo
+        let mapView = MKMapView()
+        let mockFactory = MockMKLocalSearchFactory()
+        let mockLocalSearch = MockLocalSearch()
+        mockFactory.localSearchToReturn = mockLocalSearch
+        
+        let expectation = self.expectation(description: "")
+        searchNetworkManager.startSearch(mapView: mapView, searchText: "cafe nero", factory: mockFactory) { mapItems in
+            //  XCTAssertEqual(mapItems.count, 3) this fails as expected
+            XCTAssertEqual(mapItems.count, 0)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func testStartSearch_failure_returnsError() {
+        let mapView = MKMapView()
+        let mockMKLocalSearchFactory = MockMKLocalSearchFactory()
+        let mockLocalSearch = MockLocalSearch()
+        mockMKLocalSearchFactory.localSearchToReturn = mockLocalSearch
+        
+        mockLocalSearch.error = SearchNetworkManagerError.generalError
+        
     }
 }
+
+enum SearchNetworkManagerError: Error {
+    case generalError
+}
+
 
 // MARK: - mocks
 
@@ -78,10 +105,11 @@ class MockMKLocalSearchFactory: MKLocalSearchFactoryProtocol {
 class MockLocalSearch: LocalSearchProtocol {
 
     var itemsToReturn: MKLocalSearch.Response? = nil
+    var error: Error? = nil
 
     func start(completionHandler: @escaping MKLocalSearch.CompletionHandler) {
         DispatchQueue.main.async {
-            completionHandler(self.itemsToReturn, nil)
+            completionHandler(self.itemsToReturn, self.error)
         }
     }
 }
