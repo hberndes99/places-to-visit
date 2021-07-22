@@ -12,11 +12,14 @@
 		E477EC2B26A839FB00EA3B1B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC2A26A839FB00EA3B1B /* MapViewController.swift */; };
 		E477EC3026A839FC00EA3B1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E477EC2F26A839FC00EA3B1B /* Assets.xcassets */; };
 		E477EC3326A839FC00EA3B1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E477EC3126A839FC00EA3B1B /* LaunchScreen.storyboard */; };
-		E477EC3E26A839FD00EA3B1B /* places_to_visit_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC3D26A839FD00EA3B1B /* places_to_visit_appTests.swift */; };
 		E477EC4926A839FD00EA3B1B /* places_to_visit_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC4826A839FD00EA3B1B /* places_to_visit_appUITests.swift */; };
 		E477EC5826A863D200EA3B1B /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC5726A863D200EA3B1B /* SearchResultsViewController.swift */; };
 		E477EC5A26A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC5926A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift */; };
 		E477EC5D26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC5C26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift */; };
+		E477EC6026A96AF600EA3B1B /* LocalSearchRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC5E26A96AEE00EA3B1B /* LocalSearchRequestTest.swift */; };
+		E477EC6226A96BFA00EA3B1B /* SearchNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6126A96BFA00EA3B1B /* SearchNetworkManager.swift */; };
+		E477EC6426A96EA700EA3B1B /* SearchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6326A96EA700EA3B1B /* SearchProtocol.swift */; };
+		E477EC6A26A97A4800EA3B1B /* MockSearchNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6926A97A4800EA3B1B /* MockSearchNetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +48,6 @@
 		E477EC3226A839FC00EA3B1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E477EC3426A839FC00EA3B1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E477EC3926A839FD00EA3B1B /* places to visit appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "places to visit appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E477EC3D26A839FD00EA3B1B /* places_to_visit_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = places_to_visit_appTests.swift; sourceTree = "<group>"; };
 		E477EC3F26A839FD00EA3B1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E477EC4426A839FD00EA3B1B /* places to visit appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "places to visit appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E477EC4826A839FD00EA3B1B /* places_to_visit_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = places_to_visit_appUITests.swift; sourceTree = "<group>"; };
@@ -53,6 +55,10 @@
 		E477EC5726A863D200EA3B1B /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		E477EC5926A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceOfInterestTableViewCell.swift; sourceTree = "<group>"; };
 		E477EC5C26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVCViewModel.swift; sourceTree = "<group>"; };
+		E477EC5E26A96AEE00EA3B1B /* LocalSearchRequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSearchRequestTest.swift; sourceTree = "<group>"; };
+		E477EC6126A96BFA00EA3B1B /* SearchNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNetworkManager.swift; sourceTree = "<group>"; };
+		E477EC6326A96EA700EA3B1B /* SearchProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProtocol.swift; sourceTree = "<group>"; };
+		E477EC6926A97A4800EA3B1B /* MockSearchNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchNetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,8 @@
 		E477EC2526A839FB00EA3B1B /* places to visit app */ = {
 			isa = PBXGroup;
 			children = (
+				E477EC6326A96EA700EA3B1B /* SearchProtocol.swift */,
+				E477EC6126A96BFA00EA3B1B /* SearchNetworkManager.swift */,
 				E477EC5B26A87A1C00EA3B1B /* view models */,
 				E477EC5626A8638E00EA3B1B /* views */,
 				E477EC2626A839FB00EA3B1B /* AppDelegate.swift */,
@@ -117,8 +125,9 @@
 		E477EC3C26A839FD00EA3B1B /* places to visit appTests */ = {
 			isa = PBXGroup;
 			children = (
-				E477EC3D26A839FD00EA3B1B /* places_to_visit_appTests.swift */,
 				E477EC3F26A839FD00EA3B1B /* Info.plist */,
+				E477EC5E26A96AEE00EA3B1B /* LocalSearchRequestTest.swift */,
+				E477EC6926A97A4800EA3B1B /* MockSearchNetworkManager.swift */,
 			);
 			path = "places to visit appTests";
 			sourceTree = "<group>";
@@ -220,6 +229,7 @@
 					};
 					E477EC3826A839FD00EA3B1B = {
 						CreatedOnToolsVersion = 12.5;
+						LastSwiftMigration = 1250;
 						TestTargetID = E477EC2226A839FB00EA3B1B;
 					};
 					E477EC4326A839FD00EA3B1B = {
@@ -282,9 +292,11 @@
 				E477EC5D26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift in Sources */,
 				E477EC2B26A839FB00EA3B1B /* MapViewController.swift in Sources */,
 				E477EC5826A863D200EA3B1B /* SearchResultsViewController.swift in Sources */,
+				E477EC6226A96BFA00EA3B1B /* SearchNetworkManager.swift in Sources */,
 				E477EC2726A839FB00EA3B1B /* AppDelegate.swift in Sources */,
 				E477EC5A26A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift in Sources */,
 				E477EC2926A839FB00EA3B1B /* SceneDelegate.swift in Sources */,
+				E477EC6426A96EA700EA3B1B /* SearchProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E477EC3E26A839FD00EA3B1B /* places_to_visit_appTests.swift in Sources */,
+				E477EC6A26A97A4800EA3B1B /* MockSearchNetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E477EC4926A839FD00EA3B1B /* places_to_visit_appUITests.swift in Sources */,
+				E477EC6026A96AF600EA3B1B /* LocalSearchRequestTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +503,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y82RUDS2MS;
 				INFOPLIST_FILE = "places to visit appTests/Info.plist";
@@ -501,6 +515,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "BrightNetworkTraining.places-to-visit-appTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/places to visit app.app/places to visit app";
@@ -512,6 +527,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y82RUDS2MS;
 				INFOPLIST_FILE = "places to visit appTests/Info.plist";

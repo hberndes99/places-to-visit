@@ -1,14 +1,13 @@
 //
-//  places_to_visit_appTests.swift
+//  LocalSearchRequestTest.swift
 //  places to visit appTests
 //
-//  Created by Harriette Berndes on 21/07/2021.
+//  Created by Harriette Berndes on 22/07/2021.
 //
 
 import XCTest
-@testable import places_to_visit_app
 
-class places_to_visit_appTests: XCTestCase {
+class LocalSearchRequestTest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

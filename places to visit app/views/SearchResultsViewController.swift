@@ -34,7 +34,7 @@ class SearchResultsViewController: UIViewController {
         super.viewDidLoad()
 
         title = "Search for places to visit"
-        searchResultsVCViewModel = SearchResultsVCViewModel()
+        searchResultsVCViewModel = SearchResultsVCViewModel(searchNetworkManager: SearchNetworkManager())
         searchResultsVCViewModel.delegate = self
         
         searchController = UISearchController(searchResultsController: nil)

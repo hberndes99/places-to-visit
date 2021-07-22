@@ -11,19 +11,15 @@ import MapKit
 class SearchResultsVCViewModel {
     var delegate: SearchResultsViewControllerDelegate?
     var searchResults: [MKMapItem] = []
+    var searchNetworkManager: SearchProtocol
+    
+    init (searchNetworkManager: SearchProtocol) {
+        self.searchNetworkManager = searchNetworkManager
+    }
     
     func performSearch(mapView: MKMapView, searchText: String) {
-        /// perform search
-        let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = searchText
-        request.region  = mapView.region
-        let search = MKLocalSearch(request: request)
-        search.start { [weak self] response, error in
-            guard let response = response else {
-                return
-            }
-            print(response.mapItems)
-            self?.searchResults = response.mapItems
+        searchNetworkManager.startSearch(mapView: mapView, searchText: searchText) { [weak self] searchResults in
+            self?.searchResults = searchResults
             self?.delegate?.updateTableWithSearch()
         }
     }
