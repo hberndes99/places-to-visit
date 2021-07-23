@@ -13,15 +13,20 @@ class SearchResultsVCViewModelTests: XCTestCase {
 
     var searchResultsVCViewModel: SearchResultsVCViewModel!
     var mockSearchNetworkManager: MockSearchNetworkManager!
+    var mockSearchResultsViewControllerDelegate: MockSearchResultsViewControllerDelegate!
     
     override func setUpWithError() throws {
         mockSearchNetworkManager = MockSearchNetworkManager()
-
+        mockSearchResultsViewControllerDelegate = MockSearchResultsViewControllerDelegate()
+        
         searchResultsVCViewModel = SearchResultsVCViewModel(searchNetworkManager: mockSearchNetworkManager)
+        searchResultsVCViewModel.delegate = mockSearchResultsViewControllerDelegate
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        searchResultsVCViewModel = nil
+        mockSearchNetworkManager = nil
+        mockSearchResultsViewControllerDelegate = nil
     }
 
     func testPerformSearch() throws {
@@ -33,31 +38,28 @@ class SearchResultsVCViewModelTests: XCTestCase {
             MKMapItem(placemark: placemark),
             MKMapItem(placemark: placemark)
         ]
-        //print(searchResultsVCViewModel.searchResults)
+
         searchResultsVCViewModel.performSearch(mapView: mapView, searchText: "hej")
-        //print(searchResultsVCViewModel.searchResults)
-        //print(self.mockSearchNetworkManager.response)
-        
+   
         //this fails with 3
         XCTAssertEqual(searchResultsVCViewModel.searchResults.count, 2)
-
+        XCTAssertTrue(mockSearchResultsViewControllerDelegate.updateTableWithSearchWasCalled)
     }
-
- 
-
 }
 
-
-// mock searchNetworkManager
 class MockSearchNetworkManager: SearchNetworkManagerProtocol {
     
     var response: [MKMapItem] = []
     
     func startSearch(mapView: MKMapView, searchText: String, factory: MKLocalSearchFactoryProtocol, completion: @escaping ([MKMapItem]) -> Void) {
-        
         completion(response)
-        
     }
+}
+
+class MockSearchResultsViewControllerDelegate: SearchResultsViewControllerDelegate {
+    var updateTableWithSearchWasCalled: Bool = false
     
-    
+    func updateTableWithSearch() {
+        updateTableWithSearchWasCalled = true
+    }
 }

@@ -1,7 +1,7 @@
 //
 //  SearchNetworkManager.swift
 //  places to visit app
-//
+// 
 //  Created by Harriette Berndes on 22/07/2021.
 //
 
