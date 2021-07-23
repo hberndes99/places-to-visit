@@ -16,6 +16,8 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Saved places"
+        view.accessibilityIdentifier = "Saved places map view"
         
         mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -28,6 +30,9 @@ class MapViewController: UIViewController {
         locationManager.requestLocation()
         
         setUpConstraints()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped(mapView: )))
+        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "add place of interest button"
     }
     
     func setUpConstraints() {
@@ -38,16 +43,22 @@ class MapViewController: UIViewController {
             mapView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ])
     }
+    
+    @objc func addButtonTapped(mapView: MKMapView) {
+        let searchResultsViewController = SearchResultsViewController(mapView: self.mapView)
+        navigationController?.pushViewController(searchResultsViewController, animated: true)
+    }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-                let region = MKCoordinateRegion(center: location.coordinate, span: span)
-                mapView.setRegion(region, animated: true)
-            }
+            let span = MKCoordinateSpan(latitudeDelta: 0.07, longitudeDelta: 0.07)
+            let region = MKCoordinateRegion(center: location.coordinate, span: span)
+            mapView.setRegion(region, animated: true)
+            print("location access granted")
+        }
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
          print("error:: \(error.localizedDescription)")
