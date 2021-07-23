@@ -17,8 +17,9 @@
 		E477EC5A26A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC5926A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift */; };
 		E477EC5D26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC5C26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift */; };
 		E477EC6226A96BFA00EA3B1B /* SearchNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6126A96BFA00EA3B1B /* SearchNetworkManager.swift */; };
-		E477EC6426A96EA700EA3B1B /* SearchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6326A96EA700EA3B1B /* SearchProtocol.swift */; };
+		E477EC6426A96EA700EA3B1B /* SearchNetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6326A96EA700EA3B1B /* SearchNetworkManagerProtocol.swift */; };
 		E477EC6C26A9BD0000EA3B1B /* NavigationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6B26A9BD0000EA3B1B /* NavigationUITests.swift */; };
+		E477EC6E26AAB67600EA3B1B /* SearchResultsVCViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC6D26AAB67500EA3B1B /* SearchResultsVCViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,8 +56,9 @@
 		E477EC5926A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceOfInterestTableViewCell.swift; sourceTree = "<group>"; };
 		E477EC5C26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVCViewModel.swift; sourceTree = "<group>"; };
 		E477EC6126A96BFA00EA3B1B /* SearchNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNetworkManager.swift; sourceTree = "<group>"; };
-		E477EC6326A96EA700EA3B1B /* SearchProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProtocol.swift; sourceTree = "<group>"; };
+		E477EC6326A96EA700EA3B1B /* SearchNetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNetworkManagerProtocol.swift; sourceTree = "<group>"; };
 		E477EC6B26A9BD0000EA3B1B /* NavigationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUITests.swift; sourceTree = "<group>"; };
+		E477EC6D26AAB67500EA3B1B /* SearchResultsVCViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVCViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +109,7 @@
 		E477EC2526A839FB00EA3B1B /* places to visit app */ = {
 			isa = PBXGroup;
 			children = (
-				E477EC6326A96EA700EA3B1B /* SearchProtocol.swift */,
+				E477EC6326A96EA700EA3B1B /* SearchNetworkManagerProtocol.swift */,
 				E477EC6126A96BFA00EA3B1B /* SearchNetworkManager.swift */,
 				E477EC5B26A87A1C00EA3B1B /* view models */,
 				E477EC5626A8638E00EA3B1B /* views */,
@@ -125,6 +127,7 @@
 			children = (
 				E477EC3F26A839FD00EA3B1B /* Info.plist */,
 				4526048F26A9895B00D2B950 /* SearchNetworkManagerTests.swift */,
+				E477EC6D26AAB67500EA3B1B /* SearchResultsVCViewModelTests.swift */,
 			);
 			path = "places to visit appTests";
 			sourceTree = "<group>";
@@ -294,7 +297,7 @@
 				E477EC2726A839FB00EA3B1B /* AppDelegate.swift in Sources */,
 				E477EC5A26A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift in Sources */,
 				E477EC2926A839FB00EA3B1B /* SceneDelegate.swift in Sources */,
-				E477EC6426A96EA700EA3B1B /* SearchProtocol.swift in Sources */,
+				E477EC6426A96EA700EA3B1B /* SearchNetworkManagerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E477EC6E26AAB67600EA3B1B /* SearchResultsVCViewModelTests.swift in Sources */,
 				4526049026A9895B00D2B950 /* SearchNetworkManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,9 +11,9 @@ import MapKit
 class SearchResultsVCViewModel {
     var delegate: SearchResultsViewControllerDelegate?
     var searchResults: [MKMapItem] = []
-    var searchNetworkManager: SearchProtocol
+    var searchNetworkManager: SearchNetworkManagerProtocol
     
-    init (searchNetworkManager: SearchProtocol) {
+    init (searchNetworkManager: SearchNetworkManagerProtocol) {
         self.searchNetworkManager = searchNetworkManager
     }
     

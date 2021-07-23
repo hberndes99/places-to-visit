@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-protocol SearchProtocol {
+protocol SearchNetworkManagerProtocol {
     func startSearch(mapView: MKMapView,
                      searchText: String,
                      factory: MKLocalSearchFactoryProtocol,
