@@ -19,7 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let mapViewController = MapViewController()
+        let mapAnnotationsStore = MapAnnotationsStore()
+        let mapViewController = MapViewController(mapAnnotationsStore: mapAnnotationsStore)
         window?.rootViewController = UINavigationController(rootViewController: mapViewController)
         window?.makeKeyAndVisible()
     }
