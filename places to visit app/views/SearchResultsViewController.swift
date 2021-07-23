@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-protocol SearchResultsViewControllerDelegate {
+protocol SearchResultsViewControllerDelegate: AnyObject {
     func updateTableWithSearch()
 }
 

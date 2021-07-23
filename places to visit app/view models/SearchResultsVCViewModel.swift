@@ -9,7 +9,7 @@ import Foundation
 import MapKit
 
 class SearchResultsVCViewModel {
-    var delegate: SearchResultsViewControllerDelegate?
+    weak var delegate: SearchResultsViewControllerDelegate?
     var searchResults: [MKMapItem] = []
     var searchNetworkManager: SearchNetworkManagerProtocol
     
