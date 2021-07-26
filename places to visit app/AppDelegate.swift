@@ -7,13 +7,20 @@
 
 import UIKit
 
+
+let userDefaults = UserDefaults.standard
+let jsonEncoder = JSONEncoder()
+let jsonDecoder = JSONDecoder()
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // registering default values for user defaults
+        userDefaults.register(defaults: ["savedPlaces": Data()])
+        
         return true
     }
 

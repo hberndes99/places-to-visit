@@ -57,7 +57,12 @@ class MapViewController: UIViewController {
     }
     
     func updateMapAnnotations() {
-        mapView.addAnnotations(mapAnnotationsStore.mapAnnotationPoints)
+        if let savedPlaces = userDefaults.data(forKey: "savedPlaces") {
+            if let decodedSavedPlaces = try? jsonDecoder.decode(MapAnnotationsStore.self, from: savedPlaces) {
+                mapView.addAnnotations(decodedSavedPlaces.mapAnnotationPoints)
+            }
+        }
+        //mapView.addAnnotations(mapAnnotationsStore.mapAnnotationPoints)
     }
     
     func setUpConstraints() {

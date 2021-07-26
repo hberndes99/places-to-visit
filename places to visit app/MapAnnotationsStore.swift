@@ -7,6 +7,6 @@
 
 import Foundation
 
-class MapAnnotationsStore {
+class MapAnnotationsStore: Codable {
     var mapAnnotationPoints: [MapAnnotationPoint] = []
 }
