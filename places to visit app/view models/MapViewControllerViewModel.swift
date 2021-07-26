@@ -9,10 +9,17 @@ import Foundation
 import MapKit
 
 class MapViewControllerViewModel {
-    var mapAnnotationsStore: MapAnnotationsStore 
+    var mapAnnotationsStore: MapAnnotationsStore
+    var userDefaults: UserDefaults
     
-    init(mapAnnotationsStore: MapAnnotationsStore) {
+    init(mapAnnotationsStore: MapAnnotationsStore, userDefaults: UserDefaults = .standard) {
         self.mapAnnotationsStore = mapAnnotationsStore
+        self.userDefaults = userDefaults
+    }
+    
+    func registerDefaults() {
+        // registering default values for user defaults
+        userDefaults.register(defaults: ["savedPlaces": Data()])
     }
     
     func savePlaceOfInterestToUserDefaults(save placeOfInterest: MapAnnotationPoint) {
@@ -26,8 +33,10 @@ class MapViewControllerViewModel {
             }
         }
         // alone this only saves those places added in the previous app session
-        if let encodedPlaces = try? jsonEncoder.encode(mapAnnotationsStore) {
+        else {
+            if let encodedPlaces = try? jsonEncoder.encode(mapAnnotationsStore) {
             userDefaults.setValue(encodedPlaces, forKey: "savedPlaces")
+            }
         }
         
         /*
@@ -65,3 +74,12 @@ class MapViewControllerViewModel {
         savePlaceOfInterestToUserDefaults(save: newMapAnnotationPoint)
     }
 }
+
+/*
+protocol UserDefaultsProtocol {
+    func setValue(_ value: Any?, forKey key: String)
+    func data(forKey defaultName: String) -> Data?
+}
+
+extension UserDefaults: UserDefaultsProtocol {}
+*/

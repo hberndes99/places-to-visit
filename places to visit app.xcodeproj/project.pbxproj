@@ -24,6 +24,7 @@
 		E477EC7826AB088F00EA3B1B /* MapAnnotationPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7726AB088F00EA3B1B /* MapAnnotationPoint.swift */; };
 		E477EC7A26AB093A00EA3B1B /* MapAnnotationsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7926AB093A00EA3B1B /* MapAnnotationsStore.swift */; };
 		E477EC7C26AB0BD800EA3B1B /* MapViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7B26AB0BD800EA3B1B /* MapViewControllerViewModel.swift */; };
+		E477EC7E26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7D26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		E477EC7726AB088F00EA3B1B /* MapAnnotationPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotationPoint.swift; sourceTree = "<group>"; };
 		E477EC7926AB093A00EA3B1B /* MapAnnotationsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationsStore.swift; sourceTree = "<group>"; };
 		E477EC7B26AB0BD800EA3B1B /* MapViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerViewModel.swift; sourceTree = "<group>"; };
+		E477EC7D26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				E477EC3F26A839FD00EA3B1B /* Info.plist */,
 				4526048F26A9895B00D2B950 /* SearchNetworkManagerTests.swift */,
 				E477EC6D26AAB67500EA3B1B /* SearchResultsVCViewModelTests.swift */,
+				E477EC7D26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift */,
 			);
 			path = "places to visit appTests";
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E477EC7E26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift in Sources */,
 				E477EC6E26AAB67600EA3B1B /* SearchResultsVCViewModelTests.swift in Sources */,
 				4526049026A9895B00D2B950 /* SearchNetworkManagerTests.swift in Sources */,
 				E477EC7126AAC56800EA3B1B /* MockSearchObjects.swift in Sources */,

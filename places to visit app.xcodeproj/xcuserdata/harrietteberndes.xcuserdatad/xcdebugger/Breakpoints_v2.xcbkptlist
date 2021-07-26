@@ -14,8 +14,8 @@
             filePath = "places to visit app/view models/MapViewControllerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "savePlaceOfInterestToUserDefaults(save:)"
             landmarkType = "7">
          </BreakpointContent>

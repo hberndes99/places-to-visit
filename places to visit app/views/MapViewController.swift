@@ -37,6 +37,7 @@ class MapViewController: UIViewController {
         view.accessibilityIdentifier = "Saved places map view"
         
         mapViewControllerViewModel = MapViewControllerViewModel(mapAnnotationsStore: mapAnnotationsStore)
+        mapViewControllerViewModel.registerDefaults()
         
         mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -57,7 +58,7 @@ class MapViewController: UIViewController {
     }
     
     func updateMapAnnotations() {
-        if let savedPlaces = userDefaults.data(forKey: "savedPlaces") {
+        if let savedPlaces = mapViewControllerViewModel.userDefaults.data(forKey: "savedPlaces") {
             if let decodedSavedPlaces = try? jsonDecoder.decode(MapAnnotationsStore.self, from: savedPlaces) {
                 mapView.addAnnotations(decodedSavedPlaces.mapAnnotationPoints)
             }
