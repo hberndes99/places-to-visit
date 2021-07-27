@@ -68,6 +68,7 @@ class MockUserDefaults: UserDefaults {
     var dataWasCalled: Bool = false
     var dataWasCalledUserDefaultsCurrentlyEmpty: Bool = false
     var setValueWasCalled: Bool = false
+    
     var previouslySavedData: MapAnnotationsStore?
     // want to make this generic type?
     var saved: Dictionary<String, MapAnnotationsStore> = [String: MapAnnotationsStore]()

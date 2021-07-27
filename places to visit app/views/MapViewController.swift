@@ -38,6 +38,7 @@ class MapViewController: UIViewController {
         
         mapViewControllerViewModel = MapViewControllerViewModel(mapAnnotationsStore: mapAnnotationsStore)
         mapViewControllerViewModel.registerDefaults()
+        mapViewControllerViewModel.retrieveData()
         
         mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -58,12 +59,7 @@ class MapViewController: UIViewController {
     }
     
     func updateMapAnnotations() {
-        if let savedPlaces = mapViewControllerViewModel.userDefaults.data(forKey: "savedPlaces") {
-            if let decodedSavedPlaces = try? jsonDecoder.decode(MapAnnotationsStore.self, from: savedPlaces) {
-                mapView.addAnnotations(decodedSavedPlaces.mapAnnotationPoints)
-            }
-        }
-        //mapView.addAnnotations(mapAnnotationsStore.mapAnnotationPoints)
+        mapView.addAnnotations(mapViewControllerViewModel.mapAnnotationsStore.mapAnnotationPoints)
     }
     
     func setUpConstraints() {
