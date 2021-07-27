@@ -56,8 +56,16 @@ class MapViewControllerViewModel {
     
     func savePlaceOfInterest(placeOfInterest: MKMapItem) {
         // insert check that it doesn't already include that object
-        guard let placeName = placeOfInterest.placemark.name else { return }
-        let newMapAnnotationPoint = MapAnnotationPoint(title: placeName, subtitle: "\(placeOfInterest.placemark.subThoroughfare ?? ""), \(placeOfInterest.placemark.thoroughfare ?? "")", coordinate: placeOfInterest.placemark.coordinate, number: placeOfInterest.placemark.subThoroughfare ?? "", streetAddress: placeOfInterest.placemark.thoroughfare ?? "")
+        var subtitleString: String = ""
+        guard let placeName = placeOfInterest.name else { return }
+        
+        if placeOfInterest.placemark.subThoroughfare != nil, placeOfInterest.placemark.thoroughfare != nil {
+            subtitleString = "\(placeOfInterest.placemark.subThoroughfare ?? ""), \(placeOfInterest.placemark.thoroughfare ?? "")"
+        } else if placeOfInterest.placemark.thoroughfare != nil {
+            subtitleString = "\(placeOfInterest.placemark.thoroughfare ?? "")"
+        }
+        
+        let newMapAnnotationPoint = MapAnnotationPoint(title: placeName, subtitle: subtitleString, coordinate: placeOfInterest.placemark.coordinate, number: placeOfInterest.placemark.subThoroughfare ?? "", streetAddress: placeOfInterest.placemark.thoroughfare ?? "")
         
         for savedPoint in mapAnnotationsStore.mapAnnotationPoints {
             if savedPoint.title == newMapAnnotationPoint.title,

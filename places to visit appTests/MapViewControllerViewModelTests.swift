@@ -54,8 +54,7 @@ class MapViewControllerViewModelTests: XCTestCase {
 
     func testSavePlaceOfInterestToUserDefaults_currentlyEmpty() {
         // instantiate pointOfInterest
-        let pointOfInterestOne = MapAnnotationPoint(title: "coffee place", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1)
-, number: "1", streetAddress: "high street")
+        let pointOfInterestOne = MapAnnotationPoint(title: "coffee place", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
         mapAnnotationsStore.mapAnnotationPoints.append(pointOfInterestOne)
         mapViewControllerViewModel.savePlaceOfInterestToUserDefaults()
     
@@ -67,44 +66,52 @@ class MapViewControllerViewModelTests: XCTestCase {
         
        //let savedValue = mockUserDefaults.saved["savedPlaces"] as? MapAnnotationsStore
         //XCTAssertEqual(savedValue.mapAnnotationPoints.count, 2)
-        
-        
-        
-        /*
-        // instantiate pointOfInterest
-        let pointOfInterest = MapAnnotationPoint(title: "coffee place", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1)
-, number: "1", streetAddress: "high street")
-        
-        // call function
-        mapViewControllerViewModel.savePlaceOfInterestToUserDefaults(save: pointOfInterest)
-        
-        // perform assertions
-        XCTAssertFalse(mockUserDefaults.dataWasCalled)
-        XCTAssertTrue(mockUserDefaults.dataWasCalledUserDefaultsCurrentlyEmpty)
-        XCTAssertTrue(mockUserDefaults.setValueWasCalled)
-         */
     }
+    
+    func testSavePlaceOfInterest_storeCurrentlyEmpty() {
+        let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 20, longitude: 20), addressDictionary: nil)
+        
+        let coffeePlaceOne = MKMapItem(placemark: placemark)
+        coffeePlaceOne.name = "coffee place one"
+    
+        mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: coffeePlaceOne)
 
-    func testSavePlaceOfInterestToUserDefaults_withPlacesAlreadyStored() {
-        /* store data in dict of mock user defaults
-        let pointOfInterestOne = MapAnnotationPoint(title: "coffee place one", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
-        mapAnnotationsStore.mapAnnotationPoints = [pointOfInterestOne]
         
-        mockUserDefaults.saved = ["savedPlaces": mapAnnotationsStore]
+        XCTAssertEqual(mapAnnotationsStore.mapAnnotationPoints.count, 1)
+        XCTAssertEqual(mapAnnotationsStore.mapAnnotationPoints[0].title, coffeePlaceOne.name)
+    }
+    
+    func testSavePlaceOfInterest_storeCurrentlyContainsTwoItems() {
+        let coffeePlaceOne = MapAnnotationPoint(title: "coffee place one", subtitle: "1, the street", coordinate: CLLocationCoordinate2D(latitude: 20, longitude: 20), number: "1", streetAddress: "the street")
+        let coffeePlaceTwo = MapAnnotationPoint(title: "coffee place two", subtitle: "2, the street", coordinate: CLLocationCoordinate2D(latitude: 20, longitude: 20), number: "2", streetAddress: "the street")
         
-        //call func
-        let pointOfInterestTwo = MapAnnotationPoint(title: "coffee place two", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
-        mapViewControllerViewModel.savePlaceOfInterestToUserDefaults(save: pointOfInterestTwo)
+        mapAnnotationsStore.mapAnnotationPoints = [coffeePlaceOne, coffeePlaceTwo]
         
-        // assertions
-        XCTAssertTrue(mockUserDefaults.dataWasCalled)
-        XCTAssertFalse(mockUserDefaults.dataWasCalledUserDefaultsCurrentlyEmpty)
-        XCTAssertTrue(mockUserDefaults.setValueWasCalled)
-       
-        // this fails with 2
-        XCTAssertEqual(mockUserDefaults.saved["savedPlaces"]?.mapAnnotationPoints.count, 1)
-        XCTAssertEqual(mockUserDefaults.saved["savedPlaces"]?.mapAnnotationPoints[0].title, "coffee place one")
-    */
+        let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 30, longitude: 20), addressDictionary: nil)
+        let coffeePlaceThree = MKMapItem(placemark: placemark)
+        coffeePlaceThree.name = "coffee place three"
+        
+        mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: coffeePlaceThree)
+        
+        XCTAssertEqual(mapAnnotationsStore.mapAnnotationPoints.count, 3)
+        XCTAssertEqual(mapAnnotationsStore.mapAnnotationPoints[2].title, "coffee place three")
+        XCTAssertEqual(mapAnnotationsStore.mapAnnotationPoints[2].coordinate.latitude, CLLocationDegrees(30))
+    }
+    
+    func testSavePlaceOfInterest_storeAlreadyContainsItemToSave() {
+        let coffeePlaceOne = MapAnnotationPoint(title: "coffee place one", subtitle: "1, the street", coordinate: CLLocationCoordinate2D(latitude: 20, longitude: 20), number: "1", streetAddress: "the street")
+        let coffeePlaceTwo = MapAnnotationPoint(title: "coffee place two", subtitle: "", coordinate: CLLocationCoordinate2D(latitude: 20, longitude: 20), number: "2", streetAddress: "the street")
+        
+        mapAnnotationsStore.mapAnnotationPoints = [coffeePlaceOne, coffeePlaceTwo]
+        
+        let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 20, longitude: 20), addressDictionary: nil)
+        let coffeePlaceThree = MKMapItem(placemark: placemark)
+        coffeePlaceThree.name = "coffee place two"
+        // has the same name and subtitle as coffeePlaceTwo so shouldn't be added
+        
+        mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: coffeePlaceThree)
+        
+        XCTAssertEqual(mapAnnotationsStore.mapAnnotationPoints.count, 2)
     }
 }
 
@@ -139,3 +146,5 @@ class MockUserDefaults: UserDefaultsProtocol {
     }
  
 }
+
+
