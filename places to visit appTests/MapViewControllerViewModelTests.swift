@@ -62,7 +62,12 @@ class MapViewControllerViewModelTests: XCTestCase {
         XCTAssertFalse(mockUserDefaults.dataWasCalled)
         XCTAssertTrue(mockUserDefaults.setValueWasCalled)
         
-        XCTAssert(mockUserDefaults.saved["savedPlaces"] == nil)
+        XCTAssert(mockUserDefaults.saved["savedPlaces"] != nil)
+        XCTAssert(mockUserDefaults.saved["places"] == nil)
+        
+       //let savedValue = mockUserDefaults.saved["savedPlaces"] as? MapAnnotationsStore
+        //XCTAssertEqual(savedValue.mapAnnotationPoints.count, 2)
+        
         
         
         /*
@@ -120,10 +125,8 @@ class MockUserDefaults: UserDefaultsProtocol {
     }
     
     func setValue(_ value: Any?, forKey key: String) {
-        if value is MapAnnotationsStore, key == "savedPlaces" {
-            setValueWasCalled = true
-            // value here is already encoded
-        }
+        setValueWasCalled = true
+        saved[key] = value
     }
     
     func data(forKey defaultName: String) -> Data? {
