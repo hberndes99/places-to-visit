@@ -10,9 +10,9 @@ import MapKit
 
 class MapViewControllerViewModel {
     var mapAnnotationsStore: MapAnnotationsStore
-    var userDefaults: UserDefaults
+    var userDefaults: UserDefaultsProtocol
     
-    init(mapAnnotationsStore: MapAnnotationsStore, userDefaults: UserDefaults = .standard) {
+    init(mapAnnotationsStore: MapAnnotationsStore, userDefaults: UserDefaultsProtocol = UserDefaults.standard) {
         self.mapAnnotationsStore = mapAnnotationsStore
         self.userDefaults = userDefaults
     }
@@ -30,7 +30,7 @@ class MapViewControllerViewModel {
         }
     }
     
-    func savePlaceOfInterestToUserDefaults(save placeOfInterest: MapAnnotationPoint) {
+    func savePlaceOfInterestToUserDefaults() {
         
         if let encodedPlaces = try? jsonEncoder.encode(mapAnnotationsStore) {
             userDefaults.setValue(encodedPlaces, forKey: "savedPlaces")
@@ -71,6 +71,16 @@ class MapViewControllerViewModel {
        
         
         // save place to user defaults
-        savePlaceOfInterestToUserDefaults(save: newMapAnnotationPoint)
+        savePlaceOfInterestToUserDefaults()
     }
+}
+
+protocol UserDefaultsProtocol {
+    func register(defaults registrationDictionary: [String : Any])
+    func setValue(_ value: Any?, forKey key: String)
+    func data(forKey defaultName: String) -> Data?
+}
+
+extension UserDefaults: UserDefaultsProtocol {
+    
 }

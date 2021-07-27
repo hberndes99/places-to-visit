@@ -14,8 +14,8 @@
             filePath = "places to visit appTests/MapViewControllerViewModelTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "testSavePlaceOfInterestToUserDefaults_withPlacesAlreadyStored()"
             landmarkType = "7">
          </BreakpointContent>
