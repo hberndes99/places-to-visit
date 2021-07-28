@@ -7,11 +7,6 @@
 
 import UIKit
 
-
-//let userDefaults = UserDefaults.standard
-let jsonEncoder = JSONEncoder()
-let jsonDecoder = JSONDecoder()
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     

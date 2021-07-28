@@ -105,7 +105,5 @@ extension MapViewController: SearchResultsVCMapViewVCDelegate {
         mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: placeOfInterest)
         updateMapAnnotations()
     }
-    
-    
 }
 

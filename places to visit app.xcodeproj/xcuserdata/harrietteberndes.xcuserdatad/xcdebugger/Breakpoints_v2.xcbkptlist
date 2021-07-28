@@ -14,8 +14,8 @@
             filePath = "places to visit app/view models/MapViewControllerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "savePlaceOfInterest(placeOfInterest:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "places to visit app/view models/MapViewControllerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "savePlaceOfInterest(placeOfInterest:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "places to visit app/view models/MapViewControllerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "savePlaceOfInterest(placeOfInterest:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "places to visit app/view models/MapViewControllerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "savePlaceOfInterest(placeOfInterest:)"
             landmarkType = "7">
          </BreakpointContent>

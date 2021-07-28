@@ -24,6 +24,7 @@ class MapViewControllerViewModel {
     
     func retrieveData() {
         if let oldMapStore = userDefaults.data(forKey: "savedPlaces") {
+            let jsonDecoder = JSONDecoder()
             if let oldMapStoreDecoded = try? jsonDecoder.decode(MapAnnotationsStore.self, from: oldMapStore) {
                 mapAnnotationsStore = oldMapStoreDecoded
             }
@@ -31,31 +32,13 @@ class MapViewControllerViewModel {
     }
     
     func savePlaceOfInterestToUserDefaults() {
-        
+        let jsonEncoder = JSONEncoder()
         if let encodedPlaces = try? jsonEncoder.encode(mapAnnotationsStore) {
             userDefaults.setValue(encodedPlaces, forKey: "savedPlaces")
         }
-        /*
-        if let oldMapStore = userDefaults.data(forKey: "savedPlaces") {
-            if let oldMapStore = try? jsonDecoder.decode(MapAnnotationsStore.self, from: oldMapStore) {
-                mapAnnotationsStore = oldMapStore
-                mapAnnotationsStore.mapAnnotationPoints.append(placeOfInterest)
-                if let encodedPlaces = try? jsonEncoder.encode(mapAnnotationsStore) {
-                    userDefaults.setValue(encodedPlaces, forKey: "savedPlaces")
-                }
-            }
-        }
-        // alone this only saves those places added in the previous app session
-        else {
-            if let encodedPlaces = try? jsonEncoder.encode(mapAnnotationsStore) {
-                userDefaults.setValue(encodedPlaces, forKey: "savedPlaces")
-            }
-        }
- */
     }
     
     func savePlaceOfInterest(placeOfInterest: MKMapItem) {
-        // insert check that it doesn't already include that object
         var subtitleString: String = ""
         guard let placeName = placeOfInterest.name else { return }
         
