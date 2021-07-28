@@ -27,45 +27,45 @@ class MapViewControllerViewModelTests: XCTestCase {
         mapAnnotationsStore = nil
         mockUserDefaults = nil
     }
-    
-    func testRegisterDefaults() {
-        mapViewControllerViewModel.registerDefaults()
-        
-        XCTAssertTrue(mockUserDefaults.registerWasCalled)
-        XCTAssertTrue(mockUserDefaults.saved["savedPlaces"] != nil)
-        XCTAssertFalse(mockUserDefaults.saved["places"] != nil)
-     
-    }
-    
+
     func testRetrieveData() {
         let pointOfInterestOne = MapAnnotationPoint(title: "coffee place one", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
         let pointOfInterestTwo = MapAnnotationPoint(title: "coffee place two", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
         mapAnnotationsStore.mapAnnotationPoints.append(pointOfInterestOne)
         mapAnnotationsStore.mapAnnotationPoints.append(pointOfInterestTwo)
-        // do i need to encode this first
-        mockUserDefaults.saved["savedPlaces"] = mapAnnotationsStore
+       
+        // sets encoded data in the user defaults 'store'
+        let jsonEncoder = JSONEncoder()
+        guard let encodedMapAnnotationsStore = try? jsonEncoder.encode(mapAnnotationsStore) else {return}
+        mockUserDefaults.saved["savedPlaces"] = encodedMapAnnotationsStore
         
         mapViewControllerViewModel.retrieveData()
         
         XCTAssertTrue(mockUserDefaults.dataWasCalled)
-        XCTAssertEqual(mockUserDefaults.previouslySavedData?.mapAnnotationPoints.count, 2)
-        XCTAssertEqual(mockUserDefaults.previouslySavedData?.mapAnnotationPoints[0].title, "coffee place one")
+        XCTAssertEqual(mapViewControllerViewModel.mapAnnotationsStore.mapAnnotationPoints.count, 2)
+        XCTAssertEqual(mapViewControllerViewModel.mapAnnotationsStore.mapAnnotationPoints[0].title, "coffee place one")
+        
     }
 
     func testSavePlaceOfInterestToUserDefaults_currentlyEmpty() {
-        // instantiate pointOfInterest
         let pointOfInterestOne = MapAnnotationPoint(title: "coffee place", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
-        mapAnnotationsStore.mapAnnotationPoints.append(pointOfInterestOne)
+        mapViewControllerViewModel.mapAnnotationsStore.mapAnnotationPoints.append(pointOfInterestOne)
+        
         mapViewControllerViewModel.savePlaceOfInterestToUserDefaults()
-    
+        
+        let jsonDecoder = JSONDecoder()
+        guard let decodedData = try? jsonDecoder.decode(MapAnnotationsStore.self, from: mockUserDefaults.savedBySetValue["savedPlaces"] as! Data) else {
+            print("fell through")
+            return
+        }
+
         XCTAssertFalse(mockUserDefaults.dataWasCalled)
         XCTAssertTrue(mockUserDefaults.setValueWasCalled)
         
-        XCTAssert(mockUserDefaults.saved["savedPlaces"] != nil)
-        XCTAssert(mockUserDefaults.saved["places"] == nil)
-        
-       //let savedValue = mockUserDefaults.saved["savedPlaces"] as? MapAnnotationsStore
-        //XCTAssertEqual(savedValue.mapAnnotationPoints.count, 2)
+        XCTAssert(mockUserDefaults.savedBySetValue["savedPlaces"] != nil)
+        XCTAssert(mockUserDefaults.savedBySetValue["places"] == nil)
+        XCTAssertEqual(decodedData.mapAnnotationPoints[0].title, "coffee place")
+        XCTAssertEqual(decodedData.mapAnnotationPoints[0].coordinate.latitude, CLLocationDegrees(0.2))
     }
     
     func testSavePlaceOfInterest_storeCurrentlyEmpty() {
@@ -116,31 +116,25 @@ class MapViewControllerViewModelTests: XCTestCase {
 }
 
 class MockUserDefaults: UserDefaultsProtocol {
-    
-    var registerWasCalled: Bool = false
     var dataWasCalled: Bool = false
     var dataWasCalledUserDefaultsCurrentlyEmpty: Bool = false
     var setValueWasCalled: Bool = false
     
-    var previouslySavedData: MapAnnotationsStore?
-    // want to make this generic type?
-    var saved: Dictionary<String, Any> = [String: Any]()
-    
-    func register(defaults registrationDictionary: [String : Any]) {
-        saved = registrationDictionary
-        registerWasCalled = true
-    }
+    var saved: Dictionary<String, Data> = [String: Data]()
+    var savedBySetValue: Dictionary<String, Any> = [String: Any]()
+    var encodedData: Data?
     
     func setValue(_ value: Any?, forKey key: String) {
-        setValueWasCalled = true
-        saved[key] = value
+        if value is Data {
+            setValueWasCalled = true
+            savedBySetValue[key] = value
+        }
     }
     
     func data(forKey defaultName: String) -> Data? {
         if let savedValue = saved[defaultName] {
             dataWasCalled = true
-            previouslySavedData = savedValue as? MapAnnotationsStore
-            return savedValue as? Data
+            return savedValue
         }
         return nil
     }

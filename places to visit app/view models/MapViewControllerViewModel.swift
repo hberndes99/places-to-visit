@@ -17,13 +17,8 @@ class MapViewControllerViewModel {
         self.userDefaults = userDefaults
     }
     
-    func registerDefaults() {
-        // registering default values for user defaults
-        userDefaults.register(defaults: ["savedPlaces": Data()])
-    }
-    
     func retrieveData() {
-        if let oldMapStore = userDefaults.data(forKey: "savedPlaces") {
+        if let oldMapStore = userDefaults.data(forKey: Constants.savedPlaces) {
             let jsonDecoder = JSONDecoder()
             if let oldMapStoreDecoded = try? jsonDecoder.decode(MapAnnotationsStore.self, from: oldMapStore) {
                 mapAnnotationsStore = oldMapStoreDecoded
@@ -34,7 +29,7 @@ class MapViewControllerViewModel {
     func savePlaceOfInterestToUserDefaults() {
         let jsonEncoder = JSONEncoder()
         if let encodedPlaces = try? jsonEncoder.encode(mapAnnotationsStore) {
-            userDefaults.setValue(encodedPlaces, forKey: "savedPlaces")
+            userDefaults.setValue(encodedPlaces, forKey: Constants.savedPlaces)
         }
     }
     
@@ -60,14 +55,11 @@ class MapViewControllerViewModel {
         
         mapAnnotationsStore.mapAnnotationPoints.append(newMapAnnotationPoint)
        
-        
-        // save place to user defaults
         savePlaceOfInterestToUserDefaults()
     }
 }
 
 protocol UserDefaultsProtocol {
-    func register(defaults registrationDictionary: [String : Any])
     func setValue(_ value: Any?, forKey key: String)
     func data(forKey defaultName: String) -> Data?
 }

@@ -9,12 +9,6 @@ import UIKit
 import MapKit
 import CoreLocation
 
-
-// should i use this to get the map annotations to update
-protocol MapViewControllerDelegate: AnyObject {
-    func updateMapAnnotations()
-}
-
 class MapViewController: UIViewController {
 
     var mapViewControllerViewModel: MapViewControllerViewModel!
@@ -37,7 +31,6 @@ class MapViewController: UIViewController {
         view.accessibilityIdentifier = "Saved places map view"
         
         mapViewControllerViewModel = MapViewControllerViewModel(mapAnnotationsStore: mapAnnotationsStore)
-        mapViewControllerViewModel.registerDefaults()
         mapViewControllerViewModel.retrieveData()
         
         mapView = MKMapView()

@@ -25,6 +25,7 @@
 		E477EC7A26AB093A00EA3B1B /* MapAnnotationsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7926AB093A00EA3B1B /* MapAnnotationsStore.swift */; };
 		E477EC7C26AB0BD800EA3B1B /* MapViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7B26AB0BD800EA3B1B /* MapViewControllerViewModel.swift */; };
 		E477EC7E26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7D26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift */; };
+		E477EC8026B1A52B00EA3B1B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7F26B1A52A00EA3B1B /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		E477EC7926AB093A00EA3B1B /* MapAnnotationsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationsStore.swift; sourceTree = "<group>"; };
 		E477EC7B26AB0BD800EA3B1B /* MapViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerViewModel.swift; sourceTree = "<group>"; };
 		E477EC7D26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerViewModelTests.swift; sourceTree = "<group>"; };
+		E477EC7F26B1A52A00EA3B1B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 				E477EC2F26A839FC00EA3B1B /* Assets.xcassets */,
 				E477EC3126A839FC00EA3B1B /* LaunchScreen.storyboard */,
 				E477EC3426A839FC00EA3B1B /* Info.plist */,
+				E477EC7F26B1A52A00EA3B1B /* Constants.swift */,
 			);
 			path = "places to visit app";
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				E477EC7A26AB093A00EA3B1B /* MapAnnotationsStore.swift in Sources */,
 				E477EC2926A839FB00EA3B1B /* SceneDelegate.swift in Sources */,
 				E477EC6426A96EA700EA3B1B /* SearchNetworkManagerProtocol.swift in Sources */,
+				E477EC8026B1A52B00EA3B1B /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
