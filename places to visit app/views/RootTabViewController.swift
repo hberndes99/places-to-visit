@@ -30,10 +30,14 @@ class RootTabViewController: UITabBarController {
         let listTabBarItem = UITabBarItem()
         listTabBarItem.title = "view as a list"
         
+        if #available(iOS 13, *) {
+            listTabBarItem.image = UIImage(systemName: "list.bullet")
+            mapTabBarItem.image = UIImage(systemName: "map")
+        }
+        
         mapViewController = MapViewController(mapAnnotationsStore: mapAnnotationsStore)
         placesListViewViewController = PlacesListViewViewController(mapAnnotationsStore: mapAnnotationsStore)
-        //placesListViewViewController.tabBarItem = listTabBarItem
-        
+     
         let mapNavigationController = UINavigationController(rootViewController: mapViewController)
         mapNavigationController.tabBarItem = mapTabBarItem
         let listNavigationController = UINavigationController(rootViewController: placesListViewViewController)

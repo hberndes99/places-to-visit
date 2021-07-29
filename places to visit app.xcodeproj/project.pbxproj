@@ -28,6 +28,7 @@
 		E477EC8026B1A52B00EA3B1B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7F26B1A52A00EA3B1B /* Constants.swift */; };
 		E477EC8226B2A9E900EA3B1B /* RootTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8126B2A9E900EA3B1B /* RootTabViewController.swift */; };
 		E477EC8426B2AAFE00EA3B1B /* PlacesListViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8326B2AAFE00EA3B1B /* PlacesListViewViewController.swift */; };
+		E477EC8626B2C2CC00EA3B1B /* PlacesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8526B2C2CC00EA3B1B /* PlacesListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		E477EC7F26B1A52A00EA3B1B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E477EC8126B2A9E900EA3B1B /* RootTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabViewController.swift; sourceTree = "<group>"; };
 		E477EC8326B2AAFE00EA3B1B /* PlacesListViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewViewController.swift; sourceTree = "<group>"; };
+		E477EC8526B2C2CC00EA3B1B /* PlacesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 			children = (
 				E477EC5C26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift */,
 				E477EC7B26AB0BD800EA3B1B /* MapViewControllerViewModel.swift */,
+				E477EC8526B2C2CC00EA3B1B /* PlacesListViewModel.swift */,
 			);
 			path = "view models";
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				E477EC5826A863D200EA3B1B /* SearchResultsViewController.swift in Sources */,
 				E477EC8426B2AAFE00EA3B1B /* PlacesListViewViewController.swift in Sources */,
 				E477EC7C26AB0BD800EA3B1B /* MapViewControllerViewModel.swift in Sources */,
+				E477EC8626B2C2CC00EA3B1B /* PlacesListViewModel.swift in Sources */,
 				E477EC6226A96BFA00EA3B1B /* SearchNetworkManager.swift in Sources */,
 				E477EC2726A839FB00EA3B1B /* AppDelegate.swift in Sources */,
 				E477EC5A26A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift in Sources */,
