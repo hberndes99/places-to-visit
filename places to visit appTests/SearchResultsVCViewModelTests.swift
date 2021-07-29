@@ -15,6 +15,7 @@ class SearchResultsVCViewModelTests: XCTestCase {
     var mockSearchNetworkManager: MockSearchNetworkManager!
     var mockSearchResultsViewControllerDelegate: MockSearchResultsViewControllerDelegate!
     
+    
     override func setUpWithError() throws {
         mockSearchNetworkManager = MockSearchNetworkManager()
         mockSearchResultsViewControllerDelegate = MockSearchResultsViewControllerDelegate()
@@ -45,6 +46,9 @@ class SearchResultsVCViewModelTests: XCTestCase {
         XCTAssertEqual(searchResultsVCViewModel.searchResults.count, 2)
         XCTAssertTrue(mockSearchResultsViewControllerDelegate.updateTableWithSearchWasCalled)
     }
+    
+    
+   
 }
 
 class MockSearchNetworkManager: SearchNetworkManagerProtocol {
@@ -63,3 +67,4 @@ class MockSearchResultsViewControllerDelegate: SearchResultsViewControllerDelega
         updateTableWithSearchWasCalled = true
     }
 }
+

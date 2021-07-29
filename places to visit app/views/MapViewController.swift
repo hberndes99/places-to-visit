@@ -11,13 +11,27 @@ import CoreLocation
 
 class MapViewController: UIViewController {
 
+    var mapViewControllerViewModel: MapViewControllerViewModel!
     var mapView: MKMapView!
     var locationManager: CLLocationManager!
+    var mapAnnotationsStore: MapAnnotationsStore
     
+    init (mapAnnotationsStore: MapAnnotationsStore) {
+        self.mapAnnotationsStore = mapAnnotationsStore
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Saved places"
         view.accessibilityIdentifier = "Saved places map view"
+        
+        mapViewControllerViewModel = MapViewControllerViewModel(mapAnnotationsStore: mapAnnotationsStore)
+        mapViewControllerViewModel.retrieveData()
         
         mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -33,6 +47,12 @@ class MapViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped(mapView: )))
         navigationItem.rightBarButtonItem?.accessibilityIdentifier = "add place of interest button"
+        
+        updateMapAnnotations()
+    }
+    
+    func updateMapAnnotations() {
+        mapView.addAnnotations(mapViewControllerViewModel.mapAnnotationsStore.mapAnnotationPoints)
     }
     
     func setUpConstraints() {
@@ -46,6 +66,7 @@ class MapViewController: UIViewController {
     
     @objc func addButtonTapped(mapView: MKMapView) {
         let searchResultsViewController = SearchResultsViewController(mapView: self.mapView)
+        searchResultsViewController.searchResultsVCMapViewVCDelegate = self
         navigationController?.pushViewController(searchResultsViewController, animated: true)
     }
 }
@@ -68,6 +89,14 @@ extension MapViewController: CLLocationManagerDelegate {
         if status == .authorizedWhenInUse {
             locationManager.requestLocation()
         }
+    }
+}
+
+
+extension MapViewController: SearchResultsVCMapViewVCDelegate {
+    func savePlaceOfInterest(placeOfInterest: MKMapItem) {
+        mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: placeOfInterest)
+        updateMapAnnotations()
     }
 }
 

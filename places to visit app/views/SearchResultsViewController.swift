@@ -8,8 +8,12 @@
 import UIKit
 import MapKit
 
-protocol SearchResultsViewControllerDelegate {
+protocol SearchResultsViewControllerDelegate: AnyObject {
     func updateTableWithSearch()
+}
+
+protocol SearchResultsVCMapViewVCDelegate: AnyObject {
+    func savePlaceOfInterest(placeOfInterest: MKMapItem)
 }
 
 class SearchResultsViewController: UIViewController {
@@ -18,8 +22,7 @@ class SearchResultsViewController: UIViewController {
     private var searchResultsTable: UITableView!
     private var mapView: MKMapView?
     private var searchResultsVCViewModel: SearchResultsVCViewModel!
-    
-    private var searchResults: [MKMapItem] = []
+    weak var searchResultsVCMapViewVCDelegate: SearchResultsVCMapViewVCDelegate?
     
     init(mapView: MKMapView) {
         self.mapView = mapView
@@ -38,16 +41,18 @@ class SearchResultsViewController: UIViewController {
         searchResultsVCViewModel = SearchResultsVCViewModel(searchNetworkManager: SearchNetworkManager())
         searchResultsVCViewModel.delegate = self
         
+        searchResultsTable = UITableView(frame: .zero, style: .plain)
         searchController = UISearchController(searchResultsController: nil)
+        
+        
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = false
-        //searchController.obscuresBackgroundDuringPresentation = true
+        searchController.obscuresBackgroundDuringPresentation = false
         let searchBar = searchController.searchBar
         searchBar.sizeToFit()
         searchBar.placeholder = "Search"
         navigationItem.titleView = searchBar
         
-        searchResultsTable = UITableView(frame: .zero, style: .plain)
         searchResultsTable.translatesAutoresizingMaskIntoConstraints = false
         searchResultsTable.delegate = self
         searchResultsTable.dataSource = self
@@ -70,7 +75,7 @@ class SearchResultsViewController: UIViewController {
 extension SearchResultsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchText = searchController.searchBar.text
-        if let searchText = searchText, let mapView = self.mapView {
+        if let searchText = searchText, searchText.count > 2, let mapView = self.mapView {
             searchResultsVCViewModel.performSearch(mapView: mapView, searchText: searchText)
         }
     }
@@ -79,6 +84,12 @@ extension SearchResultsViewController: UISearchResultsUpdating {
 extension SearchResultsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(65)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedPlace = searchResultsVCViewModel.searchResults[indexPath.row]
+        searchResultsVCMapViewVCDelegate?.savePlaceOfInterest(placeOfInterest: selectedPlace)
+        
     }
 }
 
@@ -91,6 +102,7 @@ extension SearchResultsViewController: UITableViewDataSource {
         let cell = searchResultsTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PlaceOfInterestTableViewCell
         let place = searchResultsVCViewModel.searchResults[indexPath.row]
         cell.configureMKMapItem(mapItem: place)
+        cell.selectionStyle = .none
         return cell
     }
 
@@ -101,6 +113,4 @@ extension SearchResultsViewController: SearchResultsViewControllerDelegate {
     func updateTableWithSearch() {
         searchResultsTable.reloadData()
     }
-    
-    
 }
