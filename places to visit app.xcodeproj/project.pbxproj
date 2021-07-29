@@ -26,6 +26,8 @@
 		E477EC7C26AB0BD800EA3B1B /* MapViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7B26AB0BD800EA3B1B /* MapViewControllerViewModel.swift */; };
 		E477EC7E26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7D26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift */; };
 		E477EC8026B1A52B00EA3B1B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7F26B1A52A00EA3B1B /* Constants.swift */; };
+		E477EC8226B2A9E900EA3B1B /* RootTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8126B2A9E900EA3B1B /* RootTabViewController.swift */; };
+		E477EC8426B2AAFE00EA3B1B /* PlacesListViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8326B2AAFE00EA3B1B /* PlacesListViewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		E477EC7B26AB0BD800EA3B1B /* MapViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerViewModel.swift; sourceTree = "<group>"; };
 		E477EC7D26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerViewModelTests.swift; sourceTree = "<group>"; };
 		E477EC7F26B1A52A00EA3B1B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E477EC8126B2A9E900EA3B1B /* RootTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabViewController.swift; sourceTree = "<group>"; };
+		E477EC8326B2AAFE00EA3B1B /* PlacesListViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +168,8 @@
 				E477EC2A26A839FB00EA3B1B /* MapViewController.swift */,
 				E477EC5926A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift */,
 				E477EC5726A863D200EA3B1B /* SearchResultsViewController.swift */,
+				E477EC8126B2A9E900EA3B1B /* RootTabViewController.swift */,
+				E477EC8326B2AAFE00EA3B1B /* PlacesListViewViewController.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -325,9 +331,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E477EC5D26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift in Sources */,
+				E477EC8226B2A9E900EA3B1B /* RootTabViewController.swift in Sources */,
 				E477EC7826AB088F00EA3B1B /* MapAnnotationPoint.swift in Sources */,
 				E477EC2B26A839FB00EA3B1B /* MapViewController.swift in Sources */,
 				E477EC5826A863D200EA3B1B /* SearchResultsViewController.swift in Sources */,
+				E477EC8426B2AAFE00EA3B1B /* PlacesListViewViewController.swift in Sources */,
 				E477EC7C26AB0BD800EA3B1B /* MapViewControllerViewModel.swift in Sources */,
 				E477EC6226A96BFA00EA3B1B /* SearchNetworkManager.swift in Sources */,
 				E477EC2726A839FB00EA3B1B /* AppDelegate.swift in Sources */,

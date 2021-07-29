@@ -20,8 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         let mapAnnotationsStore = MapAnnotationsStore()
-        let mapViewController = MapViewController(mapAnnotationsStore: mapAnnotationsStore)
-        window?.rootViewController = UINavigationController(rootViewController: mapViewController)
+        let rootTabViewController = RootTabViewController(mapAnnotationsStore: mapAnnotationsStore)
+        window?.rootViewController = rootTabViewController
         window?.makeKeyAndVisible()
     }
 

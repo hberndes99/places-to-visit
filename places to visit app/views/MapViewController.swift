@@ -27,7 +27,7 @@ class MapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Saved places"
+        navigationController?.navigationBar.topItem?.title = "Saved places"
         view.accessibilityIdentifier = "Saved places map view"
         
         mapViewControllerViewModel = MapViewControllerViewModel(mapAnnotationsStore: mapAnnotationsStore)
