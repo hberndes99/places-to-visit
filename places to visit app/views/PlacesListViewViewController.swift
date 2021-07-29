@@ -26,10 +26,8 @@ class PlacesListViewViewController: UIViewController {
         navigationController?.navigationBar.topItem?.title = "Saved places"
         
         placesListViewModel = PlacesListViewModel(mapAnnotationsStore: mapAnnotationsStore)
-        mapAnnotationsStore = placesListViewModel.retrieveData()
-        for point in mapAnnotationsStore.mapAnnotationPoints {
-            print(point.title)
-        }
+        placesListViewModel.retrieveData()
+
         
         placesOfInterestTable = UITableView()
         placesOfInterestTable.translatesAutoresizingMaskIntoConstraints = false
@@ -39,6 +37,11 @@ class PlacesListViewViewController: UIViewController {
         
         view.addSubview(placesOfInterestTable)
         addConstraints()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        placesListViewModel.retrieveData()
+        placesOfInterestTable.reloadData()
     }
     
     func addConstraints() {
@@ -55,16 +58,25 @@ extension PlacesListViewViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(65)
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            
+            //placesListViewModel.mapAnnotationsStore.mapAnnotationPoints.remove(at: indexPath.row)
+            placesListViewModel.deletePlaceOfInterest(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+        }
+    }
 }
 
 extension PlacesListViewViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mapAnnotationsStore.mapAnnotationPoints.count
+        return placesListViewModel.mapAnnotationsStore.mapAnnotationPoints.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = placesOfInterestTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PlaceOfInterestTableViewCell
-        let placeOfInterest = mapAnnotationsStore.mapAnnotationPoints[indexPath.row]
+        let placeOfInterest = placesListViewModel.mapAnnotationsStore.mapAnnotationPoints[indexPath.row]
         cell.configureAnnotationPoint(mapPoint: placeOfInterest)
         return cell
     }

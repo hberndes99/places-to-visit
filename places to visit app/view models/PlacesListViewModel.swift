@@ -16,14 +16,24 @@ class PlacesListViewModel {
         self.userDefaults = userDefaults
     }
     
-    func retrieveData() -> MapAnnotationsStore {
+    func retrieveData() {
         if let oldMapStore = userDefaults.data(forKey: Constants.savedPlaces) {
             let jsonDecoder = JSONDecoder()
             if let oldMapStoreDecoded = try? jsonDecoder.decode(MapAnnotationsStore.self, from: oldMapStore) {
                 mapAnnotationsStore = oldMapStoreDecoded
-                return mapAnnotationsStore
             }
         }
-        return mapAnnotationsStore
+    }
+    
+    func updateUserDefaults() {
+        let jsonEncoder = JSONEncoder()
+        if let encodedUpdatedPlaces = try? jsonEncoder.encode(mapAnnotationsStore) {
+            userDefaults.setValue(encodedUpdatedPlaces, forKey: Constants.savedPlaces)
+        }
+    }
+    
+    func deletePlaceOfInterest(at position: Int) {
+        mapAnnotationsStore.mapAnnotationPoints.remove(at: position)
+        updateUserDefaults()
     }
 }

@@ -51,7 +51,13 @@ class MapViewController: UIViewController {
         updateMapAnnotations()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        mapViewControllerViewModel.retrieveData()
+        updateMapAnnotations()
+    }
+    
     func updateMapAnnotations() {
+        mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotations(mapViewControllerViewModel.mapAnnotationsStore.mapAnnotationPoints)
     }
     
