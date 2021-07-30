@@ -40,7 +40,7 @@ class SearchResultsViewController: UIViewController {
         view.accessibilityIdentifier = "search for place of interest screen"
         searchResultsVCViewModel = SearchResultsVCViewModel(searchNetworkManager: SearchNetworkManager())
         searchResultsVCViewModel.delegate = self
-        
+        self.definesPresentationContext = true
         searchResultsTable = UITableView(frame: .zero, style: .plain)
         searchController = UISearchController(searchResultsController: nil)
         
@@ -89,7 +89,6 @@ extension SearchResultsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedPlace = searchResultsVCViewModel.searchResults[indexPath.row]
         searchResultsVCMapViewVCDelegate?.savePlaceOfInterest(placeOfInterest: selectedPlace)
-        
     }
 }
 

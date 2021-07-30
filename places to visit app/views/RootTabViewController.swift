@@ -23,7 +23,7 @@ class RootTabViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let mapTabBarItem = UITabBarItem()
         mapTabBarItem.title = "view on map"
         
@@ -43,5 +43,8 @@ class RootTabViewController: UITabBarController {
         let listNavigationController = UINavigationController(rootViewController: placesListViewViewController)
         listNavigationController.tabBarItem = listTabBarItem
         self.viewControllers = [mapNavigationController, listNavigationController]
+ 
     }
+    
+
 }

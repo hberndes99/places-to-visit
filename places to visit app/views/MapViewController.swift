@@ -51,7 +51,12 @@ class MapViewController: UIViewController {
         updateMapAnnotations()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("view will appear calledI have an upd")
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
+        print("view did appear called for map view")
         mapViewControllerViewModel.retrieveData()
         updateMapAnnotations()
     }
@@ -102,7 +107,7 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController: SearchResultsVCMapViewVCDelegate {
     func savePlaceOfInterest(placeOfInterest: MKMapItem) {
         mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: placeOfInterest)
-        updateMapAnnotations()
+        //updateMapAnnotations()
     }
 }
 
