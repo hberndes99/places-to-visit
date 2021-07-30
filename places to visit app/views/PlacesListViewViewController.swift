@@ -4,7 +4,6 @@
 //
 //  Created by Harriette Berndes on 29/07/2021.
 //
-/*
 import UIKit
 
 class PlacesListViewViewController: UIViewController {
@@ -69,18 +68,25 @@ extension PlacesListViewViewController: UITableViewDelegate {
 }
 
 extension PlacesListViewViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return placesListViewModel.wishListStore.wishLists.count
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        let wishListForSection = placesListViewModel.wishListStore.wishLists[section]
+        return wishListForSection.items.count
         //return placesListViewModel.mapAnnotationsStore.mapAnnotationPoints.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = placesOfInterestTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PlaceOfInterestTableViewCell
-        let placeOfInterest = placesListViewModel.mapAnnotationsStore.mapAnnotationPoints[indexPath.row]
+        //let placeOfInterest = placesListViewModel.mapAnnotationsStore.mapAnnotationPoints[indexPath.row]
+        let wishListForSection = placesListViewModel.wishListStore.wishLists[indexPath.section]
+        let placeOfInterest = wishListForSection.items[indexPath.row]
         cell.configureAnnotationPoint(mapPoint: placeOfInterest)
         return cell
     }
     
     
 }
-*/
+

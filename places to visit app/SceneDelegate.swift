@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -20,7 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         let coffeeWishList = WishList(name: "coffee list", items: [])
-        let wishListStore = WishListStore(wishLists: [coffeeWishList])
+        
+        let restaurantWishList = WishList(name: "restaurants", items: [MapAnnotationPoint(title: "restaurant 1", subtitle: "1 the street", coordinate: CLLocationCoordinate2D(latitude: 1, longitude: 1), number: "1", streetAddress: "the street")])
+        let wishListStore = WishListStore(wishLists: [coffeeWishList, restaurantWishList])
         let rootTabViewController = RootTabViewController(wishListStore: wishListStore)
         window?.rootViewController = rootTabViewController
         window?.makeKeyAndVisible()
