@@ -26,6 +26,11 @@
 		E477EC7C26AB0BD800EA3B1B /* MapViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7B26AB0BD800EA3B1B /* MapViewControllerViewModel.swift */; };
 		E477EC7E26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7D26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift */; };
 		E477EC8026B1A52B00EA3B1B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7F26B1A52A00EA3B1B /* Constants.swift */; };
+		E477EC8226B2A9E900EA3B1B /* RootTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8126B2A9E900EA3B1B /* RootTabViewController.swift */; };
+		E477EC8426B2AAFE00EA3B1B /* PlacesListViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8326B2AAFE00EA3B1B /* PlacesListViewViewController.swift */; };
+		E477EC8626B2C2CC00EA3B1B /* PlacesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8526B2C2CC00EA3B1B /* PlacesListViewModel.swift */; };
+		E477EC8826B3F9D400EA3B1B /* PlacesListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8726B3F9D400EA3B1B /* PlacesListViewModelTests.swift */; };
+		E477EC8A26B3FAAC00EA3B1B /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8926B3FAAC00EA3B1B /* MockUserDefaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +76,11 @@
 		E477EC7B26AB0BD800EA3B1B /* MapViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerViewModel.swift; sourceTree = "<group>"; };
 		E477EC7D26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerViewModelTests.swift; sourceTree = "<group>"; };
 		E477EC7F26B1A52A00EA3B1B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E477EC8126B2A9E900EA3B1B /* RootTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabViewController.swift; sourceTree = "<group>"; };
+		E477EC8326B2AAFE00EA3B1B /* PlacesListViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewViewController.swift; sourceTree = "<group>"; };
+		E477EC8526B2C2CC00EA3B1B /* PlacesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewModel.swift; sourceTree = "<group>"; };
+		E477EC8726B3F9D400EA3B1B /* PlacesListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewModelTests.swift; sourceTree = "<group>"; };
+		E477EC8926B3FAAC00EA3B1B /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +155,7 @@
 				4526048F26A9895B00D2B950 /* SearchNetworkManagerTests.swift */,
 				E477EC6D26AAB67500EA3B1B /* SearchResultsVCViewModelTests.swift */,
 				E477EC7D26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift */,
+				E477EC8726B3F9D400EA3B1B /* PlacesListViewModelTests.swift */,
 			);
 			path = "places to visit appTests";
 			sourceTree = "<group>";
@@ -164,6 +175,8 @@
 				E477EC2A26A839FB00EA3B1B /* MapViewController.swift */,
 				E477EC5926A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift */,
 				E477EC5726A863D200EA3B1B /* SearchResultsViewController.swift */,
+				E477EC8126B2A9E900EA3B1B /* RootTabViewController.swift */,
+				E477EC8326B2AAFE00EA3B1B /* PlacesListViewViewController.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -173,6 +186,7 @@
 			children = (
 				E477EC5C26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift */,
 				E477EC7B26AB0BD800EA3B1B /* MapViewControllerViewModel.swift */,
+				E477EC8526B2C2CC00EA3B1B /* PlacesListViewModel.swift */,
 			);
 			path = "view models";
 			sourceTree = "<group>";
@@ -181,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				E477EC7026AAC56800EA3B1B /* MockSearchObjects.swift */,
+				E477EC8926B3FAAC00EA3B1B /* MockUserDefaults.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -325,10 +340,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E477EC5D26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift in Sources */,
+				E477EC8226B2A9E900EA3B1B /* RootTabViewController.swift in Sources */,
 				E477EC7826AB088F00EA3B1B /* MapAnnotationPoint.swift in Sources */,
 				E477EC2B26A839FB00EA3B1B /* MapViewController.swift in Sources */,
 				E477EC5826A863D200EA3B1B /* SearchResultsViewController.swift in Sources */,
+				E477EC8426B2AAFE00EA3B1B /* PlacesListViewViewController.swift in Sources */,
 				E477EC7C26AB0BD800EA3B1B /* MapViewControllerViewModel.swift in Sources */,
+				E477EC8626B2C2CC00EA3B1B /* PlacesListViewModel.swift in Sources */,
 				E477EC6226A96BFA00EA3B1B /* SearchNetworkManager.swift in Sources */,
 				E477EC2726A839FB00EA3B1B /* AppDelegate.swift in Sources */,
 				E477EC5A26A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift in Sources */,
@@ -345,6 +363,8 @@
 			files = (
 				E477EC7E26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift in Sources */,
 				E477EC6E26AAB67600EA3B1B /* SearchResultsVCViewModelTests.swift in Sources */,
+				E477EC8A26B3FAAC00EA3B1B /* MockUserDefaults.swift in Sources */,
+				E477EC8826B3F9D400EA3B1B /* PlacesListViewModelTests.swift in Sources */,
 				4526049026A9895B00D2B950 /* SearchNetworkManagerTests.swift in Sources */,
 				E477EC7126AAC56800EA3B1B /* MockSearchObjects.swift in Sources */,
 			);

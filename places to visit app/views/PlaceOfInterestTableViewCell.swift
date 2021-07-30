@@ -35,7 +35,11 @@ class PlaceOfInterestTableViewCell: UITableViewCell {
         } else {
             addressLabel.text = "not found"
         }
-        
+    }
+    
+    func configureAnnotationPoint(mapPoint: MapAnnotationPoint) {
+        nameLabel.text = mapPoint.title
+        addressLabel.text = mapPoint.subtitle
     }
     
     required init?(coder: NSCoder) {

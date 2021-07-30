@@ -27,7 +27,7 @@ class MapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Saved places"
+        navigationController?.navigationBar.topItem?.title = "Saved places"
         view.accessibilityIdentifier = "Saved places map view"
         
         mapViewControllerViewModel = MapViewControllerViewModel(mapAnnotationsStore: mapAnnotationsStore)
@@ -51,7 +51,18 @@ class MapViewController: UIViewController {
         updateMapAnnotations()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("view will appear calledI have an upd")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("view did appear called for map view")
+        mapViewControllerViewModel.retrieveData()
+        updateMapAnnotations()
+    }
+    
     func updateMapAnnotations() {
+        mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotations(mapViewControllerViewModel.mapAnnotationsStore.mapAnnotationPoints)
     }
     
@@ -96,7 +107,7 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController: SearchResultsVCMapViewVCDelegate {
     func savePlaceOfInterest(placeOfInterest: MKMapItem) {
         mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: placeOfInterest)
-        updateMapAnnotations()
+        //updateMapAnnotations()
     }
 }
 
