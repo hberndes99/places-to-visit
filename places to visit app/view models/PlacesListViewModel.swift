@@ -32,10 +32,10 @@ class PlacesListViewModel {
         }
     }
     
-    func deletePlaceOfInterest(at position: Int) {
+    func deletePlaceOfInterest(at position: Int, from wishListPosition: Int) {
         // should I have a check in here
         // might need to pass in wishListPosition
-        var wishListToDeleteFrom = wishListStore.wishLists[0]
+        var wishListToDeleteFrom = wishListStore.wishLists[wishListPosition]
         wishListToDeleteFrom.items.remove(at: position)
         updateUserDefaults()
         

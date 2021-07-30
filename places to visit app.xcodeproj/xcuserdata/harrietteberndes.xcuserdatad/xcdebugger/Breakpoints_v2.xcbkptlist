@@ -30,8 +30,8 @@
             filePath = "places to visit app/view models/MapViewControllerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "savePlaceOfInterest(placeOfInterest:wishListPositionIndex:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "places to visit app/view models/MapViewControllerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "savePlaceOfInterest(placeOfInterest:wishListPositionIndex:)"
             landmarkType = "7">
          </BreakpointContent>

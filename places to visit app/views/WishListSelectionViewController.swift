@@ -15,6 +15,7 @@ class WishListSelectionViewController: UIViewController {
     var wishListStore: WishListStore
     var wishListSelectionViewModel: WishListSelectionViewModel!
     
+
     var wishListSelectionTableView: UITableView!
     
     init(mapViewController: MapViewController, mapView: MKMapView, wishListStore: WishListStore) {
@@ -43,11 +44,15 @@ class WishListSelectionViewController: UIViewController {
         wishListSelectionTableView.register(PlaceOfInterestTableViewCell.self, forCellReuseIdentifier: "cell")
         
         view.addSubview(wishListSelectionTableView)
+        
+      
         setUpConstraints()
     }
     
     @objc private func buttonTapped() {
-        print("add a new list")
+        let newWishListViewController = NewWishListViewController()
+        newWishListViewController.delegate = self
+        self.present(newWishListViewController, animated: true)
     }
     
     func setUpConstraints() {
@@ -57,6 +62,7 @@ class WishListSelectionViewController: UIViewController {
             wishListSelectionTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             wishListSelectionTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ])
+        
     }
 
 }
@@ -84,6 +90,16 @@ extension WishListSelectionViewController: UITableViewDataSource {
         let selectedWishList = wishListSelectionViewModel.wishListStore.wishLists[indexPath.row]
         cell.configureForWishList(for: selectedWishList)
         return cell
+    }
+    
+    
+}
+
+
+extension WishListSelectionViewController: NewWishListVCDelegate {
+    func saveNewWishList(name: String, description: String) {
+        wishListSelectionViewModel.saveNewWishList(name: name, description: description)
+        wishListSelectionTableView.reloadData()
     }
     
     

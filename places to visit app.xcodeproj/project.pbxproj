@@ -33,6 +33,7 @@
 		E477EC8A26B3FAAC00EA3B1B /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8926B3FAAC00EA3B1B /* MockUserDefaults.swift */; };
 		E477EC8C26B4159400EA3B1B /* WishListSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8B26B4159400EA3B1B /* WishListSelectionViewController.swift */; };
 		E477EC8E26B446BC00EA3B1B /* WishListSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8D26B446BC00EA3B1B /* WishListSelectionViewModel.swift */; };
+		E477EC9026B44D5D00EA3B1B /* NewWishListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8F26B44D5D00EA3B1B /* NewWishListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		E477EC8926B3FAAC00EA3B1B /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
 		E477EC8B26B4159400EA3B1B /* WishListSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListSelectionViewController.swift; sourceTree = "<group>"; };
 		E477EC8D26B446BC00EA3B1B /* WishListSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListSelectionViewModel.swift; sourceTree = "<group>"; };
+		E477EC8F26B44D5D00EA3B1B /* NewWishListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWishListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				E477EC8126B2A9E900EA3B1B /* RootTabViewController.swift */,
 				E477EC8326B2AAFE00EA3B1B /* PlacesListViewViewController.swift */,
 				E477EC8B26B4159400EA3B1B /* WishListSelectionViewController.swift */,
+				E477EC8F26B44D5D00EA3B1B /* NewWishListViewController.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				E477EC8626B2C2CC00EA3B1B /* PlacesListViewModel.swift in Sources */,
 				E477EC6226A96BFA00EA3B1B /* SearchNetworkManager.swift in Sources */,
 				E477EC2726A839FB00EA3B1B /* AppDelegate.swift in Sources */,
+				E477EC9026B44D5D00EA3B1B /* NewWishListViewController.swift in Sources */,
 				E477EC8E26B446BC00EA3B1B /* WishListSelectionViewModel.swift in Sources */,
 				E477EC5A26A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift in Sources */,
 				E477EC7A26AB093A00EA3B1B /* MapAnnotationsStore.swift in Sources */,

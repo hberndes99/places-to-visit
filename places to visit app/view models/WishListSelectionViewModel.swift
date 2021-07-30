@@ -24,4 +24,21 @@ class WishListSelectionViewModel {
             }
         }
     }
+    
+    private func updateUserDefaults() {
+        let jsonEncoder = JSONEncoder()
+        if let encodedPlaces = try? jsonEncoder.encode(wishListStore) {
+            userDefaults.setValue(encodedPlaces, forKey: Constants.savedPlaces)
+        }
+    }
+    
+    func saveNewWishList(name: String, description: String) {
+        // trim name
+        
+        // instantiate new wish list
+        let newWishList = WishList(name: name, items: [])
+        // append to the store
+        wishListStore.wishLists.append(newWishList)
+        updateUserDefaults()
+    }
 }

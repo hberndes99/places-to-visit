@@ -55,6 +55,7 @@ class MapViewControllerViewModel {
             }
         }
        // add in a check
+        retrieveData()
         var wishListToAddTo = wishListStore.wishLists[wishListPositionIndex]
         wishListToAddTo.items.append(newMapAnnotationPoint)
        

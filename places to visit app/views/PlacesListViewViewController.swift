@@ -61,7 +61,7 @@ extension PlacesListViewViewController: UITableViewDelegate {
         if editingStyle == UITableViewCell.EditingStyle.delete {
             
             //placesListViewModel.mapAnnotationsStore.mapAnnotationPoints.remove(at: indexPath.row)
-            placesListViewModel.deletePlaceOfInterest(at: indexPath.row)
+            placesListViewModel.deletePlaceOfInterest(at: indexPath.row, from: indexPath.section)
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
         }
     }
@@ -74,7 +74,12 @@ extension PlacesListViewViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let wishListForSection = placesListViewModel.wishListStore.wishLists[section]
-        return wishListForSection.items.count
+        if wishListForSection.items.count > 0 {
+            return wishListForSection.items.count
+        }
+        else {
+            return 0
+        }
         //return placesListViewModel.mapAnnotationsStore.mapAnnotationPoints.count
     }
     
