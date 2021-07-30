@@ -42,6 +42,11 @@ class PlaceOfInterestTableViewCell: UITableViewCell {
         addressLabel.text = mapPoint.subtitle
     }
     
+    func configureForWishList(for wishList: WishList) {
+        nameLabel.text = wishList.name
+        addressLabel.text = "\(wishList.items.count)"
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

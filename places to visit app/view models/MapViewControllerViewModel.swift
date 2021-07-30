@@ -54,19 +54,9 @@ class MapViewControllerViewModel {
                 }
             }
         }
-        /*
-        for savedPoint in mapAnnotationsStore.mapAnnotationPoints {
-            if savedPoint.title == newMapAnnotationPoint.title,
-               savedPoint.subtitle == newMapAnnotationPoint.subtitle {
-                print("place already saved")
-                return
-            }
-        }
- */
-        // maybe need to pass something in here to give info on which wish list it belongs to
+       // add in a check
         var wishListToAddTo = wishListStore.wishLists[wishListPositionIndex]
         wishListToAddTo.items.append(newMapAnnotationPoint)
-        //mapAnnotationsStore.mapAnnotationPoints.append(newMapAnnotationPoint)
        
         savePlaceOfInterestToUserDefaults()
     }

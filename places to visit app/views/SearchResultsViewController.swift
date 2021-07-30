@@ -21,11 +21,13 @@ class SearchResultsViewController: UIViewController {
     private var searchController: UISearchController!
     private var searchResultsTable: UITableView!
     private var mapView: MKMapView?
+    private var selectedListPosition: Int
     private var searchResultsVCViewModel: SearchResultsVCViewModel!
     weak var searchResultsVCMapViewVCDelegate: SearchResultsVCMapViewVCDelegate?
     
-    init(mapView: MKMapView) {
+    init(mapView: MKMapView, selectedListPosition: Int) {
         self.mapView = mapView
+        self.selectedListPosition = selectedListPosition
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -88,7 +90,7 @@ extension SearchResultsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedPlace = searchResultsVCViewModel.searchResults[indexPath.row]
-        searchResultsVCMapViewVCDelegate?.savePlaceOfInterest(placeOfInterest: selectedPlace, wishListPositionIndex: 0)
+        searchResultsVCMapViewVCDelegate?.savePlaceOfInterest(placeOfInterest: selectedPlace, wishListPositionIndex: self.selectedListPosition)
     }
 }
 
