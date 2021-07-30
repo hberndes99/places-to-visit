@@ -33,7 +33,10 @@ class PlacesListViewModel {
     }
     
     func deletePlaceOfInterest(at position: Int) {
-        mapAnnotationsStore.mapAnnotationPoints.remove(at: position)
-        updateUserDefaults()
+        // should I have a check in here
+        if position < mapAnnotationsStore.mapAnnotationPoints.count {
+            mapAnnotationsStore.mapAnnotationPoints.remove(at: position)
+            updateUserDefaults()
+        }
     }
 }
