@@ -10,7 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var coffeeWishList: WishList?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -19,8 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let mapAnnotationsStore = MapAnnotationsStore()
-        let rootTabViewController = RootTabViewController(mapAnnotationsStore: mapAnnotationsStore)
+        let coffeeWishList = WishList(name: "coffee list", items: [])
+        let wishListStore = WishListStore(wishLists: [coffeeWishList])
+        let rootTabViewController = RootTabViewController(wishListStore: wishListStore)
         window?.rootViewController = rootTabViewController
         window?.makeKeyAndVisible()
     }

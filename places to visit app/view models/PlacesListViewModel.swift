@@ -8,35 +8,40 @@
 import Foundation
 
 class PlacesListViewModel {
-    var mapAnnotationsStore: MapAnnotationsStore
-    var userDefaults: UserDefaultsProtocol
+    var wishListStore: WishListStore
+    private var userDefaults: UserDefaultsProtocol
     
-    init(mapAnnotationsStore: MapAnnotationsStore, userDefaults: UserDefaultsProtocol = UserDefaults.standard) {
-        self.mapAnnotationsStore = mapAnnotationsStore
+    init(userDefaults: UserDefaultsProtocol = UserDefaults.standard, wishListStore: WishListStore) {
+        self.wishListStore = wishListStore
         self.userDefaults = userDefaults
     }
     
     func retrieveData() {
         if let oldMapStore = userDefaults.data(forKey: Constants.savedPlaces) {
             let jsonDecoder = JSONDecoder()
-            if let oldMapStoreDecoded = try? jsonDecoder.decode(MapAnnotationsStore.self, from: oldMapStore) {
-                mapAnnotationsStore = oldMapStoreDecoded
+            if let oldMapStoreDecoded = try? jsonDecoder.decode(WishListStore.self, from: oldMapStore) {
+                wishListStore = oldMapStoreDecoded
             }
         }
     }
     
-    func updateUserDefaults() {
+    private func updateUserDefaults() {
         let jsonEncoder = JSONEncoder()
-        if let encodedUpdatedPlaces = try? jsonEncoder.encode(mapAnnotationsStore) {
+        if let encodedUpdatedPlaces = try? jsonEncoder.encode(wishListStore) {
             userDefaults.setValue(encodedUpdatedPlaces, forKey: Constants.savedPlaces)
         }
     }
     
     func deletePlaceOfInterest(at position: Int) {
         // should I have a check in here
-        if position < mapAnnotationsStore.mapAnnotationPoints.count {
-            mapAnnotationsStore.mapAnnotationPoints.remove(at: position)
-            updateUserDefaults()
-        }
+        // might need to pass in wishListPosition
+        var wishListToDeleteFrom = wishListStore.wishLists[0]
+        wishListToDeleteFrom.items.remove(at: position)
+        updateUserDefaults()
+        
+        //if position < mapAnnotationsStore.mapAnnotationPoints.count {
+        //    mapAnnotationsStore.mapAnnotationPoints.remove(at: position)
+        //    updateUserDefaults()
+        //}
     }
 }

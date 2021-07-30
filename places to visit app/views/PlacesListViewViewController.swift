@@ -4,16 +4,16 @@
 //
 //  Created by Harriette Berndes on 29/07/2021.
 //
-
+/*
 import UIKit
 
 class PlacesListViewViewController: UIViewController {
-    private var mapAnnotationsStore: MapAnnotationsStore
+    private var wishListStore: WishListStore
     private var placesListViewModel: PlacesListViewModel!
     private var placesOfInterestTable: UITableView!
     
-    init(mapAnnotationsStore: MapAnnotationsStore) {
-        self.mapAnnotationsStore = mapAnnotationsStore
+    init(wishListStore: WishListStore) {
+        self.wishListStore = wishListStore
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -25,10 +25,9 @@ class PlacesListViewViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.topItem?.title = "Saved places"
         
-        placesListViewModel = PlacesListViewModel(mapAnnotationsStore: mapAnnotationsStore)
+        placesListViewModel = PlacesListViewModel(wishListStore: wishListStore)
         placesListViewModel.retrieveData()
 
-        
         placesOfInterestTable = UITableView()
         placesOfInterestTable.translatesAutoresizingMaskIntoConstraints = false
         placesOfInterestTable.dataSource = self
@@ -71,7 +70,8 @@ extension PlacesListViewViewController: UITableViewDelegate {
 
 extension PlacesListViewViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return placesListViewModel.mapAnnotationsStore.mapAnnotationPoints.count
+        
+        //return placesListViewModel.mapAnnotationsStore.mapAnnotationPoints.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,3 +83,4 @@ extension PlacesListViewViewController: UITableViewDataSource {
     
     
 }
+*/
