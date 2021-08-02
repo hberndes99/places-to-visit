@@ -31,7 +31,7 @@ class WishListSelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Your saved lists"
+        title = "Add to your saved lists"
         
         wishListSelectionViewModel = WishListSelectionViewModel(wishListStore: wishListStore)
         wishListSelectionViewModel.retrieveData()
