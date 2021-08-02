@@ -20,9 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let coffeeWishList = WishList(name: "coffee list", items: [])
+        let coffeeWishList = WishList(name: "coffee list", items: [], description: "coffee shops I want to visit in london")
         
-        let restaurantWishList = WishList(name: "restaurants", items: [MapAnnotationPoint(title: "restaurant 1", subtitle: "1 the street", coordinate: CLLocationCoordinate2D(latitude: 1, longitude: 1), number: "1", streetAddress: "the street")])
+        let restaurantWishList = WishList(name: "restaurants", items: [MapAnnotationPoint(title: "restaurant 1", subtitle: "1 the street", coordinate: CLLocationCoordinate2D(latitude: 1, longitude: 1), number: "1", streetAddress: "the street")], description: "cheap restaurants in london")
         let wishListStore = WishListStore(wishLists: [coffeeWishList, restaurantWishList])
         let rootTabViewController = RootTabViewController(wishListStore: wishListStore)
         window?.rootViewController = rootTabViewController

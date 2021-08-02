@@ -15,7 +15,6 @@ class WishListSelectionViewController: UIViewController {
     var wishListStore: WishListStore
     var wishListSelectionViewModel: WishListSelectionViewModel!
     
-
     var wishListSelectionTableView: UITableView!
     
     init(mapViewController: MapViewController, mapView: MKMapView, wishListStore: WishListStore) {
@@ -32,6 +31,7 @@ class WishListSelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "Your saved lists"
         
         wishListSelectionViewModel = WishListSelectionViewModel(wishListStore: wishListStore)
         wishListSelectionViewModel.retrieveData()
@@ -41,23 +41,17 @@ class WishListSelectionViewController: UIViewController {
         wishListSelectionTableView.translatesAutoresizingMaskIntoConstraints = false
         wishListSelectionTableView.delegate = self
         wishListSelectionTableView.dataSource = self
-        wishListSelectionTableView.register(PlaceOfInterestTableViewCell.self, forCellReuseIdentifier: "cell")
+        wishListSelectionTableView.register(WishListTableViewCell.self, forCellReuseIdentifier: Constants.wishListCell)
         
         view.addSubview(wishListSelectionTableView)
         
       
         setUpConstraints()
     }
-    
-    // is there a reason why this isnt removed
-    override func viewDidAppear(_ animated: Bool) {
-        wishListSelectionTableView.reloadData()
-    }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         wishListSelectionViewModel.retrieveData()
         wishListSelectionTableView.reloadData()
-        print("view will appear called")
     }
     
     @objc private func buttonTapped() {
@@ -79,9 +73,6 @@ class WishListSelectionViewController: UIViewController {
 }
 
 extension WishListSelectionViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(65)
-    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedListPosition = indexPath.row
@@ -97,9 +88,9 @@ extension WishListSelectionViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = wishListSelectionTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PlaceOfInterestTableViewCell
+        let cell = wishListSelectionTableView.dequeueReusableCell(withIdentifier: Constants.wishListCell, for: indexPath) as! WishListTableViewCell
         let selectedWishList = wishListSelectionViewModel.wishListStore.wishLists[indexPath.row]
-        cell.configureForWishList(for: selectedWishList)
+        cell.configureForWishlist(for: selectedWishList)
         return cell
     }
 }

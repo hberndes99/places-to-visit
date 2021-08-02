@@ -25,9 +25,11 @@ class WishListStore: Codable {
 class WishList: Codable {
     var name: String
     var items: [MapAnnotationPoint]
+    var description: String?
     
-    init(name: String, items: [MapAnnotationPoint]) {
+    init(name: String, items: [MapAnnotationPoint], description: String) {
         self.name = name
         self.items = items
+        self.description = description
     }
 }

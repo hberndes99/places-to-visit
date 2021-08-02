@@ -34,6 +34,7 @@
 		E477EC8C26B4159400EA3B1B /* WishListSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8B26B4159400EA3B1B /* WishListSelectionViewController.swift */; };
 		E477EC8E26B446BC00EA3B1B /* WishListSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8D26B446BC00EA3B1B /* WishListSelectionViewModel.swift */; };
 		E477EC9026B44D5D00EA3B1B /* NewWishListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8F26B44D5D00EA3B1B /* NewWishListViewController.swift */; };
+		E477EC9226B8033500EA3B1B /* WishListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC9126B8033400EA3B1B /* WishListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		E477EC8B26B4159400EA3B1B /* WishListSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListSelectionViewController.swift; sourceTree = "<group>"; };
 		E477EC8D26B446BC00EA3B1B /* WishListSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListSelectionViewModel.swift; sourceTree = "<group>"; };
 		E477EC8F26B44D5D00EA3B1B /* NewWishListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWishListViewController.swift; sourceTree = "<group>"; };
+		E477EC9126B8033400EA3B1B /* WishListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 				E477EC8326B2AAFE00EA3B1B /* PlacesListViewViewController.swift */,
 				E477EC8B26B4159400EA3B1B /* WishListSelectionViewController.swift */,
 				E477EC8F26B44D5D00EA3B1B /* NewWishListViewController.swift */,
+				E477EC9126B8033400EA3B1B /* WishListTableViewCell.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				E477EC2B26A839FB00EA3B1B /* MapViewController.swift in Sources */,
 				E477EC5826A863D200EA3B1B /* SearchResultsViewController.swift in Sources */,
 				E477EC8426B2AAFE00EA3B1B /* PlacesListViewViewController.swift in Sources */,
+				E477EC9226B8033500EA3B1B /* WishListTableViewCell.swift in Sources */,
 				E477EC7C26AB0BD800EA3B1B /* MapViewControllerViewModel.swift in Sources */,
 				E477EC8626B2C2CC00EA3B1B /* PlacesListViewModel.swift in Sources */,
 				E477EC6226A96BFA00EA3B1B /* SearchNetworkManager.swift in Sources */,

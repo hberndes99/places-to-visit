@@ -33,11 +33,7 @@ class WishListSelectionViewModel {
     }
     
     func saveNewWishList(name: String, description: String) {
-        // trim name
-        
-        // instantiate new wish list
-        let newWishList = WishList(name: name, items: [])
-        // append to the store
+        let newWishList = WishList(name: name, items: [], description: description)
         wishListStore.wishLists.append(newWishList)
         updateUserDefaults()
     }
