@@ -49,6 +49,17 @@ class WishListSelectionViewController: UIViewController {
         setUpConstraints()
     }
     
+    // is there a reason why this isnt removed
+    override func viewDidAppear(_ animated: Bool) {
+        wishListSelectionTableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        wishListSelectionViewModel.retrieveData()
+        wishListSelectionTableView.reloadData()
+        print("view will appear called")
+    }
+    
     @objc private func buttonTapped() {
         let newWishListViewController = NewWishListViewController()
         newWishListViewController.delegate = self
@@ -91,8 +102,6 @@ extension WishListSelectionViewController: UITableViewDataSource {
         cell.configureForWishList(for: selectedWishList)
         return cell
     }
-    
-    
 }
 
 
