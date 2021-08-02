@@ -30,9 +30,11 @@ class NewWishListViewController: UIViewController {
         //bottomLine.backgroundColor = UIColor.black.cgColor
         
         nameTextField = UITextField()
-        nameTextField.placeholder = "enter wish list name"
+        nameTextField.placeholder = "Enter wish list name"
+        nameTextField.borderStyle = .roundedRect
+        let greyColour = CGColor.init(gray: 0.2, alpha: 0.2)
+        //nameTextField.backgroundColor = UIColor(cgColor: greyColour)
         
-        nameTextField.borderStyle = UITextField.BorderStyle.none
         //nameTextField.layer.addSublayer(bottomLine)
         
         nameTextFieldLabel = UILabel()
@@ -43,6 +45,7 @@ class NewWishListViewController: UIViewController {
         descriptionTextField = UITextField()
         descriptionTextField.textAlignment = .left
         descriptionTextField.placeholder = "Enter description"
+        descriptionTextField.borderStyle = .roundedRect
         //descriptionTextField.layer.addSublayer(bottomLine)
         
         descriptionTextFieldLabel = UILabel()
@@ -53,6 +56,9 @@ class NewWishListViewController: UIViewController {
         saveWishListButton.setTitle("Save wishlist", for: .normal)
         saveWishListButton.setTitleColor(.black, for: .normal)
         saveWishListButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
+        saveWishListButton.backgroundColor = UIColor(cgColor: greyColour)
+        saveWishListButton.layer.cornerRadius = 5
+        saveWishListButton.titleEdgeInsets = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
         
         stackView = UIStackView(arrangedSubviews: [nameTextFieldLabel, nameTextField, descriptionTextFieldLabel, descriptionTextField, saveWishListButton])
         stackView.axis = .vertical
@@ -69,12 +75,12 @@ class NewWishListViewController: UIViewController {
         NSLayoutConstraint.activate([
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-            stackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
+            stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
         ])
         NSLayoutConstraint.activate([
             saveWishListButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 40),
-            saveWishListButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            saveWishListButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            saveWishListButton.widthAnchor.constraint(equalToConstant: 140)
         ])
     }
     
