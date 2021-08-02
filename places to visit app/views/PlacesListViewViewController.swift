@@ -33,6 +33,7 @@ class PlacesListViewViewController: UIViewController {
         placesOfInterestTable.delegate = self
         placesOfInterestTable.register(PlaceOfInterestTableViewCell.self, forCellReuseIdentifier: "cell")
         
+        
         view.addSubview(placesOfInterestTable)
         addConstraints()
     }
@@ -59,11 +60,14 @@ extension PlacesListViewViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
-            
-            //placesListViewModel.mapAnnotationsStore.mapAnnotationPoints.remove(at: indexPath.row)
             placesListViewModel.deletePlaceOfInterest(at: indexPath.row, from: indexPath.section)
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection
+                                section: Int) -> String? {
+       return placesListViewModel.wishListStore.wishLists[section].name
     }
 }
 
@@ -74,18 +78,11 @@ extension PlacesListViewViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let wishListForSection = placesListViewModel.wishListStore.wishLists[section]
-        if wishListForSection.items.count > 0 {
-            return wishListForSection.items.count
-        }
-        else {
-            return 0
-        }
-        //return placesListViewModel.mapAnnotationsStore.mapAnnotationPoints.count
+        return wishListForSection.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = placesOfInterestTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PlaceOfInterestTableViewCell
-        //let placeOfInterest = placesListViewModel.mapAnnotationsStore.mapAnnotationPoints[indexPath.row]
         let wishListForSection = placesListViewModel.wishListStore.wishLists[indexPath.section]
         let placeOfInterest = wishListForSection.items[indexPath.row]
         cell.configureAnnotationPoint(mapPoint: placeOfInterest)

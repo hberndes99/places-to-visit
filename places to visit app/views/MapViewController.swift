@@ -66,7 +66,6 @@ class MapViewController: UIViewController {
         for wishList in mapViewControllerViewModel.wishListStore.wishLists {
             mapView.addAnnotations(wishList.items)
         }
-        //mapView.addAnnotations(mapViewControllerViewModel.mapAnnotationsStore.mapAnnotationPoints)
     }
     
     func setUpConstraints() {
@@ -108,9 +107,7 @@ extension MapViewController: CLLocationManagerDelegate {
 
 extension MapViewController: SearchResultsVCMapViewVCDelegate {
     func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListPositionIndex: Int) {
-        // mght need to pass value here
         mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: placeOfInterest, wishListPositionIndex: wishListPositionIndex)
-        //updateMapAnnotations()
     }
 
 }

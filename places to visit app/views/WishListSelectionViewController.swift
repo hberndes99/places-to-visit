@@ -67,9 +67,7 @@ class WishListSelectionViewController: UIViewController {
             wishListSelectionTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             wishListSelectionTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ])
-        
     }
-
 }
 
 extension WishListSelectionViewController: UITableViewDelegate {
@@ -101,6 +99,4 @@ extension WishListSelectionViewController: NewWishListVCDelegate {
         wishListSelectionViewModel.saveNewWishList(name: name, description: description)
         wishListSelectionTableView.reloadData()
     }
-    
-    
 }
