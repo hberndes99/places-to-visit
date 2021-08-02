@@ -12,98 +12,107 @@ import MapKit
 class PlacesListViewModelTests: XCTestCase {
     
     var placesListViewModel: PlacesListViewModel!
-    var mapAnnotationsStore: MapAnnotationsStore!
+    var wishListStore: WishListStore!
     var mockUserDefaults: MockUserDefaults!
     var pointOfInterestOne: MapAnnotationPoint!
     var pointOfInterestTwo: MapAnnotationPoint!
+    var coffeeWishList: WishList!
     
     override func setUpWithError() throws {
-        mapAnnotationsStore = MapAnnotationsStore()
+        wishListStore = WishListStore(wishLists: [])
         mockUserDefaults = MockUserDefaults()
         
-        placesListViewModel = PlacesListViewModel(mapAnnotationsStore: mapAnnotationsStore, userDefaults: mockUserDefaults)
+        placesListViewModel = PlacesListViewModel(userDefaults: mockUserDefaults, wishListStore: wishListStore)
         
         pointOfInterestOne = MapAnnotationPoint(title: "coffee place one", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
         pointOfInterestTwo = MapAnnotationPoint(title: "coffee place two", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
+        
+        coffeeWishList = WishList(name: "coffee wish list", items: [pointOfInterestOne, pointOfInterestTwo])
     }
 
     override func tearDownWithError() throws {
-        mapAnnotationsStore = nil
+        wishListStore = nil
         placesListViewModel = nil
         mockUserDefaults = nil
     }
 
     func testRetrieveData() {
-        mapAnnotationsStore.mapAnnotationPoints.append(pointOfInterestOne)
-        mapAnnotationsStore.mapAnnotationPoints.append(pointOfInterestTwo)
+        wishListStore.wishLists.append(coffeeWishList)
        
         // sets encoded data in the user defaults 'store'
         let jsonEncoder = JSONEncoder()
-        guard let encodedMapAnnotationsStore = try? jsonEncoder.encode(mapAnnotationsStore) else {return}
-        mockUserDefaults.saved["savedPlaces"] = encodedMapAnnotationsStore
+        guard let encodedWishListStore = try? jsonEncoder.encode(wishListStore) else {
+            XCTFail()
+            return
+        }
+        mockUserDefaults.saved["savedPlaces"] = encodedWishListStore
         
         placesListViewModel.retrieveData()
         
         XCTAssertTrue(mockUserDefaults.dataWasCalled)
-        XCTAssertEqual(placesListViewModel.mapAnnotationsStore.mapAnnotationPoints.count, 2)
-        XCTAssertEqual(placesListViewModel.mapAnnotationsStore.mapAnnotationPoints[0].title, "coffee place one")
+        XCTAssertEqual(wishListStore.wishLists.count, 1)
+        XCTAssertEqual(wishListStore.wishLists[0].name, "coffee wish list")
+        XCTAssertEqual(wishListStore.wishLists[0].items.count, 2)
     }
     
     func testUpdateUserDefaults() {
         // encodes updated map store and saves it
-        placesListViewModel.mapAnnotationsStore.mapAnnotationPoints = [pointOfInterestOne, pointOfInterestTwo]
+        var coffeeWishList = WishList(name: "coffee wish list", items: [pointOfInterestOne, pointOfInterestTwo])
+        placesListViewModel.wishListStore.wishLists = [coffeeWishList]
         
         placesListViewModel.updateUserDefaults()
          // i need to access what was saved and check it is the same as these points
         let jsonDecoder = JSONDecoder()
-        guard let decodedSaved = try? jsonDecoder.decode(MapAnnotationsStore.self, from: mockUserDefaults.savedBySetValue["savedPlaces"] as! Data) else {
+        guard let decodedSaved = try? jsonDecoder.decode(WishListStore.self, from: mockUserDefaults.savedBySetValue["savedPlaces"] as! Data) else {
             XCTFail()
             return
         }
         
-        XCTAssertEqual(decodedSaved.mapAnnotationPoints.count, 2)
-        XCTAssertEqual(decodedSaved.mapAnnotationPoints[1].title, "coffee place two")
+        XCTAssertEqual(decodedSaved.wishLists.count, 1)
+        XCTAssertEqual(decodedSaved.wishLists[0].name, "coffee wish list")
+        XCTAssertEqual(decodedSaved.wishLists[0].items.count, 2)
+        
     }
 
     func testUpdateUserDefaults_userDefaultsNotEmpty() {
-
-        mapAnnotationsStore.mapAnnotationPoints = [pointOfInterestOne, pointOfInterestTwo]
-        
+        wishListStore.wishLists = [coffeeWishList]
         // store place one and two in user defaults prior
         let jsonEncoder = JSONEncoder()
-        guard let encodedPlaces = try? jsonEncoder.encode(mapAnnotationsStore) else {
+        guard let encodedPlaces = try? jsonEncoder.encode(wishListStore) else {
             XCTFail()
             return
         }
         mockUserDefaults.savedBySetValue["savedPlaces"] = encodedPlaces
         
         // simulate one point of interest being removed
-        placesListViewModel.mapAnnotationsStore.mapAnnotationPoints = [pointOfInterestTwo]
+        placesListViewModel.wishListStore.wishLists[0].items = [pointOfInterestTwo]
         
         placesListViewModel.updateUserDefaults()
         
         let jsonDecoder = JSONDecoder()
-        guard let decodedSaved = try? jsonDecoder.decode(MapAnnotationsStore.self, from: mockUserDefaults.savedBySetValue["savedPlaces"] as! Data) else {
+        guard let decodedSaved = try? jsonDecoder.decode(WishListStore.self, from: mockUserDefaults.savedBySetValue["savedPlaces"] as! Data) else {
             XCTFail()
             return
         }
-        XCTAssertEqual(decodedSaved.mapAnnotationPoints.count, 1)
-        XCTAssertEqual(decodedSaved.mapAnnotationPoints[0].title, "coffee place two")
+        XCTAssertEqual(decodedSaved.wishLists[0].name, "coffee wish list")
+        XCTAssertEqual(decodedSaved.wishLists[0].items.count, 1)
+        XCTAssertEqual(decodedSaved.wishLists[0].items[0].title, "coffee place two")
     }
     
     func testDeletePlaceOfInterest() {
-        placesListViewModel.mapAnnotationsStore.mapAnnotationPoints = [pointOfInterestOne, pointOfInterestTwo]
-        placesListViewModel.deletePlaceOfInterest(at: 0)
+        placesListViewModel.wishListStore.wishLists = [coffeeWishList]
+        placesListViewModel.deletePlaceOfInterest(at: 0, from: 0)
         
-        XCTAssertEqual(placesListViewModel.mapAnnotationsStore.mapAnnotationPoints.count, 1)
-        XCTAssertEqual(placesListViewModel.mapAnnotationsStore.mapAnnotationPoints[0].title, "coffee place two")
+        XCTAssertEqual(placesListViewModel.wishListStore.wishLists.count, 1)
+        XCTAssertEqual(placesListViewModel.wishListStore.wishLists[0].items.count, 1)
+        
     }
     
     func testDeletePlaceOfInterest_dodgyCall() {
-        placesListViewModel.mapAnnotationsStore.mapAnnotationPoints = [pointOfInterestOne, pointOfInterestTwo]
-        placesListViewModel.deletePlaceOfInterest(at: 2)
+        placesListViewModel.wishListStore.wishLists = [coffeeWishList]
+        placesListViewModel.deletePlaceOfInterest(at: 2, from: 0)
         
-        XCTAssertEqual(placesListViewModel.mapAnnotationsStore.mapAnnotationPoints.count, 2)
+        XCTAssertEqual(placesListViewModel.wishListStore.wishLists[0].items.count, 2)
     }
     
 }
