@@ -27,7 +27,7 @@ class PlacesListViewModelTests: XCTestCase {
         pointOfInterestOne = MapAnnotationPoint(title: "coffee place one", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
         pointOfInterestTwo = MapAnnotationPoint(title: "coffee place two", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
         
-        coffeeWishList = WishList(name: "coffee wish list", items: [pointOfInterestOne, pointOfInterestTwo])
+        coffeeWishList = WishList(name: "coffee wish list", items: [pointOfInterestOne, pointOfInterestTwo], description: "london coffee")
     }
 
     override func tearDownWithError() throws {
@@ -57,7 +57,7 @@ class PlacesListViewModelTests: XCTestCase {
     
     func testUpdateUserDefaults() {
         // encodes updated map store and saves it
-        var coffeeWishList = WishList(name: "coffee wish list", items: [pointOfInterestOne, pointOfInterestTwo])
+        var coffeeWishList = WishList(name: "coffee wish list", items: [pointOfInterestOne, pointOfInterestTwo], description: "london coffee")
         placesListViewModel.wishListStore.wishLists = [coffeeWishList]
         
         placesListViewModel.updateUserDefaults()

@@ -36,6 +36,7 @@
 		E477EC9026B44D5D00EA3B1B /* NewWishListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8F26B44D5D00EA3B1B /* NewWishListViewController.swift */; };
 		E477EC9226B8033500EA3B1B /* WishListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC9126B8033400EA3B1B /* WishListTableViewCell.swift */; };
 		E477EC9426B8295500EA3B1B /* WishList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC9326B8295500EA3B1B /* WishList.swift */; };
+		E477EC9626B8306500EA3B1B /* WishListSelectionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC9526B8306500EA3B1B /* WishListSelectionViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		E477EC8F26B44D5D00EA3B1B /* NewWishListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWishListViewController.swift; sourceTree = "<group>"; };
 		E477EC9126B8033400EA3B1B /* WishListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListTableViewCell.swift; sourceTree = "<group>"; };
 		E477EC9326B8295500EA3B1B /* WishList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishList.swift; sourceTree = "<group>"; };
+		E477EC9526B8306500EA3B1B /* WishListSelectionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListSelectionViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 				E477EC6D26AAB67500EA3B1B /* SearchResultsVCViewModelTests.swift */,
 				E477EC7D26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift */,
 				E477EC8726B3F9D400EA3B1B /* PlacesListViewModelTests.swift */,
+				E477EC9526B8306500EA3B1B /* WishListSelectionViewModelTests.swift */,
 			);
 			path = "places to visit appTests";
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				E477EC8826B3F9D400EA3B1B /* PlacesListViewModelTests.swift in Sources */,
 				4526049026A9895B00D2B950 /* SearchNetworkManagerTests.swift in Sources */,
 				E477EC7126AAC56800EA3B1B /* MockSearchObjects.swift in Sources */,
+				E477EC9626B8306500EA3B1B /* WishListSelectionViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

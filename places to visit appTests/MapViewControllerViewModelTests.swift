@@ -31,7 +31,7 @@ class MapViewControllerViewModelTests: XCTestCase {
     func testRetrieveData() {
         let pointOfInterestOne = MapAnnotationPoint(title: "coffee place one", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
         let pointOfInterestTwo = MapAnnotationPoint(title: "coffee place two", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
-        let coffeeWishList = WishList(name: "coffee wish list", items: [pointOfInterestOne, pointOfInterestTwo])
+        let coffeeWishList = WishList(name: "coffee wish list", items: [pointOfInterestOne, pointOfInterestTwo], description: "london coffee")
         
         wishListStore.wishLists = [coffeeWishList]
        
@@ -50,7 +50,7 @@ class MapViewControllerViewModelTests: XCTestCase {
 
     func testSavePlaceOfInterestToUserDefaults_currentlyEmpty() {
         let pointOfInterestOne = MapAnnotationPoint(title: "coffee place", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
-        let coffeeWishList = WishList(name: "coffee wish list", items: [pointOfInterestOne])
+        let coffeeWishList = WishList(name: "coffee wish list", items: [pointOfInterestOne], description: "london coffee")
         mapViewControllerViewModel.wishListStore.wishLists = [coffeeWishList]
         
         mapViewControllerViewModel.savePlaceOfInterestToUserDefaults()
@@ -71,7 +71,7 @@ class MapViewControllerViewModelTests: XCTestCase {
     }
     
     func testSavePlaceOfInterest_storeCurrentlyEmpty() {
-        let coffeeWishList = WishList(name: "coffee wish list", items: [])
+        let coffeeWishList = WishList(name: "coffee wish list", items: [], description: "london coffee")
         mapViewControllerViewModel.wishListStore.wishLists = [coffeeWishList]
         let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 20, longitude: 20), addressDictionary: nil)
         let coffeePlaceOne = MKMapItem(placemark: placemark)
@@ -87,7 +87,7 @@ class MapViewControllerViewModelTests: XCTestCase {
     func testSavePlaceOfInterest_storeCurrentlyContainsTwoItems() {
         let coffeePlaceOne = MapAnnotationPoint(title: "coffee place one", subtitle: "1, the street", coordinate: CLLocationCoordinate2D(latitude: 20, longitude: 20), number: "1", streetAddress: "the street")
         let coffeePlaceTwo = MapAnnotationPoint(title: "coffee place two", subtitle: "2, the street", coordinate: CLLocationCoordinate2D(latitude: 20, longitude: 20), number: "2", streetAddress: "the street")
-        let coffeeWishList = WishList(name: "coffee wish list", items: [coffeePlaceOne, coffeePlaceTwo])
+        let coffeeWishList = WishList(name: "coffee wish list", items: [coffeePlaceOne, coffeePlaceTwo], description: "london coffee")
         mapViewControllerViewModel.wishListStore.wishLists = [coffeeWishList]
         
         let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 30, longitude: 20), addressDictionary: nil)
@@ -104,7 +104,7 @@ class MapViewControllerViewModelTests: XCTestCase {
     func testSavePlaceOfInterest_storeAlreadyContainsItemToSave() {
         let coffeePlaceOne = MapAnnotationPoint(title: "coffee place one", subtitle: "1, the street", coordinate: CLLocationCoordinate2D(latitude: 20, longitude: 20), number: "1", streetAddress: "the street")
         let coffeePlaceTwo = MapAnnotationPoint(title: "coffee place two", subtitle: "", coordinate: CLLocationCoordinate2D(latitude: 20, longitude: 20), number: "2", streetAddress: "the street")
-        let coffeeWishList = WishList(name: "coffee wish list", items: [coffeePlaceOne, coffeePlaceTwo])
+        let coffeeWishList = WishList(name: "coffee wish list", items: [coffeePlaceOne, coffeePlaceTwo], description: "london coffee")
         wishListStore.wishLists = [coffeeWishList]
         
         let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 20, longitude: 20), addressDictionary: nil)

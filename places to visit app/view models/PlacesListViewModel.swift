@@ -34,13 +34,10 @@ class PlacesListViewModel {
     }
     
     func deletePlaceOfInterest(at position: Int, from wishListPosition: Int) {
-        // should I have a check in here
-        // might need to pass in wishListPosition
         if wishListStore.wishLists.count > wishListPosition, wishListStore.wishLists[wishListPosition].items.count > position {
             var wishListToDeleteFrom = wishListStore.wishLists[wishListPosition]
             wishListToDeleteFrom.items.remove(at: position)
             updateUserDefaults()
-            
         }
     }
 }
