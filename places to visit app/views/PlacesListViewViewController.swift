@@ -4,16 +4,15 @@
 //
 //  Created by Harriette Berndes on 29/07/2021.
 //
-
 import UIKit
 
 class PlacesListViewViewController: UIViewController {
-    private var mapAnnotationsStore: MapAnnotationsStore
+    private var wishListStore: WishListStore
     private var placesListViewModel: PlacesListViewModel!
     private var placesOfInterestTable: UITableView!
     
-    init(mapAnnotationsStore: MapAnnotationsStore) {
-        self.mapAnnotationsStore = mapAnnotationsStore
+    init(wishListStore: WishListStore) {
+        self.wishListStore = wishListStore
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -25,15 +24,15 @@ class PlacesListViewViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.topItem?.title = "Saved places"
         
-        placesListViewModel = PlacesListViewModel(mapAnnotationsStore: mapAnnotationsStore)
+        placesListViewModel = PlacesListViewModel(wishListStore: wishListStore)
         placesListViewModel.retrieveData()
 
-        
         placesOfInterestTable = UITableView()
         placesOfInterestTable.translatesAutoresizingMaskIntoConstraints = false
         placesOfInterestTable.dataSource = self
         placesOfInterestTable.delegate = self
         placesOfInterestTable.register(PlaceOfInterestTableViewCell.self, forCellReuseIdentifier: "cell")
+        
         
         view.addSubview(placesOfInterestTable)
         addConstraints()
@@ -61,25 +60,35 @@ extension PlacesListViewViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
-            
-            //placesListViewModel.mapAnnotationsStore.mapAnnotationPoints.remove(at: indexPath.row)
-            placesListViewModel.deletePlaceOfInterest(at: indexPath.row)
+            placesListViewModel.deletePlaceOfInterest(at: indexPath.row, from: indexPath.section)
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection
+                                section: Int) -> String? {
+       return placesListViewModel.wishListStore.wishLists[section].name
     }
 }
 
 extension PlacesListViewViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return placesListViewModel.wishListStore.wishLists.count
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return placesListViewModel.mapAnnotationsStore.mapAnnotationPoints.count
+        let wishListForSection = placesListViewModel.wishListStore.wishLists[section]
+        return wishListForSection.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = placesOfInterestTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PlaceOfInterestTableViewCell
-        let placeOfInterest = placesListViewModel.mapAnnotationsStore.mapAnnotationPoints[indexPath.row]
+        let wishListForSection = placesListViewModel.wishListStore.wishLists[indexPath.section]
+        let placeOfInterest = wishListForSection.items[indexPath.row]
         cell.configureAnnotationPoint(mapPoint: placeOfInterest)
         return cell
     }
     
     
 }
+

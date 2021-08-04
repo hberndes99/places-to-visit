@@ -14,10 +14,10 @@ class MapViewController: UIViewController {
     var mapViewControllerViewModel: MapViewControllerViewModel!
     var mapView: MKMapView!
     var locationManager: CLLocationManager!
-    var mapAnnotationsStore: MapAnnotationsStore
+    var wishListStore: WishListStore
     
-    init (mapAnnotationsStore: MapAnnotationsStore) {
-        self.mapAnnotationsStore = mapAnnotationsStore
+    init (wishListStore: WishListStore) {
+        self.wishListStore = wishListStore
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,7 +30,7 @@ class MapViewController: UIViewController {
         navigationController?.navigationBar.topItem?.title = "Saved places"
         view.accessibilityIdentifier = "Saved places map view"
         
-        mapViewControllerViewModel = MapViewControllerViewModel(mapAnnotationsStore: mapAnnotationsStore)
+        mapViewControllerViewModel = MapViewControllerViewModel(wishListStore: wishListStore)
         mapViewControllerViewModel.retrieveData()
         
         mapView = MKMapView()
@@ -63,7 +63,9 @@ class MapViewController: UIViewController {
     
     func updateMapAnnotations() {
         mapView.removeAnnotations(mapView.annotations)
-        mapView.addAnnotations(mapViewControllerViewModel.mapAnnotationsStore.mapAnnotationPoints)
+        for wishList in mapViewControllerViewModel.wishListStore.wishLists {
+            mapView.addAnnotations(wishList.items)
+        }
     }
     
     func setUpConstraints() {
@@ -76,9 +78,8 @@ class MapViewController: UIViewController {
     }
     
     @objc func addButtonTapped(mapView: MKMapView) {
-        let searchResultsViewController = SearchResultsViewController(mapView: self.mapView)
-        searchResultsViewController.searchResultsVCMapViewVCDelegate = self
-        navigationController?.pushViewController(searchResultsViewController, animated: true)
+        let wishListSelectionViewController = WishListSelectionViewController(mapViewController: self, mapView: self.mapView, wishListStore: wishListStore)
+        navigationController?.pushViewController(wishListSelectionViewController, animated: true)
     }
 }
 
@@ -105,9 +106,9 @@ extension MapViewController: CLLocationManagerDelegate {
 
 
 extension MapViewController: SearchResultsVCMapViewVCDelegate {
-    func savePlaceOfInterest(placeOfInterest: MKMapItem) {
-        mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: placeOfInterest)
-        //updateMapAnnotations()
+    func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListPositionIndex: Int) {
+        mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: placeOfInterest, wishListPositionIndex: wishListPositionIndex)
     }
+
 }
 

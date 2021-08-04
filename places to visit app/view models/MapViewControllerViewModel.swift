@@ -9,31 +9,31 @@ import Foundation
 import MapKit
 
 class MapViewControllerViewModel {
-    var mapAnnotationsStore: MapAnnotationsStore
+    var wishListStore: WishListStore
     var userDefaults: UserDefaultsProtocol
     
-    init(mapAnnotationsStore: MapAnnotationsStore, userDefaults: UserDefaultsProtocol = UserDefaults.standard) {
-        self.mapAnnotationsStore = mapAnnotationsStore
+    init(wishListStore: WishListStore, userDefaults: UserDefaultsProtocol = UserDefaults.standard) {
+        self.wishListStore = wishListStore
         self.userDefaults = userDefaults
     }
     
     func retrieveData() {
         if let oldMapStore = userDefaults.data(forKey: Constants.savedPlaces) {
             let jsonDecoder = JSONDecoder()
-            if let oldMapStoreDecoded = try? jsonDecoder.decode(MapAnnotationsStore.self, from: oldMapStore) {
-                mapAnnotationsStore = oldMapStoreDecoded
+            if let oldMapStoreDecoded = try? jsonDecoder.decode(WishListStore.self, from: oldMapStore) {
+                wishListStore = oldMapStoreDecoded
             }
         }
     }
     
     func savePlaceOfInterestToUserDefaults() {
         let jsonEncoder = JSONEncoder()
-        if let encodedPlaces = try? jsonEncoder.encode(mapAnnotationsStore) {
+        if let encodedPlaces = try? jsonEncoder.encode(wishListStore) {
             userDefaults.setValue(encodedPlaces, forKey: Constants.savedPlaces)
         }
     }
     
-    func savePlaceOfInterest(placeOfInterest: MKMapItem) {
+    func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListPositionIndex: Int) {
         var subtitleString: String = ""
         guard let placeName = placeOfInterest.name else { return }
         
@@ -45,15 +45,19 @@ class MapViewControllerViewModel {
         
         let newMapAnnotationPoint = MapAnnotationPoint(title: placeName, subtitle: subtitleString, coordinate: placeOfInterest.placemark.coordinate, number: placeOfInterest.placemark.subThoroughfare ?? "", streetAddress: placeOfInterest.placemark.thoroughfare ?? "")
         
-        for savedPoint in mapAnnotationsStore.mapAnnotationPoints {
-            if savedPoint.title == newMapAnnotationPoint.title,
-               savedPoint.subtitle == newMapAnnotationPoint.subtitle {
-                print("place already saved")
-                return
+        for wishList in wishListStore.wishLists {
+            for savedPoint in wishList.items {
+                if savedPoint.title == newMapAnnotationPoint.title,
+                   savedPoint.subtitle == newMapAnnotationPoint.subtitle {
+                    print("place already saved")
+                    return
+                }
             }
         }
-        
-        mapAnnotationsStore.mapAnnotationPoints.append(newMapAnnotationPoint)
+       // add in a check
+        retrieveData()
+        var wishListToAddTo = wishListStore.wishLists[wishListPositionIndex]
+        wishListToAddTo.items.append(newMapAnnotationPoint)
        
         savePlaceOfInterestToUserDefaults()
     }

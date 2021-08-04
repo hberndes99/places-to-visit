@@ -8,12 +8,12 @@
 import UIKit
 
 class RootTabViewController: UITabBarController {
-    private var mapAnnotationsStore: MapAnnotationsStore
+    private var wishListStore: WishListStore
     private var mapViewController: MapViewController!
     private var placesListViewViewController: PlacesListViewViewController!
     
-    init(mapAnnotationsStore: MapAnnotationsStore) {
-        self.mapAnnotationsStore = mapAnnotationsStore
+    init(wishListStore: WishListStore) {
+        self.wishListStore = wishListStore
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,8 +35,8 @@ class RootTabViewController: UITabBarController {
             mapTabBarItem.image = UIImage(systemName: "map")
         }
         
-        mapViewController = MapViewController(mapAnnotationsStore: mapAnnotationsStore)
-        placesListViewViewController = PlacesListViewViewController(mapAnnotationsStore: mapAnnotationsStore)
+        mapViewController = MapViewController(wishListStore: wishListStore)
+        placesListViewViewController = PlacesListViewViewController(wishListStore: wishListStore)
      
         let mapNavigationController = UINavigationController(rootViewController: mapViewController)
         mapNavigationController.tabBarItem = mapTabBarItem

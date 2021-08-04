@@ -9,4 +9,5 @@ import Foundation
 
 class Constants {
     static let savedPlaces = "savedPlaces"
+    static let wishListCell = "wishListCell"
 }
