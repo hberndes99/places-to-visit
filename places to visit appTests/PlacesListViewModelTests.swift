@@ -4,7 +4,7 @@
 //
 //  Created by Harriette Berndes on 30/07/2021.
 //
-
+/*
 import XCTest
 @testable import places_to_visit_app
 import MapKit
@@ -116,3 +116,4 @@ class PlacesListViewModelTests: XCTestCase {
     }
     
 }
+*/

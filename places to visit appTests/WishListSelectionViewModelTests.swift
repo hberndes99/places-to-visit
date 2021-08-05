@@ -4,7 +4,7 @@
 //
 //  Created by Harriette Berndes on 02/08/2021.
 //
-
+/*
 import XCTest
 @testable import places_to_visit_app
 
@@ -42,3 +42,4 @@ class WishListSelectionViewModelTests: XCTestCase {
 
 
 }
+*/

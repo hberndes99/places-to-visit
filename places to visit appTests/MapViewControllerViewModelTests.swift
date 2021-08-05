@@ -14,12 +14,17 @@ class MapViewControllerViewModelTests: XCTestCase {
     var mapViewControllerViewModel: MapViewControllerViewModel!
     var wishListStore: WishListStore!
     var mockUserDefaults: MockUserDefaults!
+    var mockUserDefaultsHelper: MockUserDefaultsHelper.Type!
     
     override func setUpWithError() throws {
         wishListStore = WishListStore(wishLists: [])
         mockUserDefaults = MockUserDefaults()
+        mockUserDefaultsHelper = MockUserDefaultsHelper.self
     
-       mapViewControllerViewModel = MapViewControllerViewModel(wishListStore: wishListStore, userDefaults: mockUserDefaults)
+       mapViewControllerViewModel = MapViewControllerViewModel(
+            wishListStore: wishListStore,
+            userDefaults: mockUserDefaults,
+            userDefaultsHelper: mockUserDefaultsHelper)
     }
 
     override func tearDownWithError() throws {
@@ -28,24 +33,19 @@ class MapViewControllerViewModelTests: XCTestCase {
         mockUserDefaults = nil
     }
 
+    // new test
     func testRetrieveData() {
-        let pointOfInterestOne = MapAnnotationPoint(title: "coffee place one", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
-        let pointOfInterestTwo = MapAnnotationPoint(title: "coffee place two", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
-        let coffeeWishList = WishList(name: "coffee wish list", items: [pointOfInterestOne, pointOfInterestTwo], description: "london coffee")
-        
-        wishListStore.wishLists = [coffeeWishList]
-       
-        // sets encoded data in the user defaults 'store'
-        let jsonEncoder = JSONEncoder()
-        guard let encodedWishListStore = try? jsonEncoder.encode(wishListStore) else {return}
-        mockUserDefaults.saved["savedPlaces"] = encodedWishListStore
-        
         mapViewControllerViewModel.retrieveData()
         
-        XCTAssertTrue(mockUserDefaults.dataWasCalled)
-        XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists[0].items.count, 2)
-        XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists[0].items[0].title, "coffee place one")
+        XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists.count, 1)
+        XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists[0].name, "test coffee list")
+    }
+    
+    //new test
+    func testSavePlaceOfInterestToUserDefaults() {
+        mapViewControllerViewModel.savePlaceOfInterestToUserDefaults()
         
+        XCTAssertTrue(mockUserDefaultsHelper.updateUserDefaultsWasCalled)
     }
 
     func testSavePlaceOfInterestToUserDefaults_currentlyEmpty() {

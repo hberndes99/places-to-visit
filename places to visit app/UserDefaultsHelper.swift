@@ -8,7 +8,7 @@
 import Foundation
 
 class UserDefaultsHelper {
-    
+
     static func retrieveDataFromUserDefaults(userDefaults: UserDefaultsProtocol = UserDefaults.standard) -> WishListStore {
         if let existingData = userDefaults.data(forKey: Constants.savedPlaces) {
             let jsonDecoder = JSONDecoder()
@@ -25,4 +25,15 @@ class UserDefaultsHelper {
             userDefaults.setValue(encodedPlaces, forKey: Constants.savedPlaces)
         }
     }
+}
+
+
+protocol UserDefaultsHelperProtocol {
+    static func retrieveDataFromUserDefaults(userDefaults: UserDefaultsProtocol) -> WishListStore
+    
+    static func updateUserDefaults(userDefaults: UserDefaultsProtocol, wishListStore: WishListStore)
+}
+
+extension UserDefaultsHelper: UserDefaultsHelperProtocol {
+    
 }

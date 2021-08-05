@@ -38,6 +38,7 @@
 		E477EC9426B8295500EA3B1B /* WishList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC9326B8295500EA3B1B /* WishList.swift */; };
 		E477EC9626B8306500EA3B1B /* WishListSelectionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC9526B8306500EA3B1B /* WishListSelectionViewModelTests.swift */; };
 		E477ECA526BBDAB900EA3B1B /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECA426BBDAB800EA3B1B /* UserDefaultsHelper.swift */; };
+		E477ECA726BBE07A00EA3B1B /* MockUserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECA626BBE07A00EA3B1B /* MockUserDefaultsHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		E477EC9326B8295500EA3B1B /* WishList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishList.swift; sourceTree = "<group>"; };
 		E477EC9526B8306500EA3B1B /* WishListSelectionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListSelectionViewModelTests.swift; sourceTree = "<group>"; };
 		E477ECA426BBDAB800EA3B1B /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
+		E477ECA626BBE07A00EA3B1B /* MockUserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaultsHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 			children = (
 				E477EC7026AAC56800EA3B1B /* MockSearchObjects.swift */,
 				E477EC8926B3FAAC00EA3B1B /* MockUserDefaults.swift */,
+				E477ECA626BBE07A00EA3B1B /* MockUserDefaultsHelper.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E477ECA726BBE07A00EA3B1B /* MockUserDefaultsHelper.swift in Sources */,
 				E477EC7E26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift in Sources */,
 				E477EC6E26AAB67600EA3B1B /* SearchResultsVCViewModelTests.swift in Sources */,
 				E477EC8A26B3FAAC00EA3B1B /* MockUserDefaults.swift in Sources */,
