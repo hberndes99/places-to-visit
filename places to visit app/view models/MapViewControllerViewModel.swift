@@ -18,19 +18,11 @@ class MapViewControllerViewModel {
     }
     
     func retrieveData() {
-        if let oldMapStore = userDefaults.data(forKey: Constants.savedPlaces) {
-            let jsonDecoder = JSONDecoder()
-            if let oldMapStoreDecoded = try? jsonDecoder.decode(WishListStore.self, from: oldMapStore) {
-                wishListStore = oldMapStoreDecoded
-            }
-        }
+        wishListStore = UserDefaultsHelper.retrieveDataFromUserDefaults()
     }
     
     func savePlaceOfInterestToUserDefaults() {
-        let jsonEncoder = JSONEncoder()
-        if let encodedPlaces = try? jsonEncoder.encode(wishListStore) {
-            userDefaults.setValue(encodedPlaces, forKey: Constants.savedPlaces)
-        }
+        UserDefaultsHelper.updateUserDefaults(wishListStore: self.wishListStore)
     }
     
     func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListPositionIndex: Int) {

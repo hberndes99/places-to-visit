@@ -17,19 +17,11 @@ class WishListSelectionViewModel {
     }
     
     func retrieveData() {
-        if let existingData = userDefaults.data(forKey: Constants.savedPlaces) {
-            let jsonDecoder = JSONDecoder()
-            if let decodedData = try? jsonDecoder.decode(WishListStore.self, from: existingData) {
-                wishListStore = decodedData
-            }
-        }
+        wishListStore = UserDefaultsHelper.retrieveDataFromUserDefaults()
     }
     
     private func updateUserDefaults() {
-        let jsonEncoder = JSONEncoder()
-        if let encodedPlaces = try? jsonEncoder.encode(wishListStore) {
-            userDefaults.setValue(encodedPlaces, forKey: Constants.savedPlaces)
-        }
+        UserDefaultsHelper.updateUserDefaults(wishListStore: self.wishListStore)
     }
     
     func saveNewWishList(name: String, description: String) {

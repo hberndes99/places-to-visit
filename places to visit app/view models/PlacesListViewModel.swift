@@ -17,25 +17,16 @@ class PlacesListViewModel {
     }
     
     func retrieveData() {
-        if let oldMapStore = userDefaults.data(forKey: Constants.savedPlaces) {
-            let jsonDecoder = JSONDecoder()
-            if let oldMapStoreDecoded = try? jsonDecoder.decode(WishListStore.self, from: oldMapStore) {
-                wishListStore = oldMapStoreDecoded
-            }
-        }
+        wishListStore = UserDefaultsHelper.retrieveDataFromUserDefaults()
     }
     
-    // look into testing of private func
-    func updateUserDefaults() {
-        let jsonEncoder = JSONEncoder()
-        if let encodedUpdatedPlaces = try? jsonEncoder.encode(wishListStore) {
-            userDefaults.setValue(encodedUpdatedPlaces, forKey: Constants.savedPlaces)
-        }
+    private func updateUserDefaults() {
+        UserDefaultsHelper.updateUserDefaults(wishListStore: self.wishListStore)
     }
     
     func deletePlaceOfInterest(at position: Int, from wishListPosition: Int) {
         if wishListStore.wishLists.count > wishListPosition, wishListStore.wishLists[wishListPosition].items.count > position {
-            var wishListToDeleteFrom = wishListStore.wishLists[wishListPosition]
+            let wishListToDeleteFrom = wishListStore.wishLists[wishListPosition]
             wishListToDeleteFrom.items.remove(at: position)
             updateUserDefaults()
         }
