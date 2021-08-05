@@ -39,6 +39,7 @@
 		E477EC9626B8306500EA3B1B /* WishListSelectionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC9526B8306500EA3B1B /* WishListSelectionViewModelTests.swift */; };
 		E477ECA526BBDAB900EA3B1B /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECA426BBDAB800EA3B1B /* UserDefaultsHelper.swift */; };
 		E477ECA726BBE07A00EA3B1B /* MockUserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECA626BBE07A00EA3B1B /* MockUserDefaultsHelper.swift */; };
+		E477ECA926BBF89400EA3B1B /* UserDefaultsHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECA826BBF89400EA3B1B /* UserDefaultsHelperTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		E477EC9526B8306500EA3B1B /* WishListSelectionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListSelectionViewModelTests.swift; sourceTree = "<group>"; };
 		E477ECA426BBDAB800EA3B1B /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		E477ECA626BBE07A00EA3B1B /* MockUserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaultsHelper.swift; sourceTree = "<group>"; };
+		E477ECA826BBF89400EA3B1B /* UserDefaultsHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,7 +155,6 @@
 				E477EC5B26A87A1C00EA3B1B /* view models */,
 				E477EC5626A8638E00EA3B1B /* views */,
 				E477EC2626A839FB00EA3B1B /* AppDelegate.swift */,
-				E477EC7926AB093A00EA3B1B /* WishListStore.swift */,
 				E477EC2826A839FB00EA3B1B /* SceneDelegate.swift */,
 				E477EC2F26A839FC00EA3B1B /* Assets.xcassets */,
 				E477EC3126A839FC00EA3B1B /* LaunchScreen.storyboard */,
@@ -174,6 +175,7 @@
 				E477EC7D26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift */,
 				E477EC8726B3F9D400EA3B1B /* PlacesListViewModelTests.swift */,
 				E477EC9526B8306500EA3B1B /* WishListSelectionViewModelTests.swift */,
+				E477ECA826BBF89400EA3B1B /* UserDefaultsHelperTests.swift */,
 			);
 			path = "places to visit appTests";
 			sourceTree = "<group>";
@@ -228,6 +230,7 @@
 			children = (
 				E477EC7726AB088F00EA3B1B /* MapAnnotationPoint.swift */,
 				E477EC9326B8295500EA3B1B /* WishList.swift */,
+				E477EC7926AB093A00EA3B1B /* WishListStore.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				E477EC6E26AAB67600EA3B1B /* SearchResultsVCViewModelTests.swift in Sources */,
 				E477EC8A26B3FAAC00EA3B1B /* MockUserDefaults.swift in Sources */,
 				E477EC8826B3F9D400EA3B1B /* PlacesListViewModelTests.swift in Sources */,
+				E477ECA926BBF89400EA3B1B /* UserDefaultsHelperTests.swift in Sources */,
 				4526049026A9895B00D2B950 /* SearchNetworkManagerTests.swift in Sources */,
 				E477EC7126AAC56800EA3B1B /* MockSearchObjects.swift in Sources */,
 				E477EC9626B8306500EA3B1B /* WishListSelectionViewModelTests.swift in Sources */,
