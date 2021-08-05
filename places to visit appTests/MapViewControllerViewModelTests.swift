@@ -48,6 +48,7 @@ class MapViewControllerViewModelTests: XCTestCase {
         XCTAssertTrue(mockUserDefaultsHelper.updateUserDefaultsWasCalled)
     }
 
+    /*
     func testSavePlaceOfInterestToUserDefaults_currentlyEmpty() {
         let pointOfInterestOne = MapAnnotationPoint(title: "coffee place", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
         let coffeeWishList = WishList(name: "coffee wish list", items: [pointOfInterestOne], description: "london coffee")
@@ -69,6 +70,7 @@ class MapViewControllerViewModelTests: XCTestCase {
         XCTAssertEqual(decodedData.wishLists[0].items[0].title, "coffee place")
         XCTAssertEqual(decodedData.wishLists[0].items[0].coordinate.latitude, CLLocationDegrees(0.2))
     }
+    */
     
     func testSavePlaceOfInterest_storeCurrentlyEmpty() {
         let coffeeWishList = WishList(name: "coffee wish list", items: [], description: "london coffee")
@@ -84,21 +86,18 @@ class MapViewControllerViewModelTests: XCTestCase {
         XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists[0].items[0].title, "coffee place one")
     }
     
-    func testSavePlaceOfInterest_storeCurrentlyContainsTwoItems() {
-        let coffeePlaceOne = MapAnnotationPoint(title: "coffee place one", subtitle: "1, the street", coordinate: CLLocationCoordinate2D(latitude: 20, longitude: 20), number: "1", streetAddress: "the street")
-        let coffeePlaceTwo = MapAnnotationPoint(title: "coffee place two", subtitle: "2, the street", coordinate: CLLocationCoordinate2D(latitude: 20, longitude: 20), number: "2", streetAddress: "the street")
-        let coffeeWishList = WishList(name: "coffee wish list", items: [coffeePlaceOne, coffeePlaceTwo], description: "london coffee")
-        mapViewControllerViewModel.wishListStore.wishLists = [coffeeWishList]
-        
+    func testSavePlaceOfInterest_storeCurrentlyContainsOneWishListNoItems() {
         let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 30, longitude: 20), addressDictionary: nil)
         let coffeePlaceThree = MKMapItem(placemark: placemark)
-        coffeePlaceThree.name = "coffee place three"
+        coffeePlaceThree.name = "coffee place for test"
         
         mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: coffeePlaceThree, wishListPositionIndex: 0)
+        // returns the wishliststore from the mock user defaults helper and the item is appended to the wish list at index 0 in that wish list store
         
-        XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists[0].items.count, 3)
-        XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists[0].items[2].title, "coffee place three")
-        XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists[0].items[2].coordinate.latitude, CLLocationDegrees(30))
+        XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists.count, 1)
+        XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists[0].items.count, 1)
+        XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists[0].items[0].title, "coffee place for test")
+        XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists[0].items[0].coordinate.latitude, CLLocationDegrees(30))
     }
     
     func testSavePlaceOfInterest_storeAlreadyContainsItemToSave() {
