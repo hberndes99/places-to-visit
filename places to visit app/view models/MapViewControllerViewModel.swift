@@ -11,26 +11,24 @@ import MapKit
 class MapViewControllerViewModel {
     var wishListStore: WishListStore
     var userDefaults: UserDefaultsProtocol
+    var userDefaultsHelper: UserDefaultsHelperProtocol.Type
     
-    init(wishListStore: WishListStore, userDefaults: UserDefaultsProtocol = UserDefaults.standard) {
+    init(wishListStore: WishListStore,
+         userDefaults: UserDefaultsProtocol = UserDefaults.standard,
+         userDefaultsHelper: UserDefaultsHelperProtocol.Type = UserDefaultsHelper.self) {
         self.wishListStore = wishListStore
         self.userDefaults = userDefaults
+        self.userDefaultsHelper = userDefaultsHelper
     }
     
+    // why does it force me to add the user default parameter
     func retrieveData() {
-        if let oldMapStore = userDefaults.data(forKey: Constants.savedPlaces) {
-            let jsonDecoder = JSONDecoder()
-            if let oldMapStoreDecoded = try? jsonDecoder.decode(WishListStore.self, from: oldMapStore) {
-                wishListStore = oldMapStoreDecoded
-            }
-        }
+        wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }
     
+    // why does it force me to add the user default parameter
     func savePlaceOfInterestToUserDefaults() {
-        let jsonEncoder = JSONEncoder()
-        if let encodedPlaces = try? jsonEncoder.encode(wishListStore) {
-            userDefaults.setValue(encodedPlaces, forKey: Constants.savedPlaces)
-        }
+        userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
     }
     
     func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListPositionIndex: Int) {
@@ -54,9 +52,9 @@ class MapViewControllerViewModel {
                 }
             }
         }
-       // add in a check
+ 
         retrieveData()
-        var wishListToAddTo = wishListStore.wishLists[wishListPositionIndex]
+        let wishListToAddTo = wishListStore.wishLists[wishListPositionIndex]
         wishListToAddTo.items.append(newMapAnnotationPoint)
        
         savePlaceOfInterestToUserDefaults()

@@ -9,33 +9,30 @@ import Foundation
 
 class PlacesListViewModel {
     var wishListStore: WishListStore
-    private var userDefaults: UserDefaultsProtocol
+    var userDefaults: UserDefaultsProtocol
+    var userDefaultsHelper: UserDefaultsHelperProtocol.Type
     
-    init(userDefaults: UserDefaultsProtocol = UserDefaults.standard, wishListStore: WishListStore) {
+    init(wishListStore: WishListStore,
+         userDefaults: UserDefaultsProtocol = UserDefaults.standard,
+         userDefaultsHelper: UserDefaultsHelperProtocol.Type = UserDefaultsHelper.self) {
         self.wishListStore = wishListStore
         self.userDefaults = userDefaults
+        self.userDefaultsHelper = userDefaultsHelper
     }
     
+    // should be private
     func retrieveData() {
-        if let oldMapStore = userDefaults.data(forKey: Constants.savedPlaces) {
-            let jsonDecoder = JSONDecoder()
-            if let oldMapStoreDecoded = try? jsonDecoder.decode(WishListStore.self, from: oldMapStore) {
-                wishListStore = oldMapStoreDecoded
-            }
-        }
+        wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }
     
-    // look into testing of private func
+    // same
     func updateUserDefaults() {
-        let jsonEncoder = JSONEncoder()
-        if let encodedUpdatedPlaces = try? jsonEncoder.encode(wishListStore) {
-            userDefaults.setValue(encodedUpdatedPlaces, forKey: Constants.savedPlaces)
-        }
+        userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
     }
     
     func deletePlaceOfInterest(at position: Int, from wishListPosition: Int) {
         if wishListStore.wishLists.count > wishListPosition, wishListStore.wishLists[wishListPosition].items.count > position {
-            var wishListToDeleteFrom = wishListStore.wishLists[wishListPosition]
+            let wishListToDeleteFrom = wishListStore.wishLists[wishListPosition]
             wishListToDeleteFrom.items.remove(at: position)
             updateUserDefaults()
         }

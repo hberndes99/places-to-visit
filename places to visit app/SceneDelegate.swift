@@ -14,16 +14,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var coffeeWishList: WishList?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let coffeeWishList = WishList(name: "coffee list", items: [], description: "coffee shops I want to visit in london")
-        
-        let restaurantWishList = WishList(name: "restaurants", items: [MapAnnotationPoint(title: "restaurant 1", subtitle: "1 the street", coordinate: CLLocationCoordinate2D(latitude: 1, longitude: 1), number: "1", streetAddress: "the street")], description: "cheap restaurants in london")
-        let wishListStore = WishListStore(wishLists: [coffeeWishList, restaurantWishList])
+        let wishListStore = WishListStore(wishLists: [])
         let rootTabViewController = RootTabViewController(wishListStore: wishListStore)
         window?.rootViewController = rootTabViewController
         window?.makeKeyAndVisible()
