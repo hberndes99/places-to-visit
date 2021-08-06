@@ -31,9 +31,9 @@ class MapViewControllerViewModelTests: XCTestCase {
         mapViewControllerViewModel = nil
         wishListStore = nil
         mockUserDefaults = nil
+        mockUserDefaultsHelper = nil
     }
 
-    // new test
     func testRetrieveData() {
         mapViewControllerViewModel.retrieveData()
         
@@ -41,36 +41,11 @@ class MapViewControllerViewModelTests: XCTestCase {
         XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists[0].name, "test coffee list")
     }
     
-    //new test
     func testSavePlaceOfInterestToUserDefaults() {
         mapViewControllerViewModel.savePlaceOfInterestToUserDefaults()
         
         XCTAssertTrue(mockUserDefaultsHelper.updateUserDefaultsWasCalled)
     }
-
-    /*
-    func testSavePlaceOfInterestToUserDefaults_currentlyEmpty() {
-        let pointOfInterestOne = MapAnnotationPoint(title: "coffee place", subtitle: "1, high street", coordinate: CLLocationCoordinate2D.init(latitude: 0.2, longitude: 0.1), number: "1", streetAddress: "high street")
-        let coffeeWishList = WishList(name: "coffee wish list", items: [pointOfInterestOne], description: "london coffee")
-        mapViewControllerViewModel.wishListStore.wishLists = [coffeeWishList]
-        
-        mapViewControllerViewModel.savePlaceOfInterestToUserDefaults()
-        
-        let jsonDecoder = JSONDecoder()
-        guard let decodedData = try? jsonDecoder.decode(WishListStore.self, from: mockUserDefaults.savedBySetValue["savedPlaces"] as! Data) else {
-            XCTFail()
-            return
-        }
-
-        XCTAssertFalse(mockUserDefaults.dataWasCalled)
-        XCTAssertTrue(mockUserDefaults.setValueWasCalled)
-        
-        XCTAssert(mockUserDefaults.savedBySetValue["savedPlaces"] != nil)
-        XCTAssert(mockUserDefaults.savedBySetValue["places"] == nil)
-        XCTAssertEqual(decodedData.wishLists[0].items[0].title, "coffee place")
-        XCTAssertEqual(decodedData.wishLists[0].items[0].coordinate.latitude, CLLocationDegrees(0.2))
-    }
-    */
     
     func testSavePlaceOfInterest_storeCurrentlyEmpty() {
         let coffeeWishList = WishList(name: "coffee wish list", items: [], description: "london coffee")

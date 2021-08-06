@@ -9,19 +9,25 @@ import Foundation
 
 class WishListSelectionViewModel {
     var wishListStore: WishListStore
-    private var userDefaults: UserDefaultsProtocol
+    var userDefaults: UserDefaultsProtocol
+    var userDefaultsHelper: UserDefaultsHelperProtocol.Type
     
-    init(userDefaults: UserDefaultsProtocol = UserDefaults.standard, wishListStore: WishListStore) {
+    init(wishListStore: WishListStore,
+         userDefaults: UserDefaultsProtocol = UserDefaults.standard,
+         userDefaultsHelper: UserDefaultsHelperProtocol.Type = UserDefaultsHelper.self) {
         self.wishListStore = wishListStore
         self.userDefaults = userDefaults
+        self.userDefaultsHelper = userDefaultsHelper
     }
     
+    // should be private
     func retrieveData() {
-        wishListStore = UserDefaultsHelper.retrieveDataFromUserDefaults()
+        wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }
     
-    private func updateUserDefaults() {
-        UserDefaultsHelper.updateUserDefaults(wishListStore: self.wishListStore)
+    // same
+    func updateUserDefaults() {
+        userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
     }
     
     func saveNewWishList(name: String, description: String) {

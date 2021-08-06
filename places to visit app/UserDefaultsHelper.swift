@@ -9,7 +9,7 @@ import Foundation
 
 class UserDefaultsHelper {
 
-    static func retrieveDataFromUserDefaults(userDefaults: UserDefaultsProtocol = UserDefaults.standard) -> WishListStore {
+    static func retrieveDataFromUserDefaults(userDefaults: UserDefaultsProtocol) -> WishListStore {
         if let existingData = userDefaults.data(forKey: Constants.savedPlaces) {
             let jsonDecoder = JSONDecoder()
             if let decodedData = try? jsonDecoder.decode(WishListStore.self, from: existingData) {
@@ -19,7 +19,7 @@ class UserDefaultsHelper {
         return WishListStore(wishLists: [])
     }
     
-    static func updateUserDefaults(userDefaults: UserDefaultsProtocol = UserDefaults.standard, wishListStore: WishListStore) {
+    static func updateUserDefaults(userDefaults: UserDefaultsProtocol, wishListStore: WishListStore) {
         let jsonEncoder = JSONEncoder()
         if let encodedPlaces = try? jsonEncoder.encode(wishListStore) {
             userDefaults.setValue(encodedPlaces, forKey: Constants.savedPlaces)
