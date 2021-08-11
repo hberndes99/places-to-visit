@@ -41,6 +41,7 @@
 		E477ECA726BBE07A00EA3B1B /* MockUserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECA626BBE07A00EA3B1B /* MockUserDefaultsHelper.swift */; };
 		E477ECA926BBF89400EA3B1B /* UserDefaultsHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECA826BBF89400EA3B1B /* UserDefaultsHelperTests.swift */; };
 		E477ECAC26C2BA6100EA3B1B /* WishListStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECAB26C2BA6100EA3B1B /* WishListStoreHelper.swift */; };
+		E477ECAE26C401AA00EA3B1B /* WishListStoreHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECAD26C401AA00EA3B1B /* WishListStoreHelperTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		E477ECA626BBE07A00EA3B1B /* MockUserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaultsHelper.swift; sourceTree = "<group>"; };
 		E477ECA826BBF89400EA3B1B /* UserDefaultsHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelperTests.swift; sourceTree = "<group>"; };
 		E477ECAB26C2BA6100EA3B1B /* WishListStoreHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListStoreHelper.swift; sourceTree = "<group>"; };
+		E477ECAD26C401AA00EA3B1B /* WishListStoreHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListStoreHelperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 				E477EC8726B3F9D400EA3B1B /* PlacesListViewModelTests.swift */,
 				E477EC9526B8306500EA3B1B /* WishListSelectionViewModelTests.swift */,
 				E477ECA826BBF89400EA3B1B /* UserDefaultsHelperTests.swift */,
+				E477ECAD26C401AA00EA3B1B /* WishListStoreHelperTests.swift */,
 			);
 			path = "places to visit appTests";
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				E477EC8A26B3FAAC00EA3B1B /* MockUserDefaults.swift in Sources */,
 				E477EC8826B3F9D400EA3B1B /* PlacesListViewModelTests.swift in Sources */,
 				E477ECA926BBF89400EA3B1B /* UserDefaultsHelperTests.swift in Sources */,
+				E477ECAE26C401AA00EA3B1B /* WishListStoreHelperTests.swift in Sources */,
 				4526049026A9895B00D2B950 /* SearchNetworkManagerTests.swift in Sources */,
 				E477EC7126AAC56800EA3B1B /* MockSearchObjects.swift in Sources */,
 				E477EC9626B8306500EA3B1B /* WishListSelectionViewModelTests.swift in Sources */,

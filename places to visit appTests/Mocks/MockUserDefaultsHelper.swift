@@ -14,7 +14,7 @@ class MockUserDefaultsHelper: UserDefaultsHelperProtocol {
     static var updateUserDefaultsWasCalled: Bool = false
     
     static func retrieveDataFromUserDefaults(userDefaults: UserDefaultsProtocol) -> WishListStore {
-        let coffeePlaceOne = MapAnnotationPoint(title: "coffee place one", subtitle: "1, the street", coordinate: CLLocationCoordinate2D(latitude: 30, longitude: 30), number: "1", streetAddress: "the street")
+        let coffeePlaceOne = MapAnnotationPoint(title: "coffee place one", subtitle: "", coordinate: CLLocationCoordinate2D(latitude: 30, longitude: 30), number: "1", streetAddress: "the street")
         let coffeeWishList = WishList(name: "test coffee list", items: [coffeePlaceOne], description: "chill coffee shops in london")
         return WishListStore(wishLists: [coffeeWishList])
     }

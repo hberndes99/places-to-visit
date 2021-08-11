@@ -47,9 +47,9 @@ class MapViewControllerViewModel {
                                                        streetAddress: placeOfInterest.placemark.thoroughfare ?? "")
         retrieveData()
         let wishListToAddTo = wishListStore.wishLists[wishListPositionIndex]
-        if WishListStoreHelper.checkForDuplication(itemToCheckFor: newMapAnnotationPoint,
-                                                   listToCheckThrough: wishListToAddTo.items,
-                                                   propertiesToCheckAgainst: [\MapAnnotationPoint.title, \MapAnnotationPoint.subtitle]) {
+        if WishListStoreHelper.checkForDuplication(itemToCheckFor: newMapAnnotationPoint, listToCheckThrough: wishListToAddTo.items, propertiesToCheckAgainst: [\MapAnnotationPoint.title]),
+           WishListStoreHelper.checkForDuplication(itemToCheckFor: newMapAnnotationPoint, listToCheckThrough: wishListToAddTo.items,
+            propertiesToCheckAgainst: [\MapAnnotationPoint.subtitle]) {
             print("item is already in that list")
             return
         }
