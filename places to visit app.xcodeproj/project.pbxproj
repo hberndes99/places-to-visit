@@ -40,6 +40,8 @@
 		E477ECA526BBDAB900EA3B1B /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECA426BBDAB800EA3B1B /* UserDefaultsHelper.swift */; };
 		E477ECA726BBE07A00EA3B1B /* MockUserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECA626BBE07A00EA3B1B /* MockUserDefaultsHelper.swift */; };
 		E477ECA926BBF89400EA3B1B /* UserDefaultsHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECA826BBF89400EA3B1B /* UserDefaultsHelperTests.swift */; };
+		E477ECAC26C2BA6100EA3B1B /* WishListStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECAB26C2BA6100EA3B1B /* WishListStoreHelper.swift */; };
+		E477ECAE26C401AA00EA3B1B /* WishListStoreHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECAD26C401AA00EA3B1B /* WishListStoreHelperTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +101,8 @@
 		E477ECA426BBDAB800EA3B1B /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		E477ECA626BBE07A00EA3B1B /* MockUserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaultsHelper.swift; sourceTree = "<group>"; };
 		E477ECA826BBF89400EA3B1B /* UserDefaultsHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelperTests.swift; sourceTree = "<group>"; };
+		E477ECAB26C2BA6100EA3B1B /* WishListStoreHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListStoreHelper.swift; sourceTree = "<group>"; };
+		E477ECAD26C401AA00EA3B1B /* WishListStoreHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListStoreHelperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,7 @@
 		E477EC2526A839FB00EA3B1B /* places to visit app */ = {
 			isa = PBXGroup;
 			children = (
+				E477ECAA26C2BA4500EA3B1B /* Helpers */,
 				E477EC7426AB081B00EA3B1B /* models */,
 				E477EC6326A96EA700EA3B1B /* SearchNetworkManagerProtocol.swift */,
 				E477EC6126A96BFA00EA3B1B /* SearchNetworkManager.swift */,
@@ -160,7 +165,6 @@
 				E477EC3126A839FC00EA3B1B /* LaunchScreen.storyboard */,
 				E477EC3426A839FC00EA3B1B /* Info.plist */,
 				E477EC7F26B1A52A00EA3B1B /* Constants.swift */,
-				E477ECA426BBDAB800EA3B1B /* UserDefaultsHelper.swift */,
 			);
 			path = "places to visit app";
 			sourceTree = "<group>";
@@ -176,6 +180,7 @@
 				E477EC8726B3F9D400EA3B1B /* PlacesListViewModelTests.swift */,
 				E477EC9526B8306500EA3B1B /* WishListSelectionViewModelTests.swift */,
 				E477ECA826BBF89400EA3B1B /* UserDefaultsHelperTests.swift */,
+				E477ECAD26C401AA00EA3B1B /* WishListStoreHelperTests.swift */,
 			);
 			path = "places to visit appTests";
 			sourceTree = "<group>";
@@ -233,6 +238,15 @@
 				E477EC7926AB093A00EA3B1B /* WishListStore.swift */,
 			);
 			path = models;
+			sourceTree = "<group>";
+		};
+		E477ECAA26C2BA4500EA3B1B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E477ECA426BBDAB800EA3B1B /* UserDefaultsHelper.swift */,
+				E477ECAB26C2BA6100EA3B1B /* WishListStoreHelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,6 +386,7 @@
 				E477EC7826AB088F00EA3B1B /* MapAnnotationPoint.swift in Sources */,
 				E477EC2B26A839FB00EA3B1B /* MapViewController.swift in Sources */,
 				E477EC5826A863D200EA3B1B /* SearchResultsViewController.swift in Sources */,
+				E477ECAC26C2BA6100EA3B1B /* WishListStoreHelper.swift in Sources */,
 				E477EC8426B2AAFE00EA3B1B /* PlacesListViewViewController.swift in Sources */,
 				E477EC9226B8033500EA3B1B /* WishListTableViewCell.swift in Sources */,
 				E477EC7C26AB0BD800EA3B1B /* MapViewControllerViewModel.swift in Sources */,
@@ -400,6 +415,7 @@
 				E477EC8A26B3FAAC00EA3B1B /* MockUserDefaults.swift in Sources */,
 				E477EC8826B3F9D400EA3B1B /* PlacesListViewModelTests.swift in Sources */,
 				E477ECA926BBF89400EA3B1B /* UserDefaultsHelperTests.swift in Sources */,
+				E477ECAE26C401AA00EA3B1B /* WishListStoreHelperTests.swift in Sources */,
 				4526049026A9895B00D2B950 /* SearchNetworkManagerTests.swift in Sources */,
 				E477EC7126AAC56800EA3B1B /* MockSearchObjects.swift in Sources */,
 				E477EC9626B8306500EA3B1B /* WishListSelectionViewModelTests.swift in Sources */,

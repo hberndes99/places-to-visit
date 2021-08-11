@@ -34,28 +34,27 @@ class MapViewControllerViewModel {
     func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListPositionIndex: Int) {
         var subtitleString: String = ""
         guard let placeName = placeOfInterest.name else { return }
-        
-        if placeOfInterest.placemark.subThoroughfare != nil, placeOfInterest.placemark.thoroughfare != nil {
+        if placeOfInterest.placemark.subThoroughfare != nil,
+           placeOfInterest.placemark.thoroughfare != nil {
             subtitleString = "\(placeOfInterest.placemark.subThoroughfare ?? ""), \(placeOfInterest.placemark.thoroughfare ?? "")"
         } else if placeOfInterest.placemark.thoroughfare != nil {
             subtitleString = "\(placeOfInterest.placemark.thoroughfare ?? "")"
         }
-        
-        let newMapAnnotationPoint = MapAnnotationPoint(title: placeName, subtitle: subtitleString, coordinate: placeOfInterest.placemark.coordinate, number: placeOfInterest.placemark.subThoroughfare ?? "", streetAddress: placeOfInterest.placemark.thoroughfare ?? "")
-        
-        for wishList in wishListStore.wishLists {
-            for savedPoint in wishList.items {
-                if savedPoint.title == newMapAnnotationPoint.title,
-                   savedPoint.subtitle == newMapAnnotationPoint.subtitle {
-                    print("place already saved")
-                    return
-                }
-            }
-        }
- 
+        let newMapAnnotationPoint = MapAnnotationPoint(title: placeName,
+                                                       subtitle: subtitleString,
+                                                       coordinate: placeOfInterest.placemark.coordinate,
+                                                       number: placeOfInterest.placemark.subThoroughfare ?? "",
+                                                       streetAddress: placeOfInterest.placemark.thoroughfare ?? "")
         retrieveData()
         let wishListToAddTo = wishListStore.wishLists[wishListPositionIndex]
+        if WishListStoreHelper.checkForDuplication(itemToCheckFor: newMapAnnotationPoint, listToCheckThrough: wishListToAddTo.items, propertiesToCheckAgainst: [\MapAnnotationPoint.title]),
+           WishListStoreHelper.checkForDuplication(itemToCheckFor: newMapAnnotationPoint, listToCheckThrough: wishListToAddTo.items,
+            propertiesToCheckAgainst: [\MapAnnotationPoint.subtitle]) {
+            print("item is already in that list")
+            return
+        }
         wishListToAddTo.items.append(newMapAnnotationPoint)
+        print("saved new place")
        
         savePlaceOfInterestToUserDefaults()
     }
