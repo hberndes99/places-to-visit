@@ -16,6 +16,8 @@ class MapViewController: UIViewController {
     var locationManager: CLLocationManager!
     var wishListStore: WishListStore
     
+    var filterButtonButton: UIButton!
+    
     init (wishListStore: WishListStore) {
         self.wishListStore = wishListStore
         super.init(nibName: nil, bundle: nil)
@@ -43,12 +45,21 @@ class MapViewController: UIViewController {
         locationManager.delegate = self
         locationManager.requestLocation()
         
-        setUpConstraints()
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped(mapView: )))
         navigationItem.rightBarButtonItem?.accessibilityIdentifier = "add place of interest button"
         
+        filterButtonButton = UIButton()
+        filterButtonButton.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
+        filterButtonButton.setTitle("filter", for: .normal)
+        filterButtonButton.setTitleColor(.systemBlue, for: .normal)
+        filterButtonButton.translatesAutoresizingMaskIntoConstraints = false
+        filterButtonButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: filterButtonButton)
+        
+        setUpConstraints()
         updateMapAnnotations()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +91,11 @@ class MapViewController: UIViewController {
     @objc func addButtonTapped(mapView: MKMapView) {
         let wishListSelectionViewController = WishListSelectionViewController(mapViewController: self, mapView: self.mapView, wishListStore: wishListStore)
         navigationController?.pushViewController(wishListSelectionViewController, animated: true)
+    }
+    
+    @objc func filterButtonTapped() {
+        let filterVC = FilterViewController()
+        self.present(filterVC, animated: true)
     }
 }
 
