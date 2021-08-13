@@ -8,10 +8,15 @@
 import Foundation
 import MapKit
 
+protocol MapViewControllerViewModelDelegate: AnyObject {
+    func updateMapWithFilters() 
+}
+
 class MapViewControllerViewModel {
     var wishListStore: WishListStore
     var userDefaults: UserDefaultsProtocol
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type
+    weak var mapViewControllerViewModelDelegate: MapViewControllerViewModelDelegate?
     
     init(wishListStore: WishListStore,
          userDefaults: UserDefaultsProtocol = UserDefaults.standard,
@@ -21,12 +26,10 @@ class MapViewControllerViewModel {
         self.userDefaultsHelper = userDefaultsHelper
     }
     
-    // why does it force me to add the user default parameter
     func retrieveData() {
         wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }
     
-    // why does it force me to add the user default parameter
     func savePlaceOfInterestToUserDefaults() {
         userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
     }
@@ -57,6 +60,15 @@ class MapViewControllerViewModel {
         print("saved new place")
        
         savePlaceOfInterestToUserDefaults()
+    }
+    
+    
+    func applyFiltersToMap(filterList: [String]) {
+        let filteredWishLists = wishListStore.wishLists.filter { wishList in
+            filterList.contains(wishList.name)
+        }
+        wishListStore.wishLists = filteredWishLists
+        mapViewControllerViewModelDelegate?.updateMapWithFilters()
     }
 }
 

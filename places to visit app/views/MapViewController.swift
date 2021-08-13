@@ -33,6 +33,7 @@ class MapViewController: UIViewController {
         view.accessibilityIdentifier = "Saved places map view"
         
         mapViewControllerViewModel = MapViewControllerViewModel(wishListStore: wishListStore)
+        mapViewControllerViewModel.mapViewControllerViewModelDelegate = self
         mapViewControllerViewModel.retrieveData()
         
         mapView = MKMapView()
@@ -113,25 +114,20 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
          print("error:: \(error.localizedDescription)")
     }
-
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            locationManager.requestLocation()
-        }
-    }
+    
+    
 }
 
-
-extension MapViewController: SearchResultsVCMapViewVCDelegate {
-    func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListPositionIndex: Int) {
-        mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: placeOfInterest, wishListPositionIndex: wishListPositionIndex)
-    }
-
-}
-
-extension MapViewController :FilterViewControllerDelegate {
+extension MapViewController: FilterViewControllerDelegate {
     func applyFilters(filterList: [String]) {
-        print("delegate called")
+        mapViewControllerViewModel.applyFiltersToMap(filterList: filterList)
+    }
+}
+
+
+extension MapViewController: MapViewControllerViewModelDelegate {
+    func updateMapWithFilters() {
+        updateMapAnnotations()
     }
     
     
