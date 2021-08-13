@@ -35,15 +35,6 @@ class WishListSelectionViewModel {
         if WishListStoreHelper.checkForDuplication(itemToCheckFor: newWishList, listToCheckThrough: wishListStore.wishLists, propertiesToCheckAgainst: [\WishList.name]) {
             return
         }
-        
-        /*
-        for wishList in wishListStore.wishLists {
-            if wishList.name == name {
-                print("wish lsit with the same name already exists")
-                return
-            }
-        }
-        */
         wishListStore.wishLists.append(newWishList)
         updateUserDefaults()
     }

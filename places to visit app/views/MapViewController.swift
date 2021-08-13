@@ -94,7 +94,8 @@ class MapViewController: UIViewController {
     }
     
     @objc func filterButtonTapped() {
-        let filterVC = FilterViewController()
+        let filterVC = FilterViewController(wishListStore: wishListStore)
+        filterVC.filterViewControllerDelegate = self
         self.present(filterVC, animated: true)
     }
 }
@@ -128,3 +129,10 @@ extension MapViewController: SearchResultsVCMapViewVCDelegate {
 
 }
 
+extension MapViewController :FilterViewControllerDelegate {
+    func applyFilters(filterList: [String]) {
+        print("delegate called")
+    }
+    
+    
+}

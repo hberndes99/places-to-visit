@@ -43,6 +43,9 @@
 		E477ECAC26C2BA6100EA3B1B /* WishListStoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECAB26C2BA6100EA3B1B /* WishListStoreHelper.swift */; };
 		E477ECAE26C401AA00EA3B1B /* WishListStoreHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECAD26C401AA00EA3B1B /* WishListStoreHelperTests.swift */; };
 		E477ECB026C40DF500EA3B1B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECAF26C40DF500EA3B1B /* FilterViewController.swift */; };
+		E477ECB226C422B000EA3B1B /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECB126C422B000EA3B1B /* FilterViewModel.swift */; };
+		E477ECB426C52A9D00EA3B1B /* FilterWishListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECB326C52A9C00EA3B1B /* FilterWishListCollectionViewCell.swift */; };
+		E477ECB626C53CC000EA3B1B /* FilterWishListCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECB526C53CC000EA3B1B /* FilterWishListCollectionReusableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +108,9 @@
 		E477ECAB26C2BA6100EA3B1B /* WishListStoreHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListStoreHelper.swift; sourceTree = "<group>"; };
 		E477ECAD26C401AA00EA3B1B /* WishListStoreHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListStoreHelperTests.swift; sourceTree = "<group>"; };
 		E477ECAF26C40DF500EA3B1B /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		E477ECB126C422B000EA3B1B /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		E477ECB326C52A9C00EA3B1B /* FilterWishListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWishListCollectionViewCell.swift; sourceTree = "<group>"; };
+		E477ECB526C53CC000EA3B1B /* FilterWishListCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWishListCollectionReusableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +214,8 @@
 				E477EC8F26B44D5D00EA3B1B /* NewWishListViewController.swift */,
 				E477EC9126B8033400EA3B1B /* WishListTableViewCell.swift */,
 				E477ECAF26C40DF500EA3B1B /* FilterViewController.swift */,
+				E477ECB326C52A9C00EA3B1B /* FilterWishListCollectionViewCell.swift */,
+				E477ECB526C53CC000EA3B1B /* FilterWishListCollectionReusableView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -219,6 +227,7 @@
 				E477EC7B26AB0BD800EA3B1B /* MapViewControllerViewModel.swift */,
 				E477EC8526B2C2CC00EA3B1B /* PlacesListViewModel.swift */,
 				E477EC8D26B446BC00EA3B1B /* WishListSelectionViewModel.swift */,
+				E477ECB126C422B000EA3B1B /* FilterViewModel.swift */,
 			);
 			path = "view models";
 			sourceTree = "<group>";
@@ -393,15 +402,18 @@
 				E477ECB026C40DF500EA3B1B /* FilterViewController.swift in Sources */,
 				E477EC8426B2AAFE00EA3B1B /* PlacesListViewViewController.swift in Sources */,
 				E477EC9226B8033500EA3B1B /* WishListTableViewCell.swift in Sources */,
+				E477ECB226C422B000EA3B1B /* FilterViewModel.swift in Sources */,
 				E477EC7C26AB0BD800EA3B1B /* MapViewControllerViewModel.swift in Sources */,
 				E477EC9426B8295500EA3B1B /* WishList.swift in Sources */,
 				E477EC8626B2C2CC00EA3B1B /* PlacesListViewModel.swift in Sources */,
+				E477ECB626C53CC000EA3B1B /* FilterWishListCollectionReusableView.swift in Sources */,
 				E477EC6226A96BFA00EA3B1B /* SearchNetworkManager.swift in Sources */,
 				E477EC2726A839FB00EA3B1B /* AppDelegate.swift in Sources */,
 				E477EC9026B44D5D00EA3B1B /* NewWishListViewController.swift in Sources */,
 				E477EC8E26B446BC00EA3B1B /* WishListSelectionViewModel.swift in Sources */,
 				E477EC5A26A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift in Sources */,
 				E477EC7A26AB093A00EA3B1B /* WishListStore.swift in Sources */,
+				E477ECB426C52A9D00EA3B1B /* FilterWishListCollectionViewCell.swift in Sources */,
 				E477EC8C26B4159400EA3B1B /* WishListSelectionViewController.swift in Sources */,
 				E477EC2926A839FB00EA3B1B /* SceneDelegate.swift in Sources */,
 				E477EC6426A96EA700EA3B1B /* SearchNetworkManagerProtocol.swift in Sources */,
