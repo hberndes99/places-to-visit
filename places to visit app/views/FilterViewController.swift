@@ -22,7 +22,6 @@ class FilterViewController: UIViewController {
     
     private var filterViewModel: FilterViewModel!
     private var wishListStore: WishListStore
-    private var listOfFilterStrings: [String] = [String]()
     
     weak var filterViewControllerDelegate: FilterViewControllerDelegate?
     
@@ -40,6 +39,7 @@ class FilterViewController: UIViewController {
 
         view.backgroundColor = .white
         filterViewModel = FilterViewModel(wishListStore: wishListStore)
+        filterViewModel.filterViewControllerDelegate = filterViewControllerDelegate
         filterViewModel.retrieveData()
         
         titleFilterLabel = UILabel()
@@ -113,7 +113,8 @@ class FilterViewController: UIViewController {
     }
     
     @objc func applyFiltersTapped() {
-        filterViewControllerDelegate?.applyFilters(filterList: listOfFilterStrings)
+        filterViewModel.applyFilters()
+        //filterViewControllerDelegate?.applyFilters(filterList: listOfFilterStrings)
         self.dismiss(animated: true)
     }
 }
@@ -154,15 +155,6 @@ extension FilterViewController: UICollectionViewDelegateFlowLayout {
         let cellWidth = (adjustedCVWidth / 2) * 0.9
         return CGSize(width: cellWidth, height: cellHeight)
     }
-    
-    /*
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        print("called")
-        let header = filterCollectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: Constants.filterWishListHeader, for: indexPath) as! FilterWishListCollectionReusableView
-       
-        return header
-    }
- */
 }
 
 extension FilterViewController: UICollectionViewDelegate {
@@ -173,12 +165,10 @@ extension FilterViewController: UICollectionViewDelegate {
         cell.cellIsSelected = !cell.cellIsSelected
         if cell.cellIsSelected {
             cell.configureSelected()
-            listOfFilterStrings.append(selectedWishList.name)
+            filterViewModel.addToFilterQueries(wishListName: selectedWishList.name)
         } else {
             cell.configureDeselected()
-            if let index = listOfFilterStrings.firstIndex(of: selectedWishList.name) {
-                listOfFilterStrings.remove(at: index)
-            }
+            filterViewModel.removeFromFilterQueries(wishListName: selectedWishList.name)
         }
         
     }

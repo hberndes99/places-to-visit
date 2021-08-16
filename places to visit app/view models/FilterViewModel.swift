@@ -11,6 +11,8 @@ class FilterViewModel {
     var wishListStore: WishListStore
     var userDefaults: UserDefaultsProtocol
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type
+    weak var filterViewControllerDelegate: FilterViewControllerDelegate?
+    private var listOfFilterStrings: [String] = [String]()
     
     init(wishListStore: WishListStore,
          userDefaults: UserDefaultsProtocol = UserDefaults.standard,
@@ -23,5 +25,19 @@ class FilterViewModel {
     // should be private
     func retrieveData() {
         wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
+    }
+    
+    func addToFilterQueries(wishListName: String) {
+        listOfFilterStrings.append(wishListName)
+    }
+    
+    func removeFromFilterQueries(wishListName: String) {
+        if let index = listOfFilterStrings.firstIndex(of: wishListName) {
+            listOfFilterStrings.remove(at: index)
+        }
+    }
+    
+    func applyFilters() {
+        filterViewControllerDelegate?.applyFilters(filterList: listOfFilterStrings)
     }
 }
