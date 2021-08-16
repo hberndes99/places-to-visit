@@ -114,11 +114,8 @@ class FilterViewController: UIViewController {
     
     @objc func applyFiltersTapped() {
         filterViewControllerDelegate?.applyFilters(filterList: listOfFilterStrings)
-        self.dismiss(animated: true) {
-            print("dismissed")
-        }
+        self.dismiss(animated: true)
     }
-
 }
 
 

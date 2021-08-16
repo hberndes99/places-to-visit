@@ -17,6 +17,7 @@ class MapViewController: UIViewController {
     var wishListStore: WishListStore
     
     var filterButtonButton: UIButton!
+    var removeFiltersButton: UIButton!
     
     init (wishListStore: WishListStore) {
         self.wishListStore = wishListStore
@@ -55,6 +56,13 @@ class MapViewController: UIViewController {
         filterButtonButton.setTitleColor(.systemBlue, for: .normal)
         filterButtonButton.translatesAutoresizingMaskIntoConstraints = false
         filterButtonButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        
+        removeFiltersButton = UIButton()
+        removeFiltersButton.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
+        removeFiltersButton.setTitle("filter", for: .normal)
+        removeFiltersButton.setTitleColor(.systemBlue, for: .normal)
+        removeFiltersButton.translatesAutoresizingMaskIntoConstraints = false
+        removeFiltersButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: filterButtonButton)
         
@@ -99,6 +107,13 @@ class MapViewController: UIViewController {
         filterVC.filterViewControllerDelegate = self
         self.present(filterVC, animated: true)
     }
+    
+    func setUpLeftBarButtons() {
+        if mapViewControllerViewModel.filteringInPlace {
+            // set up remove filter button
+            navigationItem.leftBarButtonItems = [UIBarButtonItem(customView: filterButtonButton), UIBarButtonItem(customView: removeFiltersButton)]
+        }
+    }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -113,6 +128,12 @@ extension MapViewController: CLLocationManagerDelegate {
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
          print("error:: \(error.localizedDescription)")
+    }
+}
+
+extension MapViewController: SearchResultsVCMapViewVCDelegate {
+    func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListPositionIndex: Int) {
+        mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: placeOfInterest, wishListPositionIndex: wishListPositionIndex)
     }
     
     
@@ -129,6 +150,4 @@ extension MapViewController: MapViewControllerViewModelDelegate {
     func updateMapWithFilters() {
         updateMapAnnotations()
     }
-    
-    
 }
