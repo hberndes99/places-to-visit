@@ -50,9 +50,6 @@ class FilterViewController: UIViewController {
         //layout.minimumLineSpacing = 30
         layout.itemSize = CGSize(width: 20, height: 20)
         layout.estimatedItemSize = .zero
-        //layout.headerReferenceSize = CGSize(width: view.bounds.width, height: 50)
-        //layout.sectionHeadersPinToVisibleBounds = true
-        
         
         filterCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         filterCollectionView.translatesAutoresizingMaskIntoConstraints = false

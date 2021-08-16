@@ -64,7 +64,7 @@ class MapViewControllerViewModel {
                                                        streetAddress: placeOfInterest.placemark.thoroughfare ?? "")
         //retrieveData() only returning the filtered if filtering is in place
         wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
-        // if adding to a list that is being filtered out there is an issue
+        // if adding to a list when filtering is in place there is an issue
         
         let wishListToAddTo = wishListStore.wishLists[wishListPositionIndex]
         if WishListStoreHelper.checkForDuplication(itemToCheckFor: newMapAnnotationPoint, listToCheckThrough: wishListToAddTo.items, propertiesToCheckAgainst: [\MapAnnotationPoint.title]),
@@ -79,7 +79,6 @@ class MapViewControllerViewModel {
         savePlaceOfInterestToUserDefaults()
     }
     
-    
     func applyFiltersToMap(filterList: [String]) {
         let filteredWishLists = wishListStore.wishLists.filter { wishList in
             filterList.contains(wishList.name)
@@ -89,12 +88,19 @@ class MapViewControllerViewModel {
         filterTerms = filterList
         mapViewControllerViewModelDelegate?.updateMapWithFilters()
     }
+    
+    func clearFilters() {
+        filteringInPlace = false
+        retrieveData()
+    }
 }
+
 
 protocol UserDefaultsProtocol {
     func setValue(_ value: Any?, forKey key: String)
     func data(forKey defaultName: String) -> Data?
 }
+
 
 extension UserDefaults: UserDefaultsProtocol {
     

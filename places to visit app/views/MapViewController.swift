@@ -52,31 +52,24 @@ class MapViewController: UIViewController {
         
         filterButtonButton = UIButton()
         filterButtonButton.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
-        filterButtonButton.setTitle("filter", for: .normal)
+        filterButtonButton.setTitle("Filter", for: .normal)
         filterButtonButton.setTitleColor(.systemBlue, for: .normal)
         filterButtonButton.translatesAutoresizingMaskIntoConstraints = false
         filterButtonButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
         
         removeFiltersButton = UIButton()
         removeFiltersButton.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
-        removeFiltersButton.setTitle("filter", for: .normal)
+        removeFiltersButton.setTitle("Remove filters", for: .normal)
         removeFiltersButton.setTitleColor(.systemBlue, for: .normal)
         removeFiltersButton.translatesAutoresizingMaskIntoConstraints = false
-        removeFiltersButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        removeFiltersButton.addTarget(self, action: #selector(removeFiltersButtonTapped), for: .touchUpInside)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: filterButtonButton)
-        
+        setUpLeftBarButtons()
         setUpConstraints()
         updateMapAnnotations()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("view will appear calledI have an upd")
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        print("view did appear called for map view")
         mapViewControllerViewModel.retrieveData()
         updateMapAnnotations()
     }
@@ -108,10 +101,17 @@ class MapViewController: UIViewController {
         self.present(filterVC, animated: true)
     }
     
+    @objc func removeFiltersButtonTapped() {
+        mapViewControllerViewModel.clearFilters()
+        updateMapAnnotations()
+        setUpLeftBarButtons()
+    }
+    
     func setUpLeftBarButtons() {
         if mapViewControllerViewModel.filteringInPlace {
-            // set up remove filter button
-            navigationItem.leftBarButtonItems = [UIBarButtonItem(customView: filterButtonButton), UIBarButtonItem(customView: removeFiltersButton)]
+            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: removeFiltersButton)
+        } else {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: filterButtonButton)
         }
     }
 }
@@ -135,8 +135,6 @@ extension MapViewController: SearchResultsVCMapViewVCDelegate {
     func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListPositionIndex: Int) {
         mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: placeOfInterest, wishListPositionIndex: wishListPositionIndex)
     }
-    
-    
 }
 
 extension MapViewController: FilterViewControllerDelegate {
@@ -149,5 +147,6 @@ extension MapViewController: FilterViewControllerDelegate {
 extension MapViewController: MapViewControllerViewModelDelegate {
     func updateMapWithFilters() {
         updateMapAnnotations()
+        setUpLeftBarButtons()
     }
 }
