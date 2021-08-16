@@ -91,6 +91,7 @@ class MapViewControllerViewModel {
     
     func clearFilters() {
         filteringInPlace = false
+        filterTerms = nil
         retrieveData()
     }
 }
