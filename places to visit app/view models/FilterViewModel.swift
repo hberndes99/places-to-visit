@@ -38,6 +38,9 @@ class FilterViewModel {
     }
     
     func applyFilters() {
+        if listOfFilterStrings.count == 0 {
+            return
+        }
         filterViewControllerDelegate?.applyFilters(filterList: listOfFilterStrings)
     }
 }
