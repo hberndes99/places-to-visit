@@ -46,6 +46,7 @@
 		E477ECB226C422B000EA3B1B /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECB126C422B000EA3B1B /* FilterViewModel.swift */; };
 		E477ECB426C52A9D00EA3B1B /* FilterWishListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECB326C52A9C00EA3B1B /* FilterWishListCollectionViewCell.swift */; };
 		E477ECB626C53CC000EA3B1B /* FilterWishListCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECB526C53CC000EA3B1B /* FilterWishListCollectionReusableView.swift */; };
+		E4E9644A26CA9D75008B6860 /* FilterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E9644926CA9D75008B6860 /* FilterViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		E477ECB126C422B000EA3B1B /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		E477ECB326C52A9C00EA3B1B /* FilterWishListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWishListCollectionViewCell.swift; sourceTree = "<group>"; };
 		E477ECB526C53CC000EA3B1B /* FilterWishListCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWishListCollectionReusableView.swift; sourceTree = "<group>"; };
+		E4E9644926CA9D75008B6860 /* FilterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 				E477EC9526B8306500EA3B1B /* WishListSelectionViewModelTests.swift */,
 				E477ECA826BBF89400EA3B1B /* UserDefaultsHelperTests.swift */,
 				E477ECAD26C401AA00EA3B1B /* WishListStoreHelperTests.swift */,
+				E4E9644926CA9D75008B6860 /* FilterViewModelTests.swift */,
 			);
 			path = "places to visit appTests";
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				E477EC6E26AAB67600EA3B1B /* SearchResultsVCViewModelTests.swift in Sources */,
 				E477EC8A26B3FAAC00EA3B1B /* MockUserDefaults.swift in Sources */,
 				E477EC8826B3F9D400EA3B1B /* PlacesListViewModelTests.swift in Sources */,
+				E4E9644A26CA9D75008B6860 /* FilterViewModelTests.swift in Sources */,
 				E477ECA926BBF89400EA3B1B /* UserDefaultsHelperTests.swift in Sources */,
 				E477ECAE26C401AA00EA3B1B /* WishListStoreHelperTests.swift in Sources */,
 				4526049026A9895B00D2B950 /* SearchNetworkManagerTests.swift in Sources */,

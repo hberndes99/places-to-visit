@@ -42,7 +42,7 @@ class PlacesListViewModelTests: XCTestCase {
     func testRetrieveData() {
         placesListViewModel.retrieveData()
         
-        XCTAssertEqual(placesListViewModel.wishListStore.wishLists.count, 1)
+        XCTAssertEqual(placesListViewModel.wishListStore.wishLists.count, 2)
         XCTAssertEqual(placesListViewModel.wishListStore.wishLists[0].name, "test coffee list")
     }
     

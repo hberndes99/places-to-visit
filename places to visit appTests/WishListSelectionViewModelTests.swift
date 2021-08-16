@@ -32,7 +32,7 @@ class WishListSelectionViewModelTests: XCTestCase {
     func testRetrieveData() {
         wishListSelectionViewModel.retrieveData()
         
-        XCTAssertEqual(wishListSelectionViewModel.wishListStore.wishLists.count, 1)
+        XCTAssertEqual(wishListSelectionViewModel.wishListStore.wishLists.count, 2)
         XCTAssertEqual(wishListSelectionViewModel.wishListStore.wishLists[0].name, "test coffee list")
     }
     

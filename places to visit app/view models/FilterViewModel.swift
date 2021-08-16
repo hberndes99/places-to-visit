@@ -12,7 +12,7 @@ class FilterViewModel {
     var userDefaults: UserDefaultsProtocol
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type
     weak var filterViewControllerDelegate: FilterViewControllerDelegate?
-    private var listOfFilterStrings: [String] = [String]()
+    private(set) var listOfFilterStrings: [String] = [String]()
     
     init(wishListStore: WishListStore,
          userDefaults: UserDefaultsProtocol = UserDefaults.standard,
