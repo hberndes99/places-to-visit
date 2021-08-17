@@ -79,15 +79,55 @@ class MapViewControllerViewModel {
         savePlaceOfInterestToUserDefaults()
     }
     
-    func applyFiltersToMap(filterList: [String]) {
+    private func filterMapPointsByDistance(numberOfKm: Int, userLocation: CLLocation) {
+        // filter the annotations by distance away from user location
+        let filterDistance: Double = Double(numberOfKm * 1000)
+        // get users location point
+        
+        //filter through the wish lists, find distance from user location, return point if it is less than filterDistance
+        var mapPointsWithinDistance = [MapAnnotationPoint]()
+        for wishList in wishListStore.wishLists {
+            let filteredWishListItems = wishList.items.filter { mapPoint in
+                let mapPointLocation = CLLocation(latitude: mapPoint.coordinate.latitude, longitude: mapPoint.coordinate.longitude)
+                let distanceBetween = userLocation.distance(from: mapPointLocation)
+                if distanceBetween < filterDistance {
+                    return true
+                }
+                return false
+            }
+            print(filteredWishListItems)
+            wishList.items = filteredWishListItems
+        
+            
+            /*
+            for mapPoint in wishList.items {
+                let mapPointLocation = CLLocation(latitude: mapPoint.coordinate.latitude, longitude: mapPoint.coordinate.longitude)
+                let distanceBetween = userLocation.distance(from: mapPointLocation)
+                if distanceBetween < filterDistance {
+                    // neeed to return it so these points only are displayed on map
+                    //print(mapPoint.title)
+                    mapPointsWithinDistance.append(mapPoint)
+                }
+            }
+            */
+ 
+        }
+    }
+    
+    func applyFiltersToMap(filterList: [String], distance: Int?, userLocation: CLLocation?) {
         let filteredWishLists = wishListStore.wishLists.filter { wishList in
             filterList.contains(wishList.name)
         }
         wishListStore.wishLists = filteredWishLists
         filteringInPlace = true
         filterTerms = filterList
+        if let filterDistance = distance, let userLocation = userLocation {
+            filterMapPointsByDistance(numberOfKm: filterDistance, userLocation: userLocation)
+        }
         mapViewControllerViewModelDelegate?.updateMapWithFilters()
     }
+    
+  
     
     func clearFilters() {
         filteringInPlace = false

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FilterViewControllerDelegate: AnyObject {
-    func applyFilters(filterList: [String])
+    func applyFilters(filterList: [String], distance: Int?)
 }
 
 
@@ -27,7 +27,7 @@ class FilterViewController: UIViewController {
     
     weak var filterViewControllerDelegate: FilterViewControllerDelegate?
     
-    private let distanceArray = ["1km", "2km", "5km", "10km", "20km"]
+    private let distanceArray = [1, 3, 5, 10, 20]
     
     init (wishListStore: WishListStore) {
         self.wishListStore = wishListStore
@@ -215,9 +215,11 @@ extension FilterViewController: UICollectionViewDelegate {
             }
         } else {
             let cell = distanceCollectionView.cellForItem(at: indexPath) as! FilterWishListCollectionViewCell
+            let selectedDistance = distanceArray[indexPath.item]
             cell.cellIsSelected = !cell.cellIsSelected
             if cell.cellIsSelected {
                 cell.configureDistanceCVCellSelected()
+                filterViewModel.filterByDistance(of: selectedDistance)
             } else {
                 cell.configureDistanceCVCellDeselected()
             }

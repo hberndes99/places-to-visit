@@ -66,8 +66,8 @@ class FilterWishListCollectionViewCell: UICollectionViewCell {
         backgroundCellView.backgroundColor = .white
     }
     
-    func configureDistanceCVCell(for distance: String) {
-        titleLabel.text = distance
+    func configureDistanceCVCell(for distance: Int) {
+        titleLabel.text = "\(distance)km"
         titleLabel.textColor = .white
         backgroundCellView.backgroundColor = .systemIndigo
     }

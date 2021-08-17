@@ -13,6 +13,7 @@ class FilterViewModel {
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type
     weak var filterViewControllerDelegate: FilterViewControllerDelegate?
     private(set) var listOfFilterStrings: [String] = [String]()
+    private(set) var distanceToFilterBy: Int?
     
     init(wishListStore: WishListStore,
          userDefaults: UserDefaultsProtocol = UserDefaults.standard,
@@ -37,10 +38,15 @@ class FilterViewModel {
         }
     }
     
+    func filterByDistance(of distance: Int) {
+        print("filter by \(distance)")
+        distanceToFilterBy = distance
+    }
+    
     func applyFilters() {
         if listOfFilterStrings.count == 0 {
             return
         }
-        filterViewControllerDelegate?.applyFilters(filterList: listOfFilterStrings)
+        filterViewControllerDelegate?.applyFilters(filterList: listOfFilterStrings, distance: distanceToFilterBy)
     }
 }
