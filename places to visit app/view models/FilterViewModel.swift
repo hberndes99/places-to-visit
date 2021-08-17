@@ -12,7 +12,7 @@ class FilterViewModel {
     var userDefaults: UserDefaultsProtocol
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type
     weak var filterViewControllerDelegate: FilterViewControllerDelegate?
-    private(set) var listOfFilterStrings: [String] = [String]()
+    private(set) var listOfFilterStrings: [String]?
     private(set) var distanceToFilterBy: Int?
     
     init(wishListStore: WishListStore,
@@ -29,12 +29,18 @@ class FilterViewModel {
     }
     
     func addToFilterQueries(wishListName: String) {
-        listOfFilterStrings.append(wishListName)
+        if listOfFilterStrings == nil {
+            listOfFilterStrings = [String]()
+        }
+        listOfFilterStrings?.append(wishListName)
     }
     
     func removeFromFilterQueries(wishListName: String) {
-        if let index = listOfFilterStrings.firstIndex(of: wishListName) {
-            listOfFilterStrings.remove(at: index)
+        if let index = listOfFilterStrings?.firstIndex(of: wishListName) {
+            listOfFilterStrings?.remove(at: index)
+        }
+        if listOfFilterStrings?.count == 0 {
+            listOfFilterStrings = nil
         }
     }
     
@@ -44,9 +50,9 @@ class FilterViewModel {
     }
     
     func applyFilters() {
-        if listOfFilterStrings.count == 0 {
-            return
-        }
+        //if listOfFilterStrings.count == 0 {
+        //    return
+        //}
         filterViewControllerDelegate?.applyFilters(filterList: listOfFilterStrings, distance: distanceToFilterBy)
     }
 }

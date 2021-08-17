@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FilterViewControllerDelegate: AnyObject {
-    func applyFilters(filterList: [String], distance: Int?)
+    func applyFilters(filterList: [String]?, distance: Int?)
 }
 
 

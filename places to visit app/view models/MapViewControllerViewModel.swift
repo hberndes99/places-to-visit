@@ -92,8 +92,6 @@ class MapViewControllerViewModel {
     private func filterMapPointsByDistance(numberOfKm: Int) {
         // filter the annotations by distance away from user location
         let filterDistance: Double = Double(numberOfKm * 1000)
-        
-        //filter through the wish lists, find distance from user location, return point if it is less than filterDistance
         for wishList in wishListStore.wishLists {
             let filteredWishListItems = wishList.items.filter { mapPoint in
                 let mapPointLocation = CLLocation(latitude: mapPoint.coordinate.latitude, longitude: mapPoint.coordinate.longitude)
@@ -107,21 +105,22 @@ class MapViewControllerViewModel {
         }
     }
     
-    func applyFiltersToMap(filterList: [String], distance: Int?) {
-        let filteredWishLists = wishListStore.wishLists.filter { wishList in
-            filterList.contains(wishList.name)
+    func applyFiltersToMap(filterList: [String]?, distance: Int?) {
+        if let filterList = filterList {
+            let filteredWishLists = wishListStore.wishLists.filter { wishList in
+                filterList.contains(wishList.name)
+            }
+            wishListStore.wishLists = filteredWishLists
+            filteringInPlace = true
+            filterTerms = filterList
         }
-        wishListStore.wishLists = filteredWishLists
-        filteringInPlace = true
-        filterTerms = filterList
         if let filterDistance = distance, let _ = userCurrentLocation {
             self.filterDistance = filterDistance
+            filteringInPlace = true
             filterMapPointsByDistance(numberOfKm: filterDistance)
         }
         mapViewControllerViewModelDelegate?.updateMapWithFilters()
     }
-    
-  
     
     func clearFilters() {
         filteringInPlace = false

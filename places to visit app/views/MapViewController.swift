@@ -139,7 +139,7 @@ extension MapViewController: SearchResultsVCMapViewVCDelegate {
 }
 
 extension MapViewController: FilterViewControllerDelegate {
-    func applyFilters(filterList: [String], distance: Int?) {
+    func applyFilters(filterList: [String]?, distance: Int?) {
         mapViewControllerViewModel.applyFiltersToMap(filterList: filterList, distance: distance)
     }
 }
