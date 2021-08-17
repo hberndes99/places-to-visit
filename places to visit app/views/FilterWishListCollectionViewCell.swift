@@ -18,7 +18,7 @@ class FilterWishListCollectionViewCell: UICollectionViewCell {
        
         
         backgroundCellView = UIView(frame: .zero)
-        backgroundCellView.backgroundColor = .systemGreen
+        
         backgroundCellView.layer.cornerRadius = 15
         backgroundCellView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -26,7 +26,6 @@ class FilterWishListCollectionViewCell: UICollectionViewCell {
         titleLabel.numberOfLines = 0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textAlignment = .center
-        titleLabel.textColor = .white
         titleLabel.font = .boldSystemFont(ofSize: 20)
         
         contentView.addSubview(backgroundCellView)
@@ -53,14 +52,32 @@ class FilterWishListCollectionViewCell: UICollectionViewCell {
     
     func configureCVCell(for wishList: WishList) {
         titleLabel.text = wishList.name
+        titleLabel.textColor = .systemIndigo
+        backgroundCellView.backgroundColor = .white
+        backgroundCellView.layer.borderColor = UIColor.systemIndigo.cgColor
+        backgroundCellView.layer.borderWidth = 2
     }
-    
+   
     func configureSelected() {
-        backgroundCellView.backgroundColor = .purple
+        backgroundCellView.backgroundColor = .lightGray
     }
     
     func configureDeselected() {
-        backgroundCellView.backgroundColor = .systemGreen
+        backgroundCellView.backgroundColor = .white
+    }
+    
+    func configureDistanceCVCell(for distance: String) {
+        titleLabel.text = distance
+        titleLabel.textColor = .white
+        backgroundCellView.backgroundColor = .systemIndigo
+    }
+    
+    func configureDistanceCVCellSelected() {
+        backgroundCellView.backgroundColor = .purple
+    }
+    
+    func configureDistanceCVCellDeselected() {
+        backgroundCellView.backgroundColor = .systemIndigo
     }
     
     required init?(coder: NSCoder) {
