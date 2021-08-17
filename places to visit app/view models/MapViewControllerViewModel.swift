@@ -15,6 +15,8 @@ protocol MapViewControllerViewModelDelegate: AnyObject {
 class MapViewControllerViewModel {
     private(set) var filteringInPlace: Bool = false
     private var filterTerms: [String]?
+    private var filterDistance: Int?
+    private var userCurrentLocation: CLLocation?
     var wishListStore: WishListStore
     var userDefaults: UserDefaultsProtocol
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type
@@ -30,6 +32,10 @@ class MapViewControllerViewModel {
         self.userDefaultsHelper = userDefaultsHelper
     }
     
+    func setUserLocation(currentLocation: CLLocation) {
+        userCurrentLocation = currentLocation
+    }
+    
     func retrieveData() {
         wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
         if filteringInPlace {
@@ -40,6 +46,10 @@ class MapViewControllerViewModel {
                 wishListStore.wishLists = filteredWishLists
             }
         }
+        guard let filterDistance = filterDistance, let userCurrentLocation = userCurrentLocation else {
+            return
+        }
+        filterMapPointsByDistance(numberOfKm: filterDistance)
     }
     
     func savePlaceOfInterestToUserDefaults() {
@@ -79,50 +89,34 @@ class MapViewControllerViewModel {
         savePlaceOfInterestToUserDefaults()
     }
     
-    private func filterMapPointsByDistance(numberOfKm: Int, userLocation: CLLocation) {
+    private func filterMapPointsByDistance(numberOfKm: Int) {
         // filter the annotations by distance away from user location
         let filterDistance: Double = Double(numberOfKm * 1000)
-        // get users location point
         
         //filter through the wish lists, find distance from user location, return point if it is less than filterDistance
-        var mapPointsWithinDistance = [MapAnnotationPoint]()
         for wishList in wishListStore.wishLists {
             let filteredWishListItems = wishList.items.filter { mapPoint in
                 let mapPointLocation = CLLocation(latitude: mapPoint.coordinate.latitude, longitude: mapPoint.coordinate.longitude)
-                let distanceBetween = userLocation.distance(from: mapPointLocation)
+                let distanceBetween = userCurrentLocation!.distance(from: mapPointLocation)
                 if distanceBetween < filterDistance {
                     return true
                 }
                 return false
             }
-            print(filteredWishListItems)
             wishList.items = filteredWishListItems
-        
-            
-            /*
-            for mapPoint in wishList.items {
-                let mapPointLocation = CLLocation(latitude: mapPoint.coordinate.latitude, longitude: mapPoint.coordinate.longitude)
-                let distanceBetween = userLocation.distance(from: mapPointLocation)
-                if distanceBetween < filterDistance {
-                    // neeed to return it so these points only are displayed on map
-                    //print(mapPoint.title)
-                    mapPointsWithinDistance.append(mapPoint)
-                }
-            }
-            */
- 
         }
     }
     
-    func applyFiltersToMap(filterList: [String], distance: Int?, userLocation: CLLocation?) {
+    func applyFiltersToMap(filterList: [String], distance: Int?) {
         let filteredWishLists = wishListStore.wishLists.filter { wishList in
             filterList.contains(wishList.name)
         }
         wishListStore.wishLists = filteredWishLists
         filteringInPlace = true
         filterTerms = filterList
-        if let filterDistance = distance, let userLocation = userLocation {
-            filterMapPointsByDistance(numberOfKm: filterDistance, userLocation: userLocation)
+        if let filterDistance = distance, let _ = userCurrentLocation {
+            self.filterDistance = filterDistance
+            filterMapPointsByDistance(numberOfKm: filterDistance)
         }
         mapViewControllerViewModelDelegate?.updateMapWithFilters()
     }
@@ -132,6 +126,7 @@ class MapViewControllerViewModel {
     func clearFilters() {
         filteringInPlace = false
         filterTerms = nil
+        filterDistance = nil
         retrieveData()
     }
 }

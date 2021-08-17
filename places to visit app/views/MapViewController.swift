@@ -124,6 +124,7 @@ extension MapViewController: CLLocationManagerDelegate {
             let region = MKCoordinateRegion(center: location.coordinate, span: span)
             mapView.setRegion(region, animated: true)
             print("location access granted")
+            mapViewControllerViewModel.setUserLocation(currentLocation: location)
         }
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -139,8 +140,7 @@ extension MapViewController: SearchResultsVCMapViewVCDelegate {
 
 extension MapViewController: FilterViewControllerDelegate {
     func applyFilters(filterList: [String], distance: Int?) {
-        let userLocation = mapView.userLocation.location
-        mapViewControllerViewModel.applyFiltersToMap(filterList: filterList, distance: distance, userLocation: userLocation)
+        mapViewControllerViewModel.applyFiltersToMap(filterList: filterList, distance: distance)
     }
 }
 
