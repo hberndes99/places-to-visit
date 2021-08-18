@@ -45,7 +45,6 @@ class FilterViewModel {
     }
     
     func filterByDistance(of distance: Int) {
-        print("filter by \(distance)")
         distanceToFilterBy = distance
     }
     

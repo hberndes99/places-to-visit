@@ -16,7 +16,7 @@ class MapViewControllerViewModel {
     private(set) var filteringInPlace: Bool = false
     private var filterTerms: [String]?
     private var filterDistance: Int?
-    private var userCurrentLocation: CLLocation?
+    private(set) var userCurrentLocation: CLLocation?
     var wishListStore: WishListStore
     var userDefaults: UserDefaultsProtocol
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type

@@ -39,14 +39,26 @@ class FilterViewModelTests: XCTestCase {
     func testAddToFilterQueries() {
         filterViewModel.addToFilterQueries(wishListName: "coffee shops")
         
-        XCTAssertEqual(filterViewModel.listOfFilterStrings.count, 1)
-        XCTAssertEqual(filterViewModel.listOfFilterStrings[0], "coffee shops")
+        XCTAssertEqual(filterViewModel.listOfFilterStrings?.count, 1)
+        XCTAssertEqual(filterViewModel.listOfFilterStrings?[0], "coffee shops")
     }
     
     func testRemoveFromFilterQueries() {
         filterViewModel.addToFilterQueries(wishListName: "coffee shops")
         filterViewModel.removeFromFilterQueries(wishListName: "coffee shops")
-        XCTAssertEqual(filterViewModel.listOfFilterStrings.count, 0)
+        XCTAssertEqual(filterViewModel.listOfFilterStrings, nil)
+    }
+    
+    func testRemoveFromFilterQueries_twoItemsInFilterList() {
+        filterViewModel.addToFilterQueries(wishListName: "coffee shops")
+        filterViewModel.addToFilterQueries(wishListName: "restaurants")
+        filterViewModel.removeFromFilterQueries(wishListName: "coffee shops")
+        XCTAssertEqual(filterViewModel.listOfFilterStrings?.count, 1)
+    }
+    
+    func testFilterByDistance() {
+        filterViewModel.filterByDistance(of: 1)
+        XCTAssertEqual(filterViewModel.distanceToFilterBy, 1)
     }
     
     func testApplyFilters() {
@@ -58,21 +70,12 @@ class FilterViewModelTests: XCTestCase {
         
         XCTAssert(mockFilterViewControllerDelegate.applyFiltersWasCalled)
     }
-
-    func testApplyFilters_noFilterQueries() {
-        let mockFilterViewControllerDelegate = MockFilterViewControllerDelegate()
-        filterViewModel.filterViewControllerDelegate = mockFilterViewControllerDelegate
-        
-        filterViewModel.applyFilters()
-        
-        XCTAssertFalse(mockFilterViewControllerDelegate.applyFiltersWasCalled)
-    }
 }
 
 class MockFilterViewControllerDelegate: FilterViewControllerDelegate {
     var applyFiltersWasCalled: Bool = false
-    
-    func applyFilters(filterList: [String]) {
+    func applyFilters(filterList: [String]?, distance: Int?) {
         applyFiltersWasCalled = true
     }
+
 }
