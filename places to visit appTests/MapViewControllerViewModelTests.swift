@@ -16,6 +16,12 @@ class MapViewControllerViewModelTests: XCTestCase {
     var mockUserDefaults: MockUserDefaults!
     var mockUserDefaultsHelper: MockUserDefaultsHelper.Type!
     var mockMapViewControllerViewModelDelegate: MockMapViewControllerViewModelDelegate!
+    var coffeePlaceOne: MapAnnotationPoint!
+    var coffeePlaceTwo: MapAnnotationPoint!
+    var coffeeWishList: WishList!
+    var restaurantOne: MapAnnotationPoint!
+    var restaurantWishList: WishList!
+    var currentLocation: CLLocation!
     
     override func setUpWithError() throws {
         wishListStore = WishListStore(wishLists: [])
@@ -28,6 +34,14 @@ class MapViewControllerViewModelTests: XCTestCase {
             userDefaults: mockUserDefaults,
             userDefaultsHelper: mockUserDefaultsHelper)
         mapViewControllerViewModel.mapViewControllerViewModelDelegate = mockMapViewControllerViewModelDelegate
+        
+        coffeePlaceOne = MapAnnotationPoint(title: "coffee place one", subtitle: "", coordinate: CLLocationCoordinate2D(latitude: 50, longitude: 50), number: "1", streetAddress: "the street")
+        coffeePlaceTwo = MapAnnotationPoint(title: "coffee place two", subtitle: "", coordinate: CLLocationCoordinate2D(latitude: 30, longitude: 30), number: "1", streetAddress: "the street")
+        coffeeWishList = WishList(name: "test coffee list", items: [coffeePlaceOne, coffeePlaceTwo], description: "chill coffee shops in london")
+        restaurantOne = MapAnnotationPoint(title: "restaurant one", subtitle: "", coordinate: CLLocationCoordinate2D(latitude: 50, longitude: 50), number: "1", streetAddress: "the street")
+        restaurantWishList = WishList(name: "test restuarant list", items: [restaurantOne], description: "cheap restaurants")
+        
+        currentLocation = CLLocation(latitude: CLLocationDegrees(30), longitude: CLLocationDegrees(30))
     }
 
     override func tearDownWithError() throws {
@@ -38,10 +52,8 @@ class MapViewControllerViewModelTests: XCTestCase {
     }
     
     func testSetUserLocation() {
-        let userLocation = CLLocation(latitude: CLLocationDegrees(20), longitude: CLLocationDegrees(20))
-        
-        mapViewControllerViewModel.setUserLocation(currentLocation: userLocation)
-        XCTAssertEqual(mapViewControllerViewModel.userCurrentLocation, userLocation)
+        mapViewControllerViewModel.setUserLocation(currentLocation: currentLocation)
+        XCTAssertEqual(mapViewControllerViewModel.userCurrentLocation, currentLocation)
     }
 
     func testRetrieveData_noFiltering() {
@@ -60,13 +72,10 @@ class MapViewControllerViewModelTests: XCTestCase {
     }
     
     func testRetrieveData_distanceFilterInPlace() {
-        let currentLocation = CLLocation(latitude: CLLocationDegrees(30), longitude: CLLocationDegrees(30))
-        
         mapViewControllerViewModel.setUserLocation(currentLocation: currentLocation)
         mapViewControllerViewModel.applyFiltersToMap(filterList: nil, distance: 1)
         mapViewControllerViewModel.retrieveData()
         
-        // assertions
         XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists.count, 2)
         XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists[0].items.count, 0)
         XCTAssertEqual(mapViewControllerViewModel.wishListStore.wishLists[1].items.count, 1)
@@ -127,13 +136,6 @@ class MapViewControllerViewModelTests: XCTestCase {
     }
     
     func testApplyFiltersToMap_justWishListFilter() {
-        let coffeePlaceOne = MapAnnotationPoint(title: "coffee place one", subtitle: "", coordinate: CLLocationCoordinate2D(latitude: 30, longitude: 30), number: "1", streetAddress: "the street")
-        let coffeePlaceTwo = MapAnnotationPoint(title: "coffee place two", subtitle: "", coordinate: CLLocationCoordinate2D(latitude: 30, longitude: 30), number: "1", streetAddress: "the street")
-        let coffeeWishList = WishList(name: "test coffee list", items: [coffeePlaceOne, coffeePlaceTwo], description: "chill coffee shops in london")
-        let restaurantOne = MapAnnotationPoint(title: "restaurant one", subtitle: "", coordinate: CLLocationCoordinate2D(latitude: 30, longitude: 30), number: "1", streetAddress: "the street")
-        let restaurantWishList = WishList(name: "test restuarant list", items: [restaurantOne], description: "cheap restaurants")
-        
-        let currentLocation = CLLocation(latitude: 30, longitude: 30)
         mapViewControllerViewModel.setUserLocation(currentLocation: currentLocation)
         
         mapViewControllerViewModel.wishListStore.wishLists = [coffeeWishList, restaurantWishList]
@@ -145,16 +147,7 @@ class MapViewControllerViewModelTests: XCTestCase {
     }
     
     func testApplyFiltersToMap_justDistanceFilter() {
-        
-        let coffeePlaceOne = MapAnnotationPoint(title: "coffee place one", subtitle: "", coordinate: CLLocationCoordinate2D(latitude: 50, longitude: 50), number: "1", streetAddress: "the street")
-        let coffeePlaceTwo = MapAnnotationPoint(title: "coffee place two", subtitle: "", coordinate: CLLocationCoordinate2D(latitude: 30, longitude: 30), number: "1", streetAddress: "the street")
-        let coffeeWishList = WishList(name: "test coffee list", items: [coffeePlaceOne, coffeePlaceTwo], description: "chill coffee shops in london")
-        let restaurantOne = MapAnnotationPoint(title: "restaurant one", subtitle: "", coordinate: CLLocationCoordinate2D(latitude: 50, longitude: 50), number: "1", streetAddress: "the street")
-        let restaurantWishList = WishList(name: "test restuarant list", items: [restaurantOne], description: "cheap restaurants")
-        
         mapViewControllerViewModel.wishListStore.wishLists = [coffeeWishList, restaurantWishList]
-        
-        let currentLocation = CLLocation(latitude: 30, longitude: 30)
         mapViewControllerViewModel.setUserLocation(currentLocation: currentLocation)
         
         let filterDistance = 1
@@ -170,15 +163,7 @@ class MapViewControllerViewModelTests: XCTestCase {
     
     
     func testApplyFiltersToMap_distanceAndWishListFilter() {
-        let coffeePlaceOne = MapAnnotationPoint(title: "coffee place one", subtitle: "", coordinate: CLLocationCoordinate2D(latitude: 50, longitude: 50), number: "1", streetAddress: "the street")
-        let coffeePlaceTwo = MapAnnotationPoint(title: "coffee place two", subtitle: "", coordinate: CLLocationCoordinate2D(latitude: 30, longitude: 30), number: "1", streetAddress: "the street")
-        let coffeeWishList = WishList(name: "test coffee list", items: [coffeePlaceOne, coffeePlaceTwo], description: "chill coffee shops in london")
-        let restaurantOne = MapAnnotationPoint(title: "restaurant one", subtitle: "", coordinate: CLLocationCoordinate2D(latitude: 50, longitude: 50), number: "1", streetAddress: "the street")
-        let restaurantWishList = WishList(name: "test restuarant list", items: [restaurantOne], description: "cheap restaurants")
-        
         mapViewControllerViewModel.wishListStore.wishLists = [coffeeWishList, restaurantWishList]
-        
-        let currentLocation = CLLocation(latitude: 30, longitude: 30)
         mapViewControllerViewModel.setUserLocation(currentLocation: currentLocation)
         
         let filterDistance = 1
