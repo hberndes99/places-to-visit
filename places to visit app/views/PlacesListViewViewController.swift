@@ -64,16 +64,19 @@ class PlacesListViewViewController: UIViewController {
             wishListTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
-    
-
-
-
 }
 
 
 extension PlacesListViewViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(65)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            detailWishListViewModel.deletePlaceOfInterest(at: indexPath.row, from: wishListIndex)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+        }
     }
     
 }

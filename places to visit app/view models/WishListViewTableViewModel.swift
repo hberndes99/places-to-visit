@@ -29,7 +29,7 @@ class PlacesListViewModel {
     func updateUserDefaults() {
         userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
     }
-    
+    /*
     func deletePlaceOfInterest(at position: Int, from wishListPosition: Int) {
         if wishListStore.wishLists.count > wishListPosition, wishListStore.wishLists[wishListPosition].items.count > position {
             let wishListToDeleteFrom = wishListStore.wishLists[wishListPosition]
@@ -37,4 +37,5 @@ class PlacesListViewModel {
             updateUserDefaults()
         }
     }
+ */
 }

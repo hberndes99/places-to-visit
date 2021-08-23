@@ -55,13 +55,6 @@ class WishListViewTableViewController: UIViewController {
 
 extension WishListViewTableViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCell.EditingStyle.delete {
-            placesListViewModel.deletePlaceOfInterest(at: indexPath.row, from: indexPath.section)
-            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
-        }
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedIndex = indexPath.row
         let placesListViewViewController = PlacesListViewViewController(wishListIndex: selectedIndex)
