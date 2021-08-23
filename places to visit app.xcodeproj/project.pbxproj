@@ -48,6 +48,7 @@
 		E4E9644A26CA9D75008B6860 /* FilterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E9644926CA9D75008B6860 /* FilterViewModelTests.swift */; };
 		E4FC0C4826D3ADE000295645 /* PlacesListViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC0C4726D3ADE000295645 /* PlacesListViewViewController.swift */; };
 		E4FC0C4A26D3AF2300295645 /* DetailWishListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC0C4926D3AF2300295645 /* DetailWishListViewModel.swift */; };
+		E4FC0C4C26D3F36B00295645 /* DetailWishListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC0C4B26D3F36B00295645 /* DetailWishListViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		E4E9644926CA9D75008B6860 /* FilterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModelTests.swift; sourceTree = "<group>"; };
 		E4FC0C4726D3ADE000295645 /* PlacesListViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewViewController.swift; sourceTree = "<group>"; };
 		E4FC0C4926D3AF2300295645 /* DetailWishListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWishListViewModel.swift; sourceTree = "<group>"; };
+		E4FC0C4B26D3F36B00295645 /* DetailWishListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWishListViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 				E477ECA826BBF89400EA3B1B /* UserDefaultsHelperTests.swift */,
 				E477ECAD26C401AA00EA3B1B /* WishListStoreHelperTests.swift */,
 				E4E9644926CA9D75008B6860 /* FilterViewModelTests.swift */,
+				E4FC0C4B26D3F36B00295645 /* DetailWishListViewModelTests.swift */,
 			);
 			path = "places to visit appTests";
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				E477ECAE26C401AA00EA3B1B /* WishListStoreHelperTests.swift in Sources */,
 				4526049026A9895B00D2B950 /* SearchNetworkManagerTests.swift in Sources */,
 				E477EC7126AAC56800EA3B1B /* MockSearchObjects.swift in Sources */,
+				E4FC0C4C26D3F36B00295645 /* DetailWishListViewModelTests.swift in Sources */,
 				E477EC9626B8306500EA3B1B /* WishListSelectionViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

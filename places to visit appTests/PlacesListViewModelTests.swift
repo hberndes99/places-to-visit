@@ -52,21 +52,6 @@ class PlacesListViewModelTests: XCTestCase {
         XCTAssertTrue(mockUserDefaultsHelper.updateUserDefaultsWasCalled)
         
     }
-    
-    func testDeletePlaceOfInterest() {
-        placesListViewModel.wishListStore.wishLists = [coffeeWishList]
-        placesListViewModel.deletePlaceOfInterest(at: 0, from: 0)
-        
-        XCTAssertEqual(placesListViewModel.wishListStore.wishLists.count, 1)
-        XCTAssertEqual(placesListViewModel.wishListStore.wishLists[0].items.count, 1)
-        XCTAssertEqual(placesListViewModel.wishListStore.wishLists[0].items[0].title, "coffee place two")
-    }
-    
-    func testDeletePlaceOfInterest_dodgyCall() {
-        placesListViewModel.wishListStore.wishLists = [coffeeWishList]
-        placesListViewModel.deletePlaceOfInterest(at: 2, from: 0)
-        
-        XCTAssertEqual(placesListViewModel.wishListStore.wishLists[0].items.count, 2)
-    }
+
     
 }
