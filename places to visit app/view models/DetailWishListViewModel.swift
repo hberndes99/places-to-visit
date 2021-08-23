@@ -35,4 +35,11 @@ class DetailWishListViewModel {
             updateUserDefaults()
         }
     }
+    
+    func deleteWishList(at position: Int) {
+        if wishListStore.wishLists.count > position {
+            wishListStore.wishLists.remove(at: position)
+            updateUserDefaults()
+        }
+    }
 }

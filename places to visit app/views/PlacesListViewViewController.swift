@@ -40,6 +40,15 @@ class PlacesListViewViewController: UIViewController {
         wishListTableView.delegate = self
         wishListTableView.register(PlaceOfInterestTableViewCell.self, forCellReuseIdentifier: "places cell")
         
+        let optionsButton = UIButton()
+        optionsButton.setTitle("Options", for: .normal)
+        optionsButton.translatesAutoresizingMaskIntoConstraints = false
+        optionsButton.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
+        optionsButton.setTitleColor(.systemBlue, for: .normal)
+        optionsButton.addTarget(self, action: #selector(menuTapped), for: .touchUpInside)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: optionsButton)
+        
         view.addSubview(wishListTitle)
         view.addSubview(wishListTableView)
         setTitleText()
@@ -51,7 +60,26 @@ class PlacesListViewViewController: UIViewController {
         wishListTitle.text = wishListToDisplay.name
     }
     
-    func setUpConstraints() {
+    @objc func menuTapped() {
+        let optionMenu = UIAlertController(title: nil, message: .none, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Delete \(detailWishListViewModel.wishListStore.wishLists[wishListIndex].name)", style: .default) { [weak self] action in
+            self?.detailWishListViewModel.deleteWishList(at: self!.wishListIndex)
+            self?.navigationController?.popViewController(animated: true)
+        }
+        let saveAction = UIAlertAction(title: "Share wish list", style: .default) { action in
+            print("share list")
+        }
+   
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+ 
+        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(saveAction)
+        optionMenu.addAction(cancelAction)
+
+        self.present(optionMenu, animated: true, completion: nil)
+    }
+    
+    private func setUpConstraints() {
         NSLayoutConstraint.activate([
             wishListTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             wishListTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor),

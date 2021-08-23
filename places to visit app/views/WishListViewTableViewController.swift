@@ -60,13 +60,14 @@ extension WishListViewTableViewController: UITableViewDelegate {
         let placesListViewViewController = PlacesListViewViewController(wishListIndex: selectedIndex)
         navigationController?.pushViewController(placesListViewViewController, animated: true)
     }
-    
+    /*
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
             placesListViewModel.deleteWishList(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
         }
     }
+ */
 }
 
 extension WishListViewTableViewController: UITableViewDataSource {
