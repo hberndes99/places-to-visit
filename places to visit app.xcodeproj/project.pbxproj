@@ -27,8 +27,8 @@
 		E477EC7E26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7D26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift */; };
 		E477EC8026B1A52B00EA3B1B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC7F26B1A52A00EA3B1B /* Constants.swift */; };
 		E477EC8226B2A9E900EA3B1B /* RootTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8126B2A9E900EA3B1B /* RootTabViewController.swift */; };
-		E477EC8426B2AAFE00EA3B1B /* PlacesListViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8326B2AAFE00EA3B1B /* PlacesListViewViewController.swift */; };
-		E477EC8626B2C2CC00EA3B1B /* PlacesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8526B2C2CC00EA3B1B /* PlacesListViewModel.swift */; };
+		E477EC8426B2AAFE00EA3B1B /* WishListViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8326B2AAFE00EA3B1B /* WishListViewTableViewController.swift */; };
+		E477EC8626B2C2CC00EA3B1B /* WishListViewTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8526B2C2CC00EA3B1B /* WishListViewTableViewModel.swift */; };
 		E477EC8826B3F9D400EA3B1B /* PlacesListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8726B3F9D400EA3B1B /* PlacesListViewModelTests.swift */; };
 		E477EC8A26B3FAAC00EA3B1B /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8926B3FAAC00EA3B1B /* MockUserDefaults.swift */; };
 		E477EC8C26B4159400EA3B1B /* WishListSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477EC8B26B4159400EA3B1B /* WishListSelectionViewController.swift */; };
@@ -46,6 +46,8 @@
 		E477ECB226C422B000EA3B1B /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECB126C422B000EA3B1B /* FilterViewModel.swift */; };
 		E477ECB426C52A9D00EA3B1B /* FilterWishListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E477ECB326C52A9C00EA3B1B /* FilterWishListCollectionViewCell.swift */; };
 		E4E9644A26CA9D75008B6860 /* FilterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E9644926CA9D75008B6860 /* FilterViewModelTests.swift */; };
+		E4FC0C4826D3ADE000295645 /* PlacesListViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC0C4726D3ADE000295645 /* PlacesListViewViewController.swift */; };
+		E4FC0C4A26D3AF2300295645 /* DetailWishListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC0C4926D3AF2300295645 /* DetailWishListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,8 +94,8 @@
 		E477EC7D26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerViewModelTests.swift; sourceTree = "<group>"; };
 		E477EC7F26B1A52A00EA3B1B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E477EC8126B2A9E900EA3B1B /* RootTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabViewController.swift; sourceTree = "<group>"; };
-		E477EC8326B2AAFE00EA3B1B /* PlacesListViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewViewController.swift; sourceTree = "<group>"; };
-		E477EC8526B2C2CC00EA3B1B /* PlacesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewModel.swift; sourceTree = "<group>"; };
+		E477EC8326B2AAFE00EA3B1B /* WishListViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListViewTableViewController.swift; sourceTree = "<group>"; };
+		E477EC8526B2C2CC00EA3B1B /* WishListViewTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListViewTableViewModel.swift; sourceTree = "<group>"; };
 		E477EC8726B3F9D400EA3B1B /* PlacesListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewModelTests.swift; sourceTree = "<group>"; };
 		E477EC8926B3FAAC00EA3B1B /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
 		E477EC8B26B4159400EA3B1B /* WishListSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListSelectionViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,8 @@
 		E477ECB126C422B000EA3B1B /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		E477ECB326C52A9C00EA3B1B /* FilterWishListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWishListCollectionViewCell.swift; sourceTree = "<group>"; };
 		E4E9644926CA9D75008B6860 /* FilterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModelTests.swift; sourceTree = "<group>"; };
+		E4FC0C4726D3ADE000295645 /* PlacesListViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewViewController.swift; sourceTree = "<group>"; };
+		E4FC0C4926D3AF2300295645 /* DetailWishListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWishListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,12 +214,13 @@
 				E477EC5926A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift */,
 				E477EC5726A863D200EA3B1B /* SearchResultsViewController.swift */,
 				E477EC8126B2A9E900EA3B1B /* RootTabViewController.swift */,
-				E477EC8326B2AAFE00EA3B1B /* PlacesListViewViewController.swift */,
+				E477EC8326B2AAFE00EA3B1B /* WishListViewTableViewController.swift */,
 				E477EC8B26B4159400EA3B1B /* WishListSelectionViewController.swift */,
 				E477EC8F26B44D5D00EA3B1B /* NewWishListViewController.swift */,
 				E477EC9126B8033400EA3B1B /* WishListTableViewCell.swift */,
 				E477ECAF26C40DF500EA3B1B /* FilterViewController.swift */,
 				E477ECB326C52A9C00EA3B1B /* FilterWishListCollectionViewCell.swift */,
+				E4FC0C4726D3ADE000295645 /* PlacesListViewViewController.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -225,9 +230,10 @@
 			children = (
 				E477EC5C26A87A3E00EA3B1B /* SearchResultsVCViewModel.swift */,
 				E477EC7B26AB0BD800EA3B1B /* MapViewControllerViewModel.swift */,
-				E477EC8526B2C2CC00EA3B1B /* PlacesListViewModel.swift */,
+				E477EC8526B2C2CC00EA3B1B /* WishListViewTableViewModel.swift */,
 				E477EC8D26B446BC00EA3B1B /* WishListSelectionViewModel.swift */,
 				E477ECB126C422B000EA3B1B /* FilterViewModel.swift */,
+				E4FC0C4926D3AF2300295645 /* DetailWishListViewModel.swift */,
 			);
 			path = "view models";
 			sourceTree = "<group>";
@@ -400,19 +406,21 @@
 				E477EC5826A863D200EA3B1B /* SearchResultsViewController.swift in Sources */,
 				E477ECAC26C2BA6100EA3B1B /* WishListStoreHelper.swift in Sources */,
 				E477ECB026C40DF500EA3B1B /* FilterViewController.swift in Sources */,
-				E477EC8426B2AAFE00EA3B1B /* PlacesListViewViewController.swift in Sources */,
+				E477EC8426B2AAFE00EA3B1B /* WishListViewTableViewController.swift in Sources */,
 				E477EC9226B8033500EA3B1B /* WishListTableViewCell.swift in Sources */,
 				E477ECB226C422B000EA3B1B /* FilterViewModel.swift in Sources */,
 				E477EC7C26AB0BD800EA3B1B /* MapViewControllerViewModel.swift in Sources */,
 				E477EC9426B8295500EA3B1B /* WishList.swift in Sources */,
-				E477EC8626B2C2CC00EA3B1B /* PlacesListViewModel.swift in Sources */,
+				E477EC8626B2C2CC00EA3B1B /* WishListViewTableViewModel.swift in Sources */,
 				E477EC6226A96BFA00EA3B1B /* SearchNetworkManager.swift in Sources */,
 				E477EC2726A839FB00EA3B1B /* AppDelegate.swift in Sources */,
 				E477EC9026B44D5D00EA3B1B /* NewWishListViewController.swift in Sources */,
 				E477EC8E26B446BC00EA3B1B /* WishListSelectionViewModel.swift in Sources */,
+				E4FC0C4A26D3AF2300295645 /* DetailWishListViewModel.swift in Sources */,
 				E477EC5A26A86BE700EA3B1B /* PlaceOfInterestTableViewCell.swift in Sources */,
 				E477EC7A26AB093A00EA3B1B /* WishListStore.swift in Sources */,
 				E477ECB426C52A9D00EA3B1B /* FilterWishListCollectionViewCell.swift in Sources */,
+				E4FC0C4826D3ADE000295645 /* PlacesListViewViewController.swift in Sources */,
 				E477EC8C26B4159400EA3B1B /* WishListSelectionViewController.swift in Sources */,
 				E477EC2926A839FB00EA3B1B /* SceneDelegate.swift in Sources */,
 				E477EC6426A96EA700EA3B1B /* SearchNetworkManagerProtocol.swift in Sources */,

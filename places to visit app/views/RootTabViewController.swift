@@ -10,7 +10,7 @@ import UIKit
 class RootTabViewController: UITabBarController {
     private var wishListStore: WishListStore
     private var mapViewController: MapViewController!
-    private var placesListViewViewController: PlacesListViewViewController!
+    private var placesListViewViewController: WishListViewTableViewController!
     
     init(wishListStore: WishListStore) {
         self.wishListStore = wishListStore
@@ -36,7 +36,7 @@ class RootTabViewController: UITabBarController {
         }
         
         mapViewController = MapViewController(wishListStore: wishListStore)
-        placesListViewViewController = PlacesListViewViewController(wishListStore: wishListStore)
+        placesListViewViewController = WishListViewTableViewController(wishListStore: wishListStore)
      
         let mapNavigationController = UINavigationController(rootViewController: mapViewController)
         mapNavigationController.tabBarItem = mapTabBarItem

@@ -2,17 +2,20 @@
 //  PlacesListViewViewController.swift
 //  places to visit app
 //
-//  Created by Harriette Berndes on 29/07/2021.
+//  Created by Harriette Berndes on 23/08/2021.
 //
+
 import UIKit
 
 class PlacesListViewViewController: UIViewController {
-    private var wishListStore: WishListStore
-    private var placesListViewModel: PlacesListViewModel!
-    private var placesOfInterestTable: UITableView!
+    private var detailWishListViewModel: DetailWishListViewModel!
+    private var wishListTitle: UILabel!
+    private var wishListTableView: UITableView!
     
-    init(wishListStore: WishListStore) {
-        self.wishListStore = wishListStore
+    var wishListIndex: Int
+    
+    init(wishListIndex: Int) {
+        self.wishListIndex = wishListIndex
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -22,73 +25,72 @@ class PlacesListViewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.topItem?.title = "Saved places"
+        detailWishListViewModel = DetailWishListViewModel()
+        detailWishListViewModel.retrieveData()
         
-        placesListViewModel = PlacesListViewModel(wishListStore: wishListStore)
-        placesListViewModel.retrieveData()
-
-        placesOfInterestTable = UITableView()
-        placesOfInterestTable.translatesAutoresizingMaskIntoConstraints = false
-        placesOfInterestTable.dataSource = self
-        placesOfInterestTable.delegate = self
-        placesOfInterestTable.register(PlaceOfInterestTableViewCell.self, forCellReuseIdentifier: "cell")
+        view.backgroundColor = .white
         
+        wishListTitle = UILabel()
+        wishListTitle.translatesAutoresizingMaskIntoConstraints = false
+        wishListTitle.font = UIFont.systemFont(ofSize: 35, weight: .bold)
         
-        view.addSubview(placesOfInterestTable)
-        addConstraints()
+        wishListTableView = UITableView()
+        wishListTableView.translatesAutoresizingMaskIntoConstraints = false
+        wishListTableView.dataSource = self
+        wishListTableView.delegate = self
+        wishListTableView.register(PlaceOfInterestTableViewCell.self, forCellReuseIdentifier: "places cell")
+        
+        view.addSubview(wishListTitle)
+        view.addSubview(wishListTableView)
+        setTitleText()
+        setUpConstraints()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        placesListViewModel.retrieveData()
-        placesOfInterestTable.reloadData()
+    private func setTitleText() {
+        let wishListToDisplay = detailWishListViewModel.wishListStore.wishLists[wishListIndex]
+        wishListTitle.text = wishListToDisplay.name
     }
     
-    func addConstraints() {
+    func setUpConstraints() {
         NSLayoutConstraint.activate([
-            placesOfInterestTable.topAnchor.constraint(equalTo: view.topAnchor),
-            placesOfInterestTable.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            placesOfInterestTable.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            placesOfInterestTable.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            wishListTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            wishListTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            wishListTitle.heightAnchor.constraint(equalToConstant: 100)
+        ])
+        NSLayoutConstraint.activate([
+            wishListTableView.topAnchor.constraint(equalTo: wishListTitle.bottomAnchor),
+            wishListTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            wishListTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            wishListTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+    
+
+
+
 }
+
 
 extension PlacesListViewViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(65)
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCell.EditingStyle.delete {
-            placesListViewModel.deletePlaceOfInterest(at: indexPath.row, from: indexPath.section)
-            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection
-                                section: Int) -> String? {
-       return placesListViewModel.wishListStore.wishLists[section].name
-    }
 }
 
 extension PlacesListViewViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return placesListViewModel.wishListStore.wishLists.count
-    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let wishListForSection = placesListViewModel.wishListStore.wishLists[section]
-        return wishListForSection.items.count
+        let wishListToDisplay = detailWishListViewModel.wishListStore.wishLists[wishListIndex]
+        return wishListToDisplay.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = placesOfInterestTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PlaceOfInterestTableViewCell
-        let wishListForSection = placesListViewModel.wishListStore.wishLists[indexPath.section]
-        let placeOfInterest = wishListForSection.items[indexPath.row]
+        let cell = wishListTableView.dequeueReusableCell(withIdentifier: "places cell", for: indexPath) as! PlaceOfInterestTableViewCell
+        let wishListToDisplay = detailWishListViewModel.wishListStore.wishLists[wishListIndex]
+        let placeOfInterest = wishListToDisplay.items[indexPath.row]
         cell.configureAnnotationPoint(mapPoint: placeOfInterest)
         return cell
     }
     
     
 }
-
