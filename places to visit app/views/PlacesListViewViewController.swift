@@ -66,8 +66,10 @@ class PlacesListViewViewController: UIViewController {
             self?.detailWishListViewModel.deleteWishList(at: self!.wishListIndex)
             self?.navigationController?.popViewController(animated: true)
         }
-        let saveAction = UIAlertAction(title: "Share wish list", style: .default) { action in
-            print("share list")
+        let saveAction = UIAlertAction(title: "Share wish list", style: .default) { [weak self] action in
+            let itemToShare = self?.detailWishListViewModel.wishListStore.wishLists[self!.wishListIndex].name
+            let shareController = UIActivityViewController(activityItems: [itemToShare], applicationActivities: nil)
+            self?.present(shareController, animated: true)
         }
    
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
