@@ -8,26 +8,27 @@
 import Foundation
 
 class PlacesListViewModel {
-    var wishListStore: WishListStore
+    var wishListStore: [WishList] = [WishList]()
     var userDefaults: UserDefaultsProtocol
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type
     
-    init(wishListStore: WishListStore,
-         userDefaults: UserDefaultsProtocol = UserDefaults.standard,
+    init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
          userDefaultsHelper: UserDefaultsHelperProtocol.Type = UserDefaultsHelper.self) {
-        self.wishListStore = wishListStore
         self.userDefaults = userDefaults
         self.userDefaultsHelper = userDefaultsHelper
     }
     
     // should be private
     func retrieveData() {
-        wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
+        NetworkManager.getData() { [weak self] wishLists in
+            self?.wishListStore = wishLists
+        }
+        //wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }
     
     // same
     func updateUserDefaults() {
-        userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
+        //userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
     }
     
     

@@ -12,15 +12,13 @@ class WishListSelectionViewController: UIViewController {
 
     var mapViewController: MapViewController
     var mapView: MKMapView
-    var wishListStore: WishListStore
     var wishListSelectionViewModel: WishListSelectionViewModel!
     
     var wishListSelectionTableView: UITableView!
     
-    init(mapViewController: MapViewController, mapView: MKMapView, wishListStore: WishListStore) {
+    init(mapViewController: MapViewController, mapView: MKMapView) {
         self.mapViewController = mapViewController
         self.mapView = mapView
-        self.wishListStore = wishListStore
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -33,7 +31,7 @@ class WishListSelectionViewController: UIViewController {
         view.backgroundColor = .white
         title = "Add to your saved lists"
         
-        wishListSelectionViewModel = WishListSelectionViewModel(wishListStore: wishListStore)
+        wishListSelectionViewModel = WishListSelectionViewModel()
         wishListSelectionViewModel.retrieveData()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(buttonTapped))
         
@@ -82,12 +80,12 @@ extension WishListSelectionViewController: UITableViewDelegate {
 
 extension WishListSelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return wishListSelectionViewModel.wishListStore.wishLists.count
+        return wishListSelectionViewModel.wishListStore.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = wishListSelectionTableView.dequeueReusableCell(withIdentifier: Constants.wishListCell, for: indexPath) as! WishListTableViewCell
-        let selectedWishList = wishListSelectionViewModel.wishListStore.wishLists[indexPath.row]
+        let selectedWishList = wishListSelectionViewModel.wishListStore[indexPath.row]
         cell.configureForWishlist(for: selectedWishList)
         return cell
     }

@@ -51,23 +51,26 @@ class PlacesListViewViewController: UIViewController {
         
         view.addSubview(wishListTitle)
         view.addSubview(wishListTableView)
-        setTitleText()
         setUpConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        detailWishListViewModel.retrieveData()
+    }
+    
     private func setTitleText() {
-        let wishListToDisplay = detailWishListViewModel.wishListStore.wishLists[wishListIndex]
+        let wishListToDisplay = detailWishListViewModel.wishListStore[wishListIndex]
         wishListTitle.text = wishListToDisplay.name
     }
     
     @objc func menuTapped() {
         let optionMenu = UIAlertController(title: nil, message: .none, preferredStyle: .actionSheet)
-        let deleteAction = UIAlertAction(title: "Delete \(detailWishListViewModel.wishListStore.wishLists[wishListIndex].name)", style: .default) { [weak self] action in
+        let deleteAction = UIAlertAction(title: "Delete \(detailWishListViewModel.wishListStore[wishListIndex].name)", style: .default) { [weak self] action in
             self?.detailWishListViewModel.deleteWishList(at: self!.wishListIndex)
             self?.navigationController?.popViewController(animated: true)
         }
         let saveAction = UIAlertAction(title: "Share wish list", style: .default) { [weak self] action in
-            let itemToShare = self?.detailWishListViewModel.wishListStore.wishLists[self!.wishListIndex].name
+            let itemToShare = self?.detailWishListViewModel.wishListStore[self!.wishListIndex].name
             let shareController = UIActivityViewController(activityItems: [itemToShare], applicationActivities: nil)
             self?.present(shareController, animated: true)
         }
@@ -113,13 +116,13 @@ extension PlacesListViewViewController: UITableViewDelegate {
 
 extension PlacesListViewViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let wishListToDisplay = detailWishListViewModel.wishListStore.wishLists[wishListIndex]
+        let wishListToDisplay = detailWishListViewModel.wishListStore[wishListIndex]
         return wishListToDisplay.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = wishListTableView.dequeueReusableCell(withIdentifier: "places cell", for: indexPath) as! PlaceOfInterestTableViewCell
-        let wishListToDisplay = detailWishListViewModel.wishListStore.wishLists[wishListIndex]
+        let wishListToDisplay = detailWishListViewModel.wishListStore[wishListIndex]
         let placeOfInterest = wishListToDisplay.items[indexPath.row]
         cell.configureAnnotationPoint(mapPoint: placeOfInterest)
         return cell

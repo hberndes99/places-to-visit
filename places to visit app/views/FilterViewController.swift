@@ -23,14 +23,13 @@ class FilterViewController: UIViewController {
     private var filterButton: UIButton!
     
     private var filterViewModel: FilterViewModel!
-    private var wishListStore: WishListStore
+   
     
     weak var filterViewControllerDelegate: FilterViewControllerDelegate?
     
     private let distanceArray = [1, 3, 5, 10, 20]
     
-    init (wishListStore: WishListStore) {
-        self.wishListStore = wishListStore
+    init () {
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,7 +41,7 @@ class FilterViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        filterViewModel = FilterViewModel(wishListStore: wishListStore)
+        filterViewModel = FilterViewModel()
         filterViewModel.filterViewControllerDelegate = filterViewControllerDelegate
         filterViewModel.retrieveData()
         
@@ -142,7 +141,7 @@ extension FilterViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.filterCollectionView {
             print("number of items in section for filter wish list")
-            return filterViewModel.wishListStore.wishLists.count
+            return filterViewModel.wishListStore.count
         }
         else {
             return distanceArray.count
@@ -153,7 +152,7 @@ extension FilterViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.filterCollectionView {
             let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterWishListCollectionViewCell.identifier, for: indexPath) as! FilterWishListCollectionViewCell
-            let wishListForCell = filterViewModel.wishListStore.wishLists[indexPath.item]
+            let wishListForCell = filterViewModel.wishListStore[indexPath.item]
             myCell.configureCVCell(for: wishListForCell)
             return myCell
         }
@@ -204,7 +203,7 @@ extension FilterViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == filterCollectionView {
             let cell = filterCollectionView.cellForItem(at: indexPath) as! FilterWishListCollectionViewCell
-            let selectedWishList = filterViewModel.wishListStore.wishLists[indexPath.item]
+            let selectedWishList = filterViewModel.wishListStore[indexPath.item]
             cell.cellIsSelected = !cell.cellIsSelected
             if cell.cellIsSelected {
                 cell.configureSelected()

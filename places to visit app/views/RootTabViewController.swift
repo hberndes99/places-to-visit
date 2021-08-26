@@ -8,12 +8,11 @@
 import UIKit
 
 class RootTabViewController: UITabBarController {
-    private var wishListStore: WishListStore
+
     private var mapViewController: MapViewController!
     private var placesListViewViewController: WishListViewTableViewController!
     
-    init(wishListStore: WishListStore) {
-        self.wishListStore = wishListStore
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,8 +34,8 @@ class RootTabViewController: UITabBarController {
             mapTabBarItem.image = UIImage(systemName: "map")
         }
         
-        mapViewController = MapViewController(wishListStore: wishListStore)
-        placesListViewViewController = WishListViewTableViewController(wishListStore: wishListStore)
+        mapViewController = MapViewController()
+        placesListViewViewController = WishListViewTableViewController()
      
         let mapNavigationController = UINavigationController(rootViewController: mapViewController)
         mapNavigationController.tabBarItem = mapTabBarItem

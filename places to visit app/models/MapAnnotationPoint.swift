@@ -9,23 +9,40 @@ import Foundation
 import MapKit
 
 class MapAnnotationPoint: NSObject, MKAnnotation, Codable {
-    let title: String?
-    let subtitle: String?
-    let coordinate: CLLocationCoordinate2D
-    //let placemark: MKPlacemark?
-    let number: String?
-    let streetAddress: String?
+    var id: Int
+    var title: String?
+    var subtitle: String?
+    var longitude: String
+    var latitude: String
+    var coordinate : CLLocationCoordinate2D {
+            return CLLocationCoordinate2D(latitude: Double(latitude) ?? 0.0, longitude: Double(longitude) ?? 0.0)
+        }
+    var number: String?
+    var streetAddress: String?
+    var wishList: Int
     
-    init(title: String, subtitle: String, coordinate: CLLocationCoordinate2D, number: String, streetAddress: String) {
+    
+    init(id: Int, title: String, subtitle: String, longitude: String, latitude: String, number: String?, streetAddress: String?, wishList: Int) {
+        self.id = id
         self.title = title
         self.subtitle = subtitle
-        self.coordinate = coordinate
-        //self.placemark = placemark
+        self.longitude = longitude
+        self.latitude = latitude
         self.number = number
         self.streetAddress = streetAddress
+        self.wishList = wishList
         
         super.init()
     }
+    /*
+    required init(from decoder: Decoder) {
+        
+        print("decoding init")
+        self.id = 0
+        //self.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(10), longitude: CLLocationDegrees(10))
+        self.wishList = 0
+    }
+ */
 }
 
 extension CLLocationCoordinate2D: Codable {

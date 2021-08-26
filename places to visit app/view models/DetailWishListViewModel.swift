@@ -8,12 +8,11 @@
 import Foundation
 
 class DetailWishListViewModel {
-    var wishListStore: WishListStore = WishListStore(wishLists: [])
+    var wishListStore: [WishList] = [WishList]()
     var userDefaults: UserDefaultsProtocol
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type
     
-    init(
-         userDefaults: UserDefaultsProtocol = UserDefaults.standard,
+    init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
          userDefaultsHelper: UserDefaultsHelperProtocol.Type = UserDefaultsHelper.self) {
         self.userDefaults = userDefaults
         self.userDefaultsHelper = userDefaultsHelper
@@ -21,25 +20,30 @@ class DetailWishListViewModel {
     
     // should be private
     func retrieveData() {
-        wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
+        NetworkManager.getData() { [weak self] wishLists in
+            self?.wishListStore = wishLists
+        }
+        //wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }
     
     func updateUserDefaults() {
-        userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
+        //userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
     }
     
     func deletePlaceOfInterest(at position: Int, from wishListPosition: Int) {
-        if wishListStore.wishLists.count > wishListPosition, wishListStore.wishLists[wishListPosition].items.count > position {
-            let wishListToDeleteFrom = wishListStore.wishLists[wishListPosition]
-            wishListToDeleteFrom.items.remove(at: position)
-            updateUserDefaults()
-        }
+        //if wishListStore.count > wishListPosition, wishListStore.[wishListPosition].items.count > position {
+        //    let wishListToDeleteFrom = wishListStore[wishListPosition]
+         //   wishListToDeleteFrom.items.remove(at: position)
+         //   updateUserDefaults()
+        //}
     }
     
     func deleteWishList(at position: Int) {
-        if wishListStore.wishLists.count > position {
-            wishListStore.wishLists.remove(at: position)
+        /*
+        if wishListStore.count > position {
+            wishListStore.remove(at: position)
             updateUserDefaults()
         }
+ */
     }
 }

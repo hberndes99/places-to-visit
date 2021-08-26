@@ -18,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let wishListStore = WishListStore(wishLists: [])
-        let rootTabViewController = RootTabViewController(wishListStore: wishListStore)
+        
+        let rootTabViewController = RootTabViewController()
         window?.rootViewController = rootTabViewController
         window?.makeKeyAndVisible()
     }

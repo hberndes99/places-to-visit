@@ -17,17 +17,15 @@ class MapViewControllerViewModel {
     private var filterTerms: [String]?
     private var filterDistance: Int?
     private(set) var userCurrentLocation: CLLocation?
-    var wishListStore: WishListStore
+    var wishListStore: [WishList] = [WishList]()
     var userDefaults: UserDefaultsProtocol
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type
     weak var mapViewControllerViewModelDelegate: MapViewControllerViewModelDelegate?
     
     var wishListStoreToSave: WishListStore = WishListStore(wishLists: [])
     
-    init(wishListStore: WishListStore,
-         userDefaults: UserDefaultsProtocol = UserDefaults.standard,
+    init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
          userDefaultsHelper: UserDefaultsHelperProtocol.Type = UserDefaultsHelper.self) {
-        self.wishListStore = wishListStore
         self.userDefaults = userDefaults
         self.userDefaultsHelper = userDefaultsHelper
     }
@@ -37,6 +35,11 @@ class MapViewControllerViewModel {
     }
     
     func retrieveData() {
+        NetworkManager.getData() { [weak self] wishLists in
+            self?.wishListStore = wishLists
+        }
+        
+        /*
         wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
         if filteringInPlace {
             if let filterTerms = filterTerms {
@@ -50,15 +53,17 @@ class MapViewControllerViewModel {
             return
         }
         filterMapPointsByDistance(numberOfKm: filterDistance)
+ */
     }
     
     func savePlaceOfInterestToUserDefaults() {
-        wishListStoreToSave = wishListStore
-        userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
+        //wishListStoreToSave = wishListStore
+        //userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
     }
     
     func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListPositionIndex: Int) {
-        print("save place of interest being called")
+        /*
+        print(placeOfInterest)
         var subtitleString: String = ""
         guard let placeName = placeOfInterest.name else { return }
         if placeOfInterest.placemark.subThoroughfare != nil,
@@ -67,16 +72,19 @@ class MapViewControllerViewModel {
         } else if placeOfInterest.placemark.thoroughfare != nil {
             subtitleString = "\(placeOfInterest.placemark.thoroughfare ?? "")"
         }
-        let newMapAnnotationPoint = MapAnnotationPoint(title: placeName,
+        let newMapAnnotationPoint = MapAnnotationPoint(id: 0,
+                                                       title: placeName,
                                                        subtitle: subtitleString,
-                                                       coordinate: placeOfInterest.placemark.coordinate,
+                                                       longitude: String(placeOfInterest.placemark.coordinate.longitude),
+                                                       latitude: String(placeOfInterest.placemark.coordinate.latitude),
                                                        number: placeOfInterest.placemark.subThoroughfare ?? "",
-                                                       streetAddress: placeOfInterest.placemark.thoroughfare ?? "")
+                                                       streetAddress: placeOfInterest.placemark.thoroughfare ?? "",
+                                                       wishList: 0)
         //retrieveData() only returning the filtered if filtering is in place
-        wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
+        //wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
         // if adding to a list when filtering is in place there is an issue
         
-        let wishListToAddTo = wishListStore.wishLists[wishListPositionIndex]
+        //let wishListToAddTo = wishListStore.wishLists[wishListPositionIndex]
         if WishListStoreHelper.checkForDuplication(itemToCheckFor: newMapAnnotationPoint, listToCheckThrough: wishListToAddTo.items, propertiesToCheckAgainst: [\MapAnnotationPoint.title]),
            WishListStoreHelper.checkForDuplication(itemToCheckFor: newMapAnnotationPoint, listToCheckThrough: wishListToAddTo.items,
             propertiesToCheckAgainst: [\MapAnnotationPoint.subtitle]) {
@@ -87,9 +95,11 @@ class MapViewControllerViewModel {
         // this is then only saving the filtered lists to user defaults
         // other lists are removed from user defaults as a result and are no longer displayed
         savePlaceOfInterestToUserDefaults()
+ */
     }
     
     private func filterMapPointsByDistance(numberOfKm: Int) {
+        /*
         // filter the annotations by distance away from user location
         let filterDistance: Double = Double(numberOfKm * 1000)
         for wishList in wishListStore.wishLists {
@@ -103,9 +113,11 @@ class MapViewControllerViewModel {
             }
             wishList.items = filteredWishListItems
         }
+ */
     }
     
     func applyFiltersToMap(filterList: [String]?, distance: Int?) {
+        /*
         if let filterList = filterList {
             let filteredWishLists = wishListStore.wishLists.filter { wishList in
                 filterList.contains(wishList.name)
@@ -120,6 +132,7 @@ class MapViewControllerViewModel {
             filterMapPointsByDistance(numberOfKm: filterDistance)
         }
         mapViewControllerViewModelDelegate?.updateMapWithFilters()
+    */
     }
     
     func clearFilters() {

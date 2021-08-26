@@ -7,12 +7,10 @@
 import UIKit
 
 class WishListViewTableViewController: UIViewController {
-    private var wishListStore: WishListStore
     private var placesListViewModel: PlacesListViewModel!
     private var placesOfInterestTable: UITableView!
     
-    init(wishListStore: WishListStore) {
-        self.wishListStore = wishListStore
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -24,7 +22,7 @@ class WishListViewTableViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.topItem?.title = "Your saved lists"
         
-        placesListViewModel = PlacesListViewModel(wishListStore: wishListStore)
+        placesListViewModel = PlacesListViewModel()
         placesListViewModel.retrieveData()
 
         placesOfInterestTable = UITableView()
@@ -39,8 +37,11 @@ class WishListViewTableViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        placesListViewModel.retrieveData()
         placesOfInterestTable.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        placesListViewModel.retrieveData()
     }
     
     func addConstraints() {
@@ -57,6 +58,7 @@ extension WishListViewTableViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedIndex = indexPath.row
+        print(selectedIndex)
         let placesListViewViewController = PlacesListViewViewController(wishListIndex: selectedIndex)
         navigationController?.pushViewController(placesListViewViewController, animated: true)
     }
@@ -72,12 +74,12 @@ extension WishListViewTableViewController: UITableViewDelegate {
 
 extension WishListViewTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return placesListViewModel.wishListStore.wishLists.count
+        return placesListViewModel.wishListStore.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = placesOfInterestTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WishListTableViewCell
-        let wishList = placesListViewModel.wishListStore.wishLists[indexPath.row]
+        let wishList = placesListViewModel.wishListStore[indexPath.row]
         cell.configureForWishlist(for: wishList)
         return cell
     }

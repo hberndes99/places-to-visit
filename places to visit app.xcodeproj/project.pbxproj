@@ -49,6 +49,7 @@
 		E4FC0C4826D3ADE000295645 /* PlacesListViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC0C4726D3ADE000295645 /* PlacesListViewViewController.swift */; };
 		E4FC0C4A26D3AF2300295645 /* DetailWishListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC0C4926D3AF2300295645 /* DetailWishListViewModel.swift */; };
 		E4FC0C4C26D3F36B00295645 /* DetailWishListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC0C4B26D3F36B00295645 /* DetailWishListViewModelTests.swift */; };
+		E4FC0C4E26D7D92400295645 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC0C4D26D7D92400295645 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,7 @@
 		E4FC0C4726D3ADE000295645 /* PlacesListViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewViewController.swift; sourceTree = "<group>"; };
 		E4FC0C4926D3AF2300295645 /* DetailWishListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWishListViewModel.swift; sourceTree = "<group>"; };
 		E4FC0C4B26D3F36B00295645 /* DetailWishListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWishListViewModelTests.swift; sourceTree = "<group>"; };
+		E4FC0C4D26D7D92400295645 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 				E477EC5626A8638E00EA3B1B /* views */,
 				E477EC2626A839FB00EA3B1B /* AppDelegate.swift */,
 				E477EC2826A839FB00EA3B1B /* SceneDelegate.swift */,
+				E4FC0C4D26D7D92400295645 /* NetworkManager.swift */,
 				E477EC2F26A839FC00EA3B1B /* Assets.xcassets */,
 				E477EC3126A839FC00EA3B1B /* LaunchScreen.storyboard */,
 				E477EC3426A839FC00EA3B1B /* Info.plist */,
@@ -425,6 +428,7 @@
 				E477ECB426C52A9D00EA3B1B /* FilterWishListCollectionViewCell.swift in Sources */,
 				E4FC0C4826D3ADE000295645 /* PlacesListViewViewController.swift in Sources */,
 				E477EC8C26B4159400EA3B1B /* WishListSelectionViewController.swift in Sources */,
+				E4FC0C4E26D7D92400295645 /* NetworkManager.swift in Sources */,
 				E477EC2926A839FB00EA3B1B /* SceneDelegate.swift in Sources */,
 				E477EC6426A96EA700EA3B1B /* SearchNetworkManagerProtocol.swift in Sources */,
 				E477EC8026B1A52B00EA3B1B /* Constants.swift in Sources */,

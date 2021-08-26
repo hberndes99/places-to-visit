@@ -8,24 +8,25 @@
 import Foundation
 
 class FilterViewModel {
-    var wishListStore: WishListStore
+    var wishListStore: [WishList] = [WishList]()
     var userDefaults: UserDefaultsProtocol
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type
     weak var filterViewControllerDelegate: FilterViewControllerDelegate?
     private(set) var listOfFilterStrings: [String]?
     private(set) var distanceToFilterBy: Int?
     
-    init(wishListStore: WishListStore,
-         userDefaults: UserDefaultsProtocol = UserDefaults.standard,
+    init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
          userDefaultsHelper: UserDefaultsHelperProtocol.Type = UserDefaultsHelper.self) {
-        self.wishListStore = wishListStore
         self.userDefaults = userDefaults
         self.userDefaultsHelper = userDefaultsHelper
     }
     
     // should be private
     func retrieveData() {
-        wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
+        NetworkManager.getData() { [weak self] wishLists in
+            self?.wishListStore = wishLists
+        }
+        //wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }
     
     func addToFilterQueries(wishListName: String) {

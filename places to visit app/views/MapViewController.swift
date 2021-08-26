@@ -14,13 +14,12 @@ class MapViewController: UIViewController {
     var mapViewControllerViewModel: MapViewControllerViewModel!
     var mapView: MKMapView!
     var locationManager: CLLocationManager!
-    var wishListStore: WishListStore
+ 
     
     var filterButtonButton: UIButton!
     var removeFiltersButton: UIButton!
     
-    init (wishListStore: WishListStore) {
-        self.wishListStore = wishListStore
+    init () {
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -33,7 +32,7 @@ class MapViewController: UIViewController {
         navigationController?.navigationBar.topItem?.title = "Saved places"
         view.accessibilityIdentifier = "Saved places map view"
         
-        mapViewControllerViewModel = MapViewControllerViewModel(wishListStore: wishListStore)
+        mapViewControllerViewModel = MapViewControllerViewModel()
         mapViewControllerViewModel.mapViewControllerViewModelDelegate = self
         mapViewControllerViewModel.retrieveData()
         
@@ -76,7 +75,7 @@ class MapViewController: UIViewController {
     
     func updateMapAnnotations() {
         mapView.removeAnnotations(mapView.annotations)
-        for wishList in mapViewControllerViewModel.wishListStore.wishLists {
+        for wishList in mapViewControllerViewModel.wishListStore {
             mapView.addAnnotations(wishList.items)
         }
     }
@@ -91,12 +90,12 @@ class MapViewController: UIViewController {
     }
     
     @objc func addButtonTapped(mapView: MKMapView) {
-        let wishListSelectionViewController = WishListSelectionViewController(mapViewController: self, mapView: self.mapView, wishListStore: wishListStore)
+        let wishListSelectionViewController = WishListSelectionViewController(mapViewController: self, mapView: self.mapView)
         navigationController?.pushViewController(wishListSelectionViewController, animated: true)
     }
     
     @objc func filterButtonTapped() {
-        let filterVC = FilterViewController(wishListStore: wishListStore)
+        let filterVC = FilterViewController()
         filterVC.filterViewControllerDelegate = self
         self.present(filterVC, animated: true)
     }
