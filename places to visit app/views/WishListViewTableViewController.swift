@@ -21,10 +21,10 @@ class WishListViewTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.topItem?.title = "Your saved lists"
-        
+    
         placesListViewModel = PlacesListViewModel()
         placesListViewModel.retrieveData()
-
+        
         placesOfInterestTable = UITableView()
         placesOfInterestTable.translatesAutoresizingMaskIntoConstraints = false
         placesOfInterestTable.dataSource = self
@@ -36,12 +36,9 @@ class WishListViewTableViewController: UIViewController {
         addConstraints()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        placesOfInterestTable.reloadData()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         placesListViewModel.retrieveData()
+        placesOfInterestTable.reloadData()
     }
     
     func addConstraints() {
@@ -74,6 +71,9 @@ extension WishListViewTableViewController: UITableViewDelegate {
 
 extension WishListViewTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if placesListViewModel.wishListStore.count == 0 {
+            return 0
+        }
         return placesListViewModel.wishListStore.count
     }
     

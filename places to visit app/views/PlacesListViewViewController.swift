@@ -25,8 +25,6 @@ class PlacesListViewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailWishListViewModel = DetailWishListViewModel()
-        detailWishListViewModel.retrieveData()
         
         view.backgroundColor = .white
         
@@ -55,7 +53,10 @@ class PlacesListViewViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        detailWishListViewModel.retrieveData()
+        detailWishListViewModel = DetailWishListViewModel()
+        detailWishListViewModel.retrieveData() {
+            self.wishListTableView.reloadData()
+        }
     }
     
     private func setTitleText() {
@@ -116,6 +117,9 @@ extension PlacesListViewViewController: UITableViewDelegate {
 
 extension PlacesListViewViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if detailWishListViewModel.wishListStore.count == 0 {
+            return 0
+        }
         let wishListToDisplay = detailWishListViewModel.wishListStore[wishListIndex]
         return wishListToDisplay.items.count
     }

@@ -33,6 +33,8 @@ class WishListSelectionViewController: UIViewController {
         
         wishListSelectionViewModel = WishListSelectionViewModel()
         wishListSelectionViewModel.retrieveData()
+        wishListSelectionViewModel.wishListSelectionViewModelDelegate = self
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(buttonTapped))
         
         wishListSelectionTableView = UITableView()
@@ -97,4 +99,13 @@ extension WishListSelectionViewController: NewWishListVCDelegate {
         wishListSelectionViewModel.saveNewWishList(name: name, description: description)
         wishListSelectionTableView.reloadData()
     }
+}
+
+
+extension WishListSelectionViewController: WishListSelectionViewModelDelegate {
+    func updateWishListList() {
+        wishListSelectionTableView.reloadData()
+    }
+    
+    
 }

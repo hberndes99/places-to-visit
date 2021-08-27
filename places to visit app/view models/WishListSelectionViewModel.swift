@@ -7,10 +7,15 @@
 
 import Foundation
 
+protocol WishListSelectionViewModelDelegate: AnyObject {
+    func updateWishListList()
+}
+
 class WishListSelectionViewModel {
     var wishListStore: [WishList] = [WishList]()
     var userDefaults: UserDefaultsProtocol
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type
+    weak var wishListSelectionViewModelDelegate: WishListSelectionViewModelDelegate?
     
     init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
          userDefaultsHelper: UserDefaultsHelperProtocol.Type = UserDefaultsHelper.self) {
@@ -32,11 +37,17 @@ class WishListSelectionViewModel {
     }
     
     func saveNewWishList(name: String, description: String) {
-        let newWishList = WishList(id: 0, name: name, items: [], description: description)
+        let newWishList = WishList(id: nil, name: name, items: [], description: description)
         if WishListStoreHelper.checkForDuplication(itemToCheckFor: newWishList, listToCheckThrough: wishListStore, propertiesToCheckAgainst: [\WishList.name]) {
             return
         }
-        wishListStore.append(newWishList)
-        updateUserDefaults()
+        // api call to POST the new wish list
+        NetworkManager.postData(wishList: newWishList) { [weak self] wishList in
+            self?.wishListStore.append(wishList)
+            self?.wishListSelectionViewModelDelegate?.updateWishListList()
+            
+        }
+        //wishListStore.append(newWishList)
+        //updateUserDefaults()
     }
 }

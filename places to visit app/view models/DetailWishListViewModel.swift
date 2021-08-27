@@ -19,7 +19,7 @@ class DetailWishListViewModel {
     }
     
     // should be private
-    func retrieveData() {
+    func retrieveData(completion: @escaping () -> ()) {
         NetworkManager.getData() { [weak self] wishLists in
             self?.wishListStore = wishLists
         }
