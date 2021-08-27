@@ -27,6 +27,9 @@ class PlacesListViewViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        detailWishListViewModel = DetailWishListViewModel()
+        detailWishListViewModel.retrieveData()
+        detailWishListViewModel.detailWishListViewModelDelegate = self
         
         wishListTitle = UILabel()
         wishListTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -53,10 +56,7 @@ class PlacesListViewViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        detailWishListViewModel = DetailWishListViewModel()
-        detailWishListViewModel.retrieveData() {
-            self.wishListTableView.reloadData()
-        }
+        
     }
     
     private func setTitleText() {
@@ -131,6 +131,18 @@ extension PlacesListViewViewController: UITableViewDataSource {
         cell.configureAnnotationPoint(mapPoint: placeOfInterest)
         return cell
     }
+    
+    
+}
+
+extension PlacesListViewViewController: DetailWishListViewModelDelegate {
+    func updateDetailView() {
+        DispatchQueue.main.async {
+            self.wishListTableView.reloadData()
+        }
+    }
+    
+
     
     
 }

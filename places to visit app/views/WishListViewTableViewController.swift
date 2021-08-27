@@ -24,6 +24,7 @@ class WishListViewTableViewController: UIViewController {
     
         placesListViewModel = PlacesListViewModel()
         placesListViewModel.retrieveData()
+        placesListViewModel.placesListViewModelDelegate = self
         
         placesOfInterestTable = UITableView()
         placesOfInterestTable.translatesAutoresizingMaskIntoConstraints = false
@@ -59,14 +60,6 @@ extension WishListViewTableViewController: UITableViewDelegate {
         let placesListViewViewController = PlacesListViewViewController(wishListIndex: selectedIndex)
         navigationController?.pushViewController(placesListViewViewController, animated: true)
     }
-    /*
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCell.EditingStyle.delete {
-            placesListViewModel.deleteWishList(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
-        }
-    }
- */
 }
 
 extension WishListViewTableViewController: UITableViewDataSource {
@@ -85,3 +78,13 @@ extension WishListViewTableViewController: UITableViewDataSource {
     }
 }
 
+extension WishListViewTableViewController: PlacesListViewModelDelegate {
+    func updateWishListList() {
+        print("update called from placeslistviewmodeldelegate")
+        DispatchQueue.main.async {
+            self.placesOfInterestTable.reloadData()
+        }
+    }
+    
+    
+}

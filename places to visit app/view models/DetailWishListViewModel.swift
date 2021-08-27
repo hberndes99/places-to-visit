@@ -7,10 +7,15 @@
 
 import Foundation
 
+protocol DetailWishListViewModelDelegate: AnyObject {
+    func updateDetailView()
+}
+
 class DetailWishListViewModel {
     var wishListStore: [WishList] = [WishList]()
     var userDefaults: UserDefaultsProtocol
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type
+    weak var detailWishListViewModelDelegate: DetailWishListViewModelDelegate?
     
     init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
          userDefaultsHelper: UserDefaultsHelperProtocol.Type = UserDefaultsHelper.self) {
@@ -19,9 +24,10 @@ class DetailWishListViewModel {
     }
     
     // should be private
-    func retrieveData(completion: @escaping () -> ()) {
+    func retrieveData() {
         NetworkManager.getData() { [weak self] wishLists in
             self?.wishListStore = wishLists
+            self?.detailWishListViewModelDelegate?.updateDetailView()
         }
         //wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }

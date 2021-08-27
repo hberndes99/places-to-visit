@@ -7,10 +7,15 @@
 
 import Foundation
 
+protocol PlacesListViewModelDelegate: AnyObject {
+    func updateWishListList()
+}
+
 class PlacesListViewModel {
     var wishListStore: [WishList] = [WishList]()
     var userDefaults: UserDefaultsProtocol
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type
+    weak var placesListViewModelDelegate: PlacesListViewModelDelegate?
     
     init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
          userDefaultsHelper: UserDefaultsHelperProtocol.Type = UserDefaultsHelper.self) {
@@ -22,6 +27,7 @@ class PlacesListViewModel {
     func retrieveData() {
         NetworkManager.getData() { [weak self] wishLists in
             self?.wishListStore = wishLists
+            self?.placesListViewModelDelegate?.updateWishListList()
         }
         //wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }

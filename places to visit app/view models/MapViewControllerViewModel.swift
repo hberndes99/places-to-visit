@@ -9,7 +9,8 @@ import Foundation
 import MapKit
 
 protocol MapViewControllerViewModelDelegate: AnyObject {
-    func updateMapWithFilters() 
+    func updateMapWithFilters()
+    func loadMapAnnotations()
 }
 
 class MapViewControllerViewModel {
@@ -37,6 +38,7 @@ class MapViewControllerViewModel {
     func retrieveData() {
         NetworkManager.getData() { [weak self] wishLists in
             self?.wishListStore = wishLists
+            self?.mapViewControllerViewModelDelegate?.loadMapAnnotations()
         }
         
         /*

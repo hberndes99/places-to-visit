@@ -104,7 +104,9 @@ extension WishListSelectionViewController: NewWishListVCDelegate {
 
 extension WishListSelectionViewController: WishListSelectionViewModelDelegate {
     func updateWishListList() {
-        wishListSelectionTableView.reloadData()
+        DispatchQueue.main.async { 
+            self.wishListSelectionTableView.reloadData()
+        }
     }
     
     

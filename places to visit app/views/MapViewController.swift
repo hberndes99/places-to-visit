@@ -74,9 +74,11 @@ class MapViewController: UIViewController {
     }
     
     func updateMapAnnotations() {
-        mapView.removeAnnotations(mapView.annotations)
-        for wishList in mapViewControllerViewModel.wishListStore {
-            mapView.addAnnotations(wishList.items)
+        if let mapView = mapView {
+            mapView.removeAnnotations(mapView.annotations)
+            for wishList in mapViewControllerViewModel.wishListStore {
+                mapView.addAnnotations(wishList.items)
+            }
         }
     }
     
@@ -107,10 +109,10 @@ class MapViewController: UIViewController {
     }
     
     func setUpLeftBarButtons() {
-        if mapViewControllerViewModel.filteringInPlace {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: removeFiltersButton)
+        if self.mapViewControllerViewModel.filteringInPlace {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.removeFiltersButton)
         } else {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: filterButtonButton)
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.filterButtonButton)
         }
     }
 }
@@ -148,5 +150,13 @@ extension MapViewController: MapViewControllerViewModelDelegate {
     func updateMapWithFilters() {
         updateMapAnnotations()
         setUpLeftBarButtons()
+    }
+    func loadMapAnnotations() {
+        DispatchQueue.main.async {
+            for wishList in self.mapViewControllerViewModel.wishListStore {
+                self.mapView.addAnnotations(wishList.items)
+            }
+        }
+        
     }
 }
