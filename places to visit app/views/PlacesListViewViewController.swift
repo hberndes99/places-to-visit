@@ -67,8 +67,12 @@ class PlacesListViewViewController: UIViewController {
     @objc func menuTapped() {
         let optionMenu = UIAlertController(title: nil, message: .none, preferredStyle: .actionSheet)
         let deleteAction = UIAlertAction(title: "Delete \(detailWishListViewModel.wishListStore[wishListIndex].name)", style: .default) { [weak self] action in
-            self?.detailWishListViewModel.deleteWishList(at: self!.wishListIndex)
-            self?.navigationController?.popViewController(animated: true)
+            self?.detailWishListViewModel.deleteWishList(at: self!.wishListIndex) {
+                DispatchQueue.main.async {
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            }
+            
         }
         let saveAction = UIAlertAction(title: "Share wish list", style: .default) { [weak self] action in
             let itemToShare = self?.detailWishListViewModel.wishListStore[self!.wishListIndex].name

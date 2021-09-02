@@ -12,9 +12,9 @@ protocol WishListSelectionViewModelDelegate: AnyObject {
 }
 
 class WishListSelectionViewModel {
-    var wishListStore: [WishList] = [WishList]()
-    var userDefaults: UserDefaultsProtocol
-    var userDefaultsHelper: UserDefaultsHelperProtocol.Type
+    private(set) var wishListStore: [WishList] = [WishList]()
+    private var userDefaults: UserDefaultsProtocol
+    private var userDefaultsHelper: UserDefaultsHelperProtocol.Type
     weak var wishListSelectionViewModelDelegate: WishListSelectionViewModelDelegate?
     
     init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
@@ -23,7 +23,6 @@ class WishListSelectionViewModel {
         self.userDefaultsHelper = userDefaultsHelper
     }
     
-    // should be private
     func retrieveData() {
         NetworkManager.getData() { [weak self] wishLists in
             self?.wishListStore = wishLists
@@ -31,18 +30,14 @@ class WishListSelectionViewModel {
         }
         //wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }
-    
-    // same
-    //func updateUserDefaults() {
-        //userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
-    //}
+
     
     func saveNewWishList(name: String, description: String) {
         let newWishList = WishList(id: nil, name: name, items: [], description: description)
         if WishListStoreHelper.checkForDuplication(itemToCheckFor: newWishList, listToCheckThrough: wishListStore, propertiesToCheckAgainst: [\WishList.name]) {
             return
         }
-        NetworkManager.postData(wishList: newWishList) { [weak self] wishList in
+        NetworkManager.postData(dataToPost: newWishList, endpoint: "places/wishlists/"){ [weak self] wishList in
             self?.wishListStore.append(wishList)
             self?.wishListSelectionViewModelDelegate?.updateWishListList()
         }

@@ -90,7 +90,7 @@ class MapViewControllerViewModel {
             }
         }
         
-        NetworkManager.postMapPoint(mapPoint: newMapAnnotationPoint) { [weak self] mapAnnotationPoint in
+        NetworkManager.postData(dataToPost: newMapAnnotationPoint, endpoint: "places/wishlists/mappoints/") { [weak self] mapAnnotationPoint in
             guard let wishListToAddToIndex = self?.wishListStore.firstIndex(where: { wishlist in
                 if wishlist.id == wishListId {
                     return true
@@ -123,7 +123,6 @@ class MapViewControllerViewModel {
     }
     
     func applyFiltersToMap(filterList: [String]?, distance: Int?) {
-        
         if let filterList = filterList {
             let filteredWishLists = wishListStore.filter { wishList in
                 filterList.contains(wishList.name)

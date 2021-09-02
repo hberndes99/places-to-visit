@@ -16,9 +16,9 @@ protocol FilterViewModelDelegate: AnyObject {
 }
 
 class FilterViewModel {
-    var wishListStore: [WishList] = [WishList]()
-    var userDefaults: UserDefaultsProtocol
-    var userDefaultsHelper: UserDefaultsHelperProtocol.Type
+    private(set) var wishListStore: [WishList] = [WishList]()
+    private var userDefaults: UserDefaultsProtocol
+    private var userDefaultsHelper: UserDefaultsHelperProtocol.Type
     
     weak var filterViewControllerDelegate: FilterViewControllerDelegate?
     weak var filterViewModelDelegate: FilterViewModelDelegate?
@@ -62,10 +62,6 @@ class FilterViewModel {
     }
     
     func applyFilters() {
-        //if listOfFilterStrings.count == 0 {
-        //    return
-        //}
-        print("apply filters called")
         filterViewControllerDelegate?.applyFilters(filterList: listOfFilterStrings, distance: distanceToFilterBy)
     }
 }

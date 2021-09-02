@@ -23,19 +23,10 @@ class PlacesListViewModel {
         self.userDefaultsHelper = userDefaultsHelper
     }
     
-    // should be private
     func retrieveData() {
         NetworkManager.getData() { [weak self] wishLists in
             self?.wishListStore = wishLists
             self?.placesListViewModelDelegate?.updateWishListList()
         }
-        //wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }
-    
-    // same
-    func updateUserDefaults() {
-        //userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
-    }
-    
-    
 }

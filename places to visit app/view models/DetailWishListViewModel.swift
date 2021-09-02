@@ -12,9 +12,9 @@ protocol DetailWishListViewModelDelegate: AnyObject {
 }
 
 class DetailWishListViewModel {
-    var wishListStore: [WishList] = [WishList]()
-    var userDefaults: UserDefaultsProtocol
-    var userDefaultsHelper: UserDefaultsHelperProtocol.Type
+    private(set) var wishListStore: [WishList] = [WishList]()
+    private var userDefaults: UserDefaultsProtocol
+    private var userDefaultsHelper: UserDefaultsHelperProtocol.Type
     weak var detailWishListViewModelDelegate: DetailWishListViewModelDelegate?
     
     init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
@@ -23,43 +23,28 @@ class DetailWishListViewModel {
         self.userDefaultsHelper = userDefaultsHelper
     }
     
-    // should be private
     func retrieveData() {
         NetworkManager.getData() { [weak self] wishLists in
             self?.wishListStore = wishLists
             self?.detailWishListViewModelDelegate?.updateDetailView()
         }
-        //wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }
-    
-    //func updateUserDefaults() {
-        //userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
-    //}
     
     func deletePlaceOfInterest(at position: Int, from wishListPosition: Int) {
-        //if wishListStore.count > wishListPosition, wishListStore.[wishListPosition].items.count > position {
-        //    let wishListToDeleteFrom = wishListStore[wishListPosition]
-         //   wishListToDeleteFrom.items.remove(at: position)
-         //   updateUserDefaults()
-        //}
         let mapPointToDelete = wishListStore[wishListPosition].items[position]
         if let id = mapPointToDelete.id {
-            NetworkManager.deleteMapPoint(id: id)
+            NetworkManager.deleteItem(endpoint: "places/wishlists/mappoints/", id: id)
             self.wishListStore[wishListPosition].items.remove(at: position)
-
         }
-        
     }
     
-    func deleteWishList(at position: Int) {
-        
+    func deleteWishList(at position: Int, completion: @escaping () -> ()) {
         if wishListStore.count > position {
             if let id = wishListStore[position].id {
-                NetworkManager.deleteWishList(id: id)
+                NetworkManager.deleteItem(endpoint: "places/wishlists/", id: id)
+                completion()
             }
             wishListStore.remove(at: position)
-            
         }
- 
     }
 }
