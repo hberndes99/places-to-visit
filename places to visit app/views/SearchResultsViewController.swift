@@ -13,7 +13,7 @@ protocol SearchResultsViewControllerDelegate: AnyObject {
 }
 
 protocol SearchResultsVCMapViewVCDelegate: AnyObject {
-    func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListPositionIndex: Int)
+    func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListId: Int)
 }
 
 class SearchResultsViewController: UIViewController {
@@ -90,7 +90,7 @@ extension SearchResultsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedPlace = searchResultsVCViewModel.searchResults[indexPath.row]
-        searchResultsVCMapViewVCDelegate?.savePlaceOfInterest(placeOfInterest: selectedPlace, wishListPositionIndex: self.selectedListPosition)
+        searchResultsVCMapViewVCDelegate?.savePlaceOfInterest(placeOfInterest: selectedPlace, wishListId: self.selectedListPosition)
     }
 }
 

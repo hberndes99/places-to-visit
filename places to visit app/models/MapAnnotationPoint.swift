@@ -9,7 +9,7 @@ import Foundation
 import MapKit
 
 class MapAnnotationPoint: NSObject, MKAnnotation, Codable {
-    var id: Int
+    var id: Int?
     var title: String?
     var subtitle: String?
     var longitude: String
@@ -22,7 +22,7 @@ class MapAnnotationPoint: NSObject, MKAnnotation, Codable {
     var wishList: Int
     
     
-    init(id: Int, title: String, subtitle: String, longitude: String, latitude: String, number: String?, streetAddress: String?, wishList: Int) {
+    init(id: Int?, title: String, subtitle: String, longitude: String, latitude: String, number: String?, streetAddress: String?, wishList: Int) {
         self.id = id
         self.title = title
         self.subtitle = subtitle

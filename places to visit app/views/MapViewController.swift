@@ -134,8 +134,8 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: SearchResultsVCMapViewVCDelegate {
-    func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListPositionIndex: Int) {
-        mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: placeOfInterest, wishListPositionIndex: wishListPositionIndex)
+    func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListId: Int) {
+        mapViewControllerViewModel.savePlaceOfInterest(placeOfInterest: placeOfInterest, wishListId: wishListId)
     }
 }
 

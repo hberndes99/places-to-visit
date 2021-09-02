@@ -74,7 +74,11 @@ extension WishListSelectionViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedListPosition = indexPath.row
-        let searchResultsViewController = SearchResultsViewController(mapView: mapView, selectedListPosition: selectedListPosition)
+        guard let selectedListId = wishListSelectionViewModel.wishListStore[selectedListPosition].id else {
+            return
+        }
+        print(selectedListId)
+        let searchResultsViewController = SearchResultsViewController(mapView: mapView, selectedListPosition: selectedListId)
         searchResultsViewController.searchResultsVCMapViewVCDelegate = mapViewController as? SearchResultsVCMapViewVCDelegate
         navigationController?.pushViewController(searchResultsViewController, animated: true)
     }

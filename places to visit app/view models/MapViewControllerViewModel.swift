@@ -23,7 +23,7 @@ class MapViewControllerViewModel {
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type
     weak var mapViewControllerViewModelDelegate: MapViewControllerViewModelDelegate?
     
-    var wishListStoreToSave: WishListStore = WishListStore(wishLists: [])
+    //var wishListStoreToSave: WishListStore = WishListStore(wishLists: [])
     
     init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
          userDefaultsHelper: UserDefaultsHelperProtocol.Type = UserDefaultsHelper.self) {
@@ -63,9 +63,7 @@ class MapViewControllerViewModel {
         //userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
     }
     
-    func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListPositionIndex: Int) {
-        /*
-        print(placeOfInterest)
+    func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListId: Int) {
         var subtitleString: String = ""
         guard let placeName = placeOfInterest.name else { return }
         if placeOfInterest.placemark.subThoroughfare != nil,
@@ -74,14 +72,29 @@ class MapViewControllerViewModel {
         } else if placeOfInterest.placemark.thoroughfare != nil {
             subtitleString = "\(placeOfInterest.placemark.thoroughfare ?? "")"
         }
-        let newMapAnnotationPoint = MapAnnotationPoint(id: 0,
+        let newMapAnnotationPoint = MapAnnotationPoint(id: nil,
                                                        title: placeName,
                                                        subtitle: subtitleString,
                                                        longitude: String(placeOfInterest.placemark.coordinate.longitude),
                                                        latitude: String(placeOfInterest.placemark.coordinate.latitude),
                                                        number: placeOfInterest.placemark.subThoroughfare ?? "",
                                                        streetAddress: placeOfInterest.placemark.thoroughfare ?? "",
-                                                       wishList: 0)
+                                                       wishList: wishListId)
+        
+        //     PREVENT DUPLICATION
+        for place in wishListStore {
+            for item in place.items {
+                if item.title == newMapAnnotationPoint.title {
+                    print("removed duplication")
+                    return
+                }
+            }
+        }
+        
+        NetworkManager.postMapPoint(mapPoint: newMapAnnotationPoint) { [weak self] mapAnnotationPoint in
+            self?.wishListStore[wishListId].items.append(mapAnnotationPoint)
+        }
+        /*
         //retrieveData() only returning the filtered if filtering is in place
         //wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
         // if adding to a list when filtering is in place there is an issue
