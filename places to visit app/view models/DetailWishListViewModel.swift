@@ -52,11 +52,14 @@ class DetailWishListViewModel {
     }
     
     func deleteWishList(at position: Int) {
-        /*
+        
         if wishListStore.count > position {
+            if let id = wishListStore[position].id {
+                NetworkManager.deleteWishList(id: id)
+            }
             wishListStore.remove(at: position)
-            updateUserDefaults()
+            
         }
- */
+ 
     }
 }
