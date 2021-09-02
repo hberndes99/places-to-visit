@@ -7,11 +7,22 @@
 
 import Foundation
 
+protocol FilterViewControllerDelegate: AnyObject {
+    func applyFilters(filterList: [String]?, distance: Int?)
+}
+
+protocol FilterViewModelDelegate: AnyObject {
+    func updateCollectionView()
+}
+
 class FilterViewModel {
     var wishListStore: [WishList] = [WishList]()
     var userDefaults: UserDefaultsProtocol
     var userDefaultsHelper: UserDefaultsHelperProtocol.Type
+    
     weak var filterViewControllerDelegate: FilterViewControllerDelegate?
+    weak var filterViewModelDelegate: FilterViewModelDelegate?
+    
     private(set) var listOfFilterStrings: [String]?
     private(set) var distanceToFilterBy: Int?
     
@@ -25,6 +36,7 @@ class FilterViewModel {
     func retrieveData() {
         NetworkManager.getData() { [weak self] wishLists in
             self?.wishListStore = wishLists
+            self?.filterViewModelDelegate?.updateCollectionView()
         }
         //wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }

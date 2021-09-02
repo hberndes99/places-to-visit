@@ -7,9 +7,6 @@
 
 import UIKit
 
-protocol FilterViewControllerDelegate: AnyObject {
-    func applyFilters(filterList: [String]?, distance: Int?)
-}
 
 
 class FilterViewController: UIViewController {
@@ -24,7 +21,6 @@ class FilterViewController: UIViewController {
     
     private var filterViewModel: FilterViewModel!
    
-    
     weak var filterViewControllerDelegate: FilterViewControllerDelegate?
     
     private let distanceArray = [1, 3, 5, 10, 20]
@@ -43,6 +39,7 @@ class FilterViewController: UIViewController {
         view.backgroundColor = .white
         filterViewModel = FilterViewModel()
         filterViewModel.filterViewControllerDelegate = filterViewControllerDelegate
+        filterViewModel.filterViewModelDelegate = self
         filterViewModel.retrieveData()
         
         titleFilterLabel = UILabel()
@@ -224,4 +221,12 @@ extension FilterViewController: UICollectionViewDelegate {
             }
         }
     }
+}
+
+extension FilterViewController: FilterViewModelDelegate {
+    func updateCollectionView() {
+        filterCollectionView.reloadData()
+    }
+    
+    
 }
