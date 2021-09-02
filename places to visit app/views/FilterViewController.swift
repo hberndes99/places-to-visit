@@ -225,7 +225,9 @@ extension FilterViewController: UICollectionViewDelegate {
 
 extension FilterViewController: FilterViewModelDelegate {
     func updateCollectionView() {
-        filterCollectionView.reloadData()
+        DispatchQueue.main.async {
+            self.filterCollectionView.reloadData()
+        }
     }
     
     

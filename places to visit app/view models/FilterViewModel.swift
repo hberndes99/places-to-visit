@@ -65,6 +65,7 @@ class FilterViewModel {
         //if listOfFilterStrings.count == 0 {
         //    return
         //}
+        print("apply filters called")
         filterViewControllerDelegate?.applyFilters(filterList: listOfFilterStrings, distance: distanceToFilterBy)
     }
 }
