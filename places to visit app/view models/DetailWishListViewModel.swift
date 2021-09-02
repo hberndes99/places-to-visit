@@ -32,9 +32,9 @@ class DetailWishListViewModel {
         //wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }
     
-    func updateUserDefaults() {
+    //func updateUserDefaults() {
         //userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
-    }
+    //}
     
     func deletePlaceOfInterest(at position: Int, from wishListPosition: Int) {
         //if wishListStore.count > wishListPosition, wishListStore.[wishListPosition].items.count > position {
@@ -42,6 +42,13 @@ class DetailWishListViewModel {
          //   wishListToDeleteFrom.items.remove(at: position)
          //   updateUserDefaults()
         //}
+        let mapPointToDelete = wishListStore[wishListPosition].items[position]
+        if let id = mapPointToDelete.id {
+            NetworkManager.deleteMapPoint(id: id)
+            self.wishListStore[wishListPosition].items.remove(at: position)
+
+        }
+        
     }
     
     func deleteWishList(at position: Int) {

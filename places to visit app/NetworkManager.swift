@@ -96,4 +96,24 @@ class NetworkManager {
             task.resume()
         }
     }
+    
+    
+    static func deleteMapPoint(id: Int) {
+        if let url = URL(string: "http://localhost:8000/places/wishlists/mappoints/\(id)") {
+            var request = URLRequest(url: url)
+            request.httpMethod = "DELETE"
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                guard let httpResponse = response as? HTTPURLResponse,
+                   (200...299).contains(httpResponse.statusCode) else {
+                    print("bad response")
+                    return
+                }
+            }
+            task.resume()
+        }
+    }
 }
