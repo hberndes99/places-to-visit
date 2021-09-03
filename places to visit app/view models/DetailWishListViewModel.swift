@@ -13,18 +13,16 @@ protocol DetailWishListViewModelDelegate: AnyObject {
 
 class DetailWishListViewModel {
     private(set) var wishListStore: [WishList] = [WishList]()
-    private var userDefaults: UserDefaultsProtocol
-    private var userDefaultsHelper: UserDefaultsHelperProtocol.Type
+
     weak var detailWishListViewModelDelegate: DetailWishListViewModelDelegate?
+    var networkManager: NetworkManagerProtocol
     
-    init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
-         userDefaultsHelper: UserDefaultsHelperProtocol.Type = UserDefaultsHelper.self) {
-        self.userDefaults = userDefaults
-        self.userDefaultsHelper = userDefaultsHelper
+    init(networkManager: NetworkManagerProtocol = NetworkManager()) {
+        self.networkManager = networkManager
     }
     
     func retrieveData() {
-        NetworkManager.getData() { [weak self] wishLists in
+        networkManager.getData() { [weak self] wishLists in
             self?.wishListStore = wishLists
             self?.detailWishListViewModelDelegate?.updateDetailView()
         }
@@ -33,7 +31,7 @@ class DetailWishListViewModel {
     func deletePlaceOfInterest(at position: Int, from wishListPosition: Int) {
         let mapPointToDelete = wishListStore[wishListPosition].items[position]
         if let id = mapPointToDelete.id {
-            NetworkManager.deleteItem(endpoint: "places/wishlists/mappoints/", id: id)
+            networkManager.deleteItem(endpoint: "places/wishlists/mappoints/", id: id)
             self.wishListStore[wishListPosition].items.remove(at: position)
         }
     }
@@ -41,7 +39,7 @@ class DetailWishListViewModel {
     func deleteWishList(at position: Int, completion: @escaping () -> ()) {
         if wishListStore.count > position {
             if let id = wishListStore[position].id {
-                NetworkManager.deleteItem(endpoint: "places/wishlists/", id: id)
+                networkManager.deleteItem(endpoint: "places/wishlists/", id: id)
                 completion()
             }
             wishListStore.remove(at: position)

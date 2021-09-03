@@ -5,6 +5,7 @@
 //  Created by Harriette Berndes on 11/08/2021.
 //
 
+/*
 import XCTest
 @testable import places_to_visit_app
 import MapKit
@@ -39,3 +40,4 @@ class WishListStoreHelperTests: XCTestCase {
     
 
 }
+*/

@@ -9,6 +9,9 @@ import XCTest
 @testable import places_to_visit_app
 import MapKit
 
+/*
+ 
+
 class UserDefaultsHelperTests: XCTestCase {
 
     var mockUserDefaults: MockUserDefaults!
@@ -90,3 +93,5 @@ class UserDefaultsHelperTests: XCTestCase {
     }
     
 }
+
+ */

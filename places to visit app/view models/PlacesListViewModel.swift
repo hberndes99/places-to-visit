@@ -13,18 +13,16 @@ protocol PlacesListViewModelDelegate: AnyObject {
 
 class PlacesListViewModel {
     var wishListStore: [WishList] = [WishList]()
-    var userDefaults: UserDefaultsProtocol
-    var userDefaultsHelper: UserDefaultsHelperProtocol.Type
+ 
     weak var placesListViewModelDelegate: PlacesListViewModelDelegate?
+    var networkManager: NetworkManagerProtocol
     
-    init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
-         userDefaultsHelper: UserDefaultsHelperProtocol.Type = UserDefaultsHelper.self) {
-        self.userDefaults = userDefaults
-        self.userDefaultsHelper = userDefaultsHelper
+    init(networkManager: NetworkManagerProtocol = NetworkManager()) {
+        self.networkManager = networkManager
     }
     
     func retrieveData() {
-        NetworkManager.getData() { [weak self] wishLists in
+        networkManager.getData() { [weak self] wishLists in
             self?.wishListStore = wishLists
             self?.placesListViewModelDelegate?.updateWishListList()
         }

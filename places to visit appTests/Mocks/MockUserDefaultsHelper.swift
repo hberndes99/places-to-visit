@@ -9,6 +9,7 @@ import Foundation
 @testable import places_to_visit_app
 import MapKit
 
+/*
 class MockUserDefaultsHelper: UserDefaultsHelperProtocol {
     
     static var updateUserDefaultsWasCalled: Bool = false
@@ -24,6 +25,6 @@ class MockUserDefaultsHelper: UserDefaultsHelperProtocol {
     static func updateUserDefaults(userDefaults: UserDefaultsProtocol, wishListStore: WishListStore) {
         self.updateUserDefaultsWasCalled = true
     }
-    
-    
+   
 }
+*/

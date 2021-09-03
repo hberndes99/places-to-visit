@@ -17,8 +17,6 @@ protocol FilterViewModelDelegate: AnyObject {
 
 class FilterViewModel {
     private(set) var wishListStore: [WishList] = [WishList]()
-    private var userDefaults: UserDefaultsProtocol
-    private var userDefaultsHelper: UserDefaultsHelperProtocol.Type
     
     weak var filterViewControllerDelegate: FilterViewControllerDelegate?
     weak var filterViewModelDelegate: FilterViewModelDelegate?
@@ -26,15 +24,16 @@ class FilterViewModel {
     private(set) var listOfFilterStrings: [String]?
     private(set) var distanceToFilterBy: Int?
     
-    init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
-         userDefaultsHelper: UserDefaultsHelperProtocol.Type = UserDefaultsHelper.self) {
-        self.userDefaults = userDefaults
-        self.userDefaultsHelper = userDefaultsHelper
+    var networkManager: NetworkManagerProtocol
+    
+    init(networkManager: NetworkManagerProtocol = NetworkManager()) {
+        self.networkManager = networkManager
     }
     
     // should be private
     func retrieveData() {
-        NetworkManager.getData() { [weak self] wishLists in
+        let networkManager = NetworkManager()
+        networkManager.getData() { [weak self] wishLists in
             self?.wishListStore = wishLists
             self?.filterViewModelDelegate?.updateCollectionView()
         }

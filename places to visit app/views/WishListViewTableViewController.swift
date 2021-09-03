@@ -39,7 +39,7 @@ class WishListViewTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         placesListViewModel.retrieveData()
-        placesOfInterestTable.reloadData()
+        //placesOfInterestTable.reloadData()
     }
     
     func addConstraints() {
@@ -85,6 +85,4 @@ extension WishListViewTableViewController: PlacesListViewModelDelegate {
             self.placesOfInterestTable.reloadData()
         }
     }
-    
-    
 }

@@ -19,15 +19,12 @@ class MapViewControllerViewModel {
     private var filterDistance: Int?
     private(set) var userCurrentLocation: CLLocation?
     var wishListStore: [WishList] = [WishList]()
-    var userDefaults: UserDefaultsProtocol
-    var userDefaultsHelper: UserDefaultsHelperProtocol.Type
+
     weak var mapViewControllerViewModelDelegate: MapViewControllerViewModelDelegate?
+    var networkManager: NetworkManagerProtocol
     
-    
-    init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
-         userDefaultsHelper: UserDefaultsHelperProtocol.Type = UserDefaultsHelper.self) {
-        self.userDefaults = userDefaults
-        self.userDefaultsHelper = userDefaultsHelper
+    init(networkManager: NetworkManagerProtocol = NetworkManager()) {
+        self.networkManager = networkManager
     }
     
     func setUserLocation(currentLocation: CLLocation) {
@@ -35,7 +32,7 @@ class MapViewControllerViewModel {
     }
     
     func retrieveData() {
-        NetworkManager.getData() { [weak self] wishLists in
+        networkManager.getData() { [weak self] wishLists in
             self?.wishListStore = wishLists
             if let filteringInPlace = self?.filteringInPlace {
                 if filteringInPlace {
@@ -57,10 +54,6 @@ class MapViewControllerViewModel {
         }
     }
     
-    func savePlaceOfInterestToUserDefaults() {
-        //wishListStoreToSave = wishListStore
-        //userDefaultsHelper.updateUserDefaults(userDefaults: userDefaults, wishListStore: self.wishListStore)
-    }
     
     func savePlaceOfInterest(placeOfInterest: MKMapItem, wishListId: Int) {
         var subtitleString: String = ""
@@ -81,27 +74,20 @@ class MapViewControllerViewModel {
                                                        wishList: wishListId)
         
         //     PREVENT DUPLICATION
-        for place in wishListStore {
-            for item in place.items {
-                if item.title == newMapAnnotationPoint.title, item.subtitle == newMapAnnotationPoint.title {
-                    print("removed duplication")
-                    return
-                }
+        // get index of the wishlist id
+        guard let wishListIndex = wishListStore.firstIndex(where: { wishList in
+            wishList.id == wishListId
+        }) else { return }
+        for item in wishListStore[wishListIndex].items {
+            if item.title == newMapAnnotationPoint.title, item.subtitle == newMapAnnotationPoint.title {
+                print("removed duplication")
+                return
             }
         }
         
-        NetworkManager.postData(dataToPost: newMapAnnotationPoint, endpoint: "places/wishlists/mappoints/") { [weak self] mapAnnotationPoint in
-            guard let wishListToAddToIndex = self?.wishListStore.firstIndex(where: { wishlist in
-                if wishlist.id == wishListId {
-                    return true
-                }
-                else {
-                    return false
-                }
-            }) else {
-                return
-            }
-            self?.wishListStore[wishListToAddToIndex].items.append(mapAnnotationPoint)
+        networkManager.postData(dataToPost: newMapAnnotationPoint, endpoint: "places/wishlists/mappoints/") { [weak self] mapAnnotationPoint in
+            self?.wishListStore[wishListIndex].items.append(mapAnnotationPoint)
+            
         }
     }
     
