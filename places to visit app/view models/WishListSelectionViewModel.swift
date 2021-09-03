@@ -26,7 +26,6 @@ class WishListSelectionViewModel {
             self?.wishListStore = wishLists
             self?.wishListSelectionViewModelDelegate?.updateWishListList()
         }
-        //wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }
 
     

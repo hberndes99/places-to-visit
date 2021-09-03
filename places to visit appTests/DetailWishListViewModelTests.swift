@@ -11,50 +11,54 @@ import MapKit
 
 class DetailWishListViewModelTests: XCTestCase {
     var detailWishListViewModel: DetailWishListViewModel!
+    var mockNetworkManager: MockNetworkManager!
     
     override func setUpWithError() throws {
-
-        detailWishListViewModel = DetailWishListViewModel()
-        
-        
-        
+        mockNetworkManager = MockNetworkManager()
+        detailWishListViewModel = DetailWishListViewModel(networkManager: mockNetworkManager)
     }
 
     override func tearDownWithError() throws {
         detailWishListViewModel = nil
-
+        mockNetworkManager = nil
     }
     
     func testRetrieveData() {
+        var mockDetailWishListViewModelDelegate = MockDetailWishListViewModelDelegate()
+        detailWishListViewModel.detailWishListViewModelDelegate = mockDetailWishListViewModelDelegate
         detailWishListViewModel.retrieveData()
         
-        //XCTAssertEqual(detailWishListViewModel.wishListStore.wishLists.count, 2)
-        //XCTAssertEqual(detailWishListViewModel.wishListStore.wishLists[0].name, "test coffee list")
+        XCTAssertEqual(detailWishListViewModel.wishListStore.count, 2)
+        XCTAssertEqual(detailWishListViewModel.wishListStore[0].name, "coffee wish list")
+        XCTAssert(mockDetailWishListViewModelDelegate.updateDetailViewCalled)
     }
     
 
 
     func testDeletePlaceOfInterest() {
+        detailWishListViewModel.retrieveData()
         detailWishListViewModel.deletePlaceOfInterest(at: 0, from: 0)
         
-        //XCTAssertEqual(detailWishListViewModel.wishListStore.wishLists[0].items.count, 1)
-            //XCTAssertEqual(detailWishListViewModel.wishListStore.wishLists[0].items[0].title, "coffee place two")
+        XCTAssertEqual(detailWishListViewModel.wishListStore[0].items.count, 1)
+        XCTAssertEqual(detailWishListViewModel.wishListStore[0].items[0].title, "coffee place two")
     }
     
-    func testDeletePlaceOfInterest_outOfRange() {
-        detailWishListViewModel.deletePlaceOfInterest(at: 3, from: 0)
-        
-        //XCTAssertEqual(detailWishListViewModel.wishListStore.wishLists[0].items.count, 2)
-        //XCTAssertEqual(detailWishListViewModel.wishListStore.wishLists[0].items[0].title, "coffee place one")
-    }
-    
-   
     
     func testDeleteWishList_outOfRange() {
-        //detailWishListViewModel.deleteWishList(at: 2)
+        detailWishListViewModel.retrieveData()
+        detailWishListViewModel.deleteWishList(at: 0) {
+            
+        }
         
-        //XCTAssertEqual(detailWishListViewModel.wishListStore.wishLists.count, 2)
-        //XCTAssertEqual(detailWishListViewModel.wishListStore.wishLists[0].name, "coffee")
+        XCTAssertEqual(detailWishListViewModel.wishListStore.count, 1)
+        XCTAssertEqual(detailWishListViewModel.wishListStore[0].name, "restaurant wish list")
     }
 
+}
+
+class MockDetailWishListViewModelDelegate: DetailWishListViewModelDelegate {
+    var updateDetailViewCalled: Bool = false
+    func updateDetailView() {
+        updateDetailViewCalled = true
+    }
 }

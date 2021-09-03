@@ -29,15 +29,12 @@ class FilterViewModel {
     init(networkManager: NetworkManagerProtocol = NetworkManager()) {
         self.networkManager = networkManager
     }
-    
-    // should be private
+
     func retrieveData() {
-        let networkManager = NetworkManager()
         networkManager.getData() { [weak self] wishLists in
             self?.wishListStore = wishLists
             self?.filterViewModelDelegate?.updateCollectionView()
         }
-        //wishListStore = userDefaultsHelper.retrieveDataFromUserDefaults(userDefaults: userDefaults)
     }
     
     func addToFilterQueries(wishListName: String) {

@@ -14,11 +14,6 @@ class MapViewControllerViewModelTests: XCTestCase {
     var mapViewControllerViewModel: MapViewControllerViewModel!
     var mockNetworkManager: MockNetworkManager!
     var mockMapViewControllerViewModelDelegate: MockMapViewControllerViewModelDelegate!
-    var coffeePlaceOne: MapAnnotationPoint!
-    var coffeePlaceTwo: MapAnnotationPoint!
-    var coffeeWishList: WishList!
-    var restaurantOne: MapAnnotationPoint!
-    var restaurantWishList: WishList!
     var currentLocation: CLLocation!
     
     override func setUpWithError() throws {
@@ -27,10 +22,6 @@ class MapViewControllerViewModelTests: XCTestCase {
         mockNetworkManager = MockNetworkManager()
        mapViewControllerViewModel = MapViewControllerViewModel(networkManager: mockNetworkManager)
         mapViewControllerViewModel.mapViewControllerViewModelDelegate = mockMapViewControllerViewModelDelegate
-        
-        //coffeePlaceOne = MapAnnotationPoint(id: 1, title: "coffee place one", subtitle: "1, the street", longitude: "50", latitude: "50", number: "1", streetAddress: "the street", wishList: 1)
-        
-        //coffeeWishList = WishList(id: 1, name: "coffee wish list", items: [], description: "chill coffee")
         
         currentLocation = CLLocation(latitude: CLLocationDegrees(30), longitude: CLLocationDegrees(30))
     }

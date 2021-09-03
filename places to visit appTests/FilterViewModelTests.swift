@@ -11,22 +11,23 @@ import XCTest
 
 class FilterViewModelTests: XCTestCase {
     var filterViewModel: FilterViewModel!
-
+    var mockNetworkManager: MockNetworkManager!
     
     override func setUpWithError() throws {
-
-        filterViewModel = FilterViewModel()
+        mockNetworkManager = MockNetworkManager()
+        filterViewModel = FilterViewModel(networkManager: mockNetworkManager)
     }
 
     override func tearDownWithError() throws {
         filterViewModel = nil
+        mockNetworkManager = nil
     }
 
     func testRetrieveData() {
         filterViewModel.retrieveData()
         
-        //XCTAssertEqual(filterViewModel.wishListStore.wishLists.count, 2)
-        //XCTAssertEqual(filterViewModel.wishListStore.wishLists[0].name, "test coffee list")
+        XCTAssertEqual(filterViewModel.wishListStore.count, 2)
+        XCTAssertEqual(filterViewModel.wishListStore[0].name, "coffee wish list")
     }
     
     func testAddToFilterQueries() {
