@@ -8,9 +8,16 @@
 import Foundation
 
 class NetworkManager: NetworkManagerProtocol {
+    static let localHostUrl = "http://127.0.0.1:8000/"
+    var networkSessionObject: NetworkSession
+    
+    init(networkSessionObject: NetworkSession = URLSession.shared) {
+        self.networkSessionObject = networkSessionObject
+    }
+    
     func getData(completion: @escaping ([WishList]) -> Void) {
         let url = URL(string: "\(NetworkManager.localHostUrl)places/wishlists/")
-        let task = URLSession.shared.dataTask(with: url!) { data, response, error in
+        let task = networkSessionObject.dataTask(with: url!) { data, response, error in
             if let error = error {
                 print("error: \(error.localizedDescription)")
                 return
@@ -34,13 +41,12 @@ class NetworkManager: NetworkManagerProtocol {
         let jsonEncoder = JSONEncoder()
         if let encodedData = try? jsonEncoder.encode(dataToPost) {
             if let url = URL(string: "\(NetworkManager.localHostUrl)\(endpoint)") {
-                print("url worked")
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
                 request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
                 request.setValue("application/json", forHTTPHeaderField: "Accept")
                 request.httpBody = encodedData
-                let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                let task = networkSessionObject.dataTask(with: request) { data, response, error in
                     if let error = error {
                         print("error: \(error.localizedDescription)")
                         return
@@ -67,7 +73,7 @@ class NetworkManager: NetworkManagerProtocol {
         if let url = URL(string: "\(NetworkManager.localHostUrl)\(endpoint)\(id)/") {
             var request = URLRequest(url: url)
             request.httpMethod = "DELETE"
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            let task = networkSessionObject.dataTask(with: request) { data, response, error in
                 if let error = error {
                     print(error.localizedDescription)
                     return
@@ -81,16 +87,41 @@ class NetworkManager: NetworkManagerProtocol {
             task.resume()
         }
     }
-    
-    
-    static let localHostUrl = "http://127.0.0.1:8000/"
-    
-   
+
 }
+
+
 
 
 protocol NetworkManagerProtocol {
     func getData(completion: @escaping ([WishList]) -> Void)
     func postData<T: Codable>(dataToPost: T, endpoint: String, completion: @escaping (T) -> ())
     func deleteItem(endpoint: String, id: Int)
+}
+
+
+protocol NetworkTask {
+    func resume()
+}
+
+extension URLSessionDataTask: NetworkTask {
+    
+}
+
+protocol NetworkSession {
+    func dataTask(with request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> NetworkTask
+
+    func dataTask(with url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> NetworkTask
+}
+
+extension URLSession: NetworkSession {
+    func dataTask(with request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> NetworkTask {
+        return dataTask(with: request, completionHandler: completion)
+    }
+    
+    func dataTask(with url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> NetworkTask {
+        return dataTask(with: url, completionHandler: completion)
+    }
+    
+    
 }

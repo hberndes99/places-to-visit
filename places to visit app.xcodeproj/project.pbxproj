@@ -51,6 +51,9 @@
 		E4FC0C4C26D3F36B00295645 /* DetailWishListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC0C4B26D3F36B00295645 /* DetailWishListViewModelTests.swift */; };
 		E4FC0C4E26D7D92400295645 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC0C4D26D7D92400295645 /* NetworkManager.swift */; };
 		E4FC0C5026E217E600295645 /* NetworkManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC0C4F26E217E600295645 /* NetworkManagerMock.swift */; };
+		E4FC0C5226E2772300295645 /* MockNetworkTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC0C5126E2772300295645 /* MockNetworkTask.swift */; };
+		E4FC0C5426E2772F00295645 /* MockNetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC0C5326E2772F00295645 /* MockNetworkSession.swift */; };
+		E4FC0C5626E279E600295645 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC0C5526E279E600295645 /* NetworkManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +124,9 @@
 		E4FC0C4B26D3F36B00295645 /* DetailWishListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWishListViewModelTests.swift; sourceTree = "<group>"; };
 		E4FC0C4D26D7D92400295645 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E4FC0C4F26E217E600295645 /* NetworkManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerMock.swift; sourceTree = "<group>"; };
+		E4FC0C5126E2772300295645 /* MockNetworkTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkTask.swift; sourceTree = "<group>"; };
+		E4FC0C5326E2772F00295645 /* MockNetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkSession.swift; sourceTree = "<group>"; };
+		E4FC0C5526E279E600295645 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +208,7 @@
 				E477ECAD26C401AA00EA3B1B /* WishListStoreHelperTests.swift */,
 				E4E9644926CA9D75008B6860 /* FilterViewModelTests.swift */,
 				E4FC0C4B26D3F36B00295645 /* DetailWishListViewModelTests.swift */,
+				E4FC0C5526E279E600295645 /* NetworkManagerTests.swift */,
 			);
 			path = "places to visit appTests";
 			sourceTree = "<group>";
@@ -253,6 +260,8 @@
 				E477EC8926B3FAAC00EA3B1B /* MockUserDefaults.swift */,
 				E477ECA626BBE07A00EA3B1B /* MockUserDefaultsHelper.swift */,
 				E4FC0C4F26E217E600295645 /* NetworkManagerMock.swift */,
+				E4FC0C5126E2772300295645 /* MockNetworkTask.swift */,
+				E4FC0C5326E2772F00295645 /* MockNetworkSession.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -443,15 +452,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				E477ECA726BBE07A00EA3B1B /* MockUserDefaultsHelper.swift in Sources */,
+				E4FC0C5226E2772300295645 /* MockNetworkTask.swift in Sources */,
 				E477EC7E26AEEBFD00EA3B1B /* MapViewControllerViewModelTests.swift in Sources */,
 				E477EC6E26AAB67600EA3B1B /* SearchResultsVCViewModelTests.swift in Sources */,
 				E477EC8A26B3FAAC00EA3B1B /* MockUserDefaults.swift in Sources */,
 				E477EC8826B3F9D400EA3B1B /* PlacesListViewModelTests.swift in Sources */,
 				E4E9644A26CA9D75008B6860 /* FilterViewModelTests.swift in Sources */,
+				E4FC0C5426E2772F00295645 /* MockNetworkSession.swift in Sources */,
 				E477ECA926BBF89400EA3B1B /* UserDefaultsHelperTests.swift in Sources */,
 				E477ECAE26C401AA00EA3B1B /* WishListStoreHelperTests.swift in Sources */,
 				4526049026A9895B00D2B950 /* SearchNetworkManagerTests.swift in Sources */,
 				E477EC7126AAC56800EA3B1B /* MockSearchObjects.swift in Sources */,
+				E4FC0C5626E279E600295645 /* NetworkManagerTests.swift in Sources */,
 				E4FC0C4C26D3F36B00295645 /* DetailWishListViewModelTests.swift in Sources */,
 				E477EC9626B8306500EA3B1B /* WishListSelectionViewModelTests.swift in Sources */,
 				E4FC0C5026E217E600295645 /* NetworkManagerMock.swift in Sources */,
