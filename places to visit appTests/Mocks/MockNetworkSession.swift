@@ -25,12 +25,8 @@ class MockNetworkSession: NetworkSession {
             completion(nil, nil, networkError)
             return MockNetworkTask()
         }
-        let coffeeWishList = WishList(id: 1, name: "coffee wish list mock network session", items: [coffeePlaceOne, coffeePlaceTwo], description: "chill coffee")
-        let restaurantWishList = WishList(id: 2, name: "restaurant wish list", items: [], description: "restaurants")
-        let jsonEncoder = JSONEncoder()
-        let jsonData = try! jsonEncoder.encode([coffeeWishList, restaurantWishList])
-        
-        completion(jsonData, httpResponse, nil)
+        let data = request.httpBody
+        completion(data, httpResponse, nil)
         return MockNetworkTask()
     }
     

@@ -19,9 +19,9 @@ class MockNetworkManager: NetworkManagerProtocol {
         completion([coffeeWishList, restaurantWishList], nil)
     }
     
-    func postData<T>(dataToPost: T, endpoint: String, completion: @escaping (T) -> ()) where T : Decodable, T : Encodable {
+    func postData<T>(dataToPost: T, endpoint: String, completion: @escaping (T?, String?) -> ()) where T : Decodable, T : Encodable {
         print("in mock")
-        completion(dataToPost)
+        completion(dataToPost, nil)
     }
     
     func deleteItem(endpoint: String, id: Int) {

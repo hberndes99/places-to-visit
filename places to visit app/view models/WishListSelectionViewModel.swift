@@ -39,9 +39,14 @@ class WishListSelectionViewModel {
         if WishListStoreHelper.checkForDuplication(itemToCheckFor: newWishList, listToCheckThrough: wishListStore, propertiesToCheckAgainst: [\WishList.name]) {
             return
         }
-        networkManager.postData(dataToPost: newWishList, endpoint: "places/wishlists/"){ [weak self] wishList in
-            self?.wishListStore.append(wishList)
-            self?.wishListSelectionViewModelDelegate?.updateWishListList()
+        networkManager.postData(dataToPost: newWishList, endpoint: "places/wishlists/"){ [weak self] wishList, errorMessage in
+            if let errorMessage = errorMessage {
+                print(errorMessage)
+            }
+            if let wishList = wishList {
+                self?.wishListStore.append(wishList)
+                self?.wishListSelectionViewModelDelegate?.updateWishListList()
+            }
         }
     }
 }

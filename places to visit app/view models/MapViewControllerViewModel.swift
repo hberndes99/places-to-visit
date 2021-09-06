@@ -90,9 +90,13 @@ class MapViewControllerViewModel {
             }
         }
         
-        networkManager.postData(dataToPost: newMapAnnotationPoint, endpoint: "places/wishlists/mappoints/") { [weak self] mapAnnotationPoint in
-            self?.wishListStore[wishListIndex].items.append(mapAnnotationPoint)
-            
+        networkManager.postData(dataToPost: newMapAnnotationPoint, endpoint: "places/wishlists/mappoints/") { [weak self] mapAnnotationPoint, errorMessage in
+            if let errorMessage = errorMessage {
+                print(errorMessage)
+            }
+            if let mapAnnotationPoint = mapAnnotationPoint {
+                self?.wishListStore[wishListIndex].items.append(mapAnnotationPoint)
+            }
         }
     }
     

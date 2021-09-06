@@ -64,8 +64,44 @@ class NetworkManagerTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     // test for other requests
+    
+    func testPostData() {
+        let newWishList = WishList(id: 3, name: "bookshops", items: [], description: "quiet interesting bookshops")
+        let expectation = XCTestExpectation(description: "")
+        networkManager.postData(dataToPost: newWishList, endpoint: "places/wishlists/") { wishList, errorMessage in
+            XCTAssertEqual(wishList?.name, "bookshops")
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 5)
+    }
+    
+    func testPostData_errorOccured() {
+        let newWishList = WishList(id: 3, name: "bookshops", items: [], description: "quiet interesting bookshops")
+        mockNetworkSession.networkError = NetworkErrors.networkError
+        networkManager = NetworkManager(networkSessionObject: mockNetworkSession)
+        
+        let expectation = XCTestExpectation(description: "")
+        networkManager.postData(dataToPost: newWishList, endpoint: "places/wishlists/") { wishList, errorMessage in
+            XCTAssertEqual(errorMessage, "error occured")
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 5)
+    }
+    
+    func testPostData_badResponse() {
+        let newWishList = WishList(id: 3, name: "bookshops", items: [], description: "quiet interesting bookshops")
+        mockNetworkSession.httpResponse = HTTPURLResponse(url: URL(string: "url")!, statusCode: 400, httpVersion: nil, headerFields: nil)!
+        networkManager = NetworkManager(networkSessionObject: mockNetworkSession)
+        let expectation = XCTestExpectation(description: "")
+        networkManager.postData(dataToPost: newWishList, endpoint: "places/wishlists/") { wishList, errorMessage in
+            XCTAssertEqual(errorMessage, "bad response")
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 5)
+    }
 }
 
-enum NetworkErrors: Error {
-    case networkError
-}
+

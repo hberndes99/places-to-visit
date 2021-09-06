@@ -37,7 +37,7 @@ class NetworkManager: NetworkManagerProtocol {
         task.resume()
     }
     
-    func postData<T>(dataToPost: T, endpoint: String, completion: @escaping (T) -> ()) where T : Decodable, T : Encodable {
+    func postData<T>(dataToPost: T, endpoint: String, completion: @escaping (T?, String?) -> ()) where T : Decodable, T : Encodable {
         let jsonEncoder = JSONEncoder()
         if let encodedData = try? jsonEncoder.encode(dataToPost) {
             if let url = URL(string: "\(NetworkManager.localHostUrl)\(endpoint)") {
@@ -48,19 +48,19 @@ class NetworkManager: NetworkManagerProtocol {
                 request.httpBody = encodedData
                 let task = networkSessionObject.dataTask(with: request) { data, response, error in
                     if let error = error {
-                        print("error: \(error.localizedDescription)")
+                        completion(nil, "error occured")
                         return
                     }
                     guard let httpResponse = response as? HTTPURLResponse,
                           (200...299).contains(httpResponse.statusCode) else {
-                        print("bad response")
+                        completion(nil, "bad response")
                         return
                     }
                     if let data = data {
                         let jsonDecoder = JSONDecoder()
                         if let decodedData = try? jsonDecoder.decode(T.self, from: data) {
                             print("calling completion")
-                            completion(decodedData)
+                            completion(decodedData, nil)
                         }
                     }
                 }
@@ -95,7 +95,7 @@ class NetworkManager: NetworkManagerProtocol {
 
 protocol NetworkManagerProtocol {
     func getData(completion: @escaping (_ wishLists: [WishList]?, _ errorMessage: String?) -> Void)
-    func postData<T: Codable>(dataToPost: T, endpoint: String, completion: @escaping (T) -> ())
+    func postData<T>(dataToPost: T, endpoint: String, completion: @escaping (T?, String?) -> ()) where T : Decodable, T : Encodable
     func deleteItem(endpoint: String, id: Int)
 }
 
@@ -122,4 +122,10 @@ extension URLSession: NetworkSession {
     func dataTask(with url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> NetworkTask {
         return dataTask(with: url, completionHandler: completion)
     }
+}
+
+
+enum NetworkErrors: Error {
+    case networkError
+    case badResponse
 }
