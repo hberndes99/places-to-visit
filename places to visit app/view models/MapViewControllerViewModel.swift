@@ -32,25 +32,30 @@ class MapViewControllerViewModel {
     }
     
     func retrieveData() {
-        networkManager.getData() { [weak self] wishLists in
-            self?.wishListStore = wishLists
-            if let filteringInPlace = self?.filteringInPlace {
-                if filteringInPlace {
-                    if let filterTerms = self?.filterTerms {
-                        if let filteredWishLists = self?.wishListStore.filter({ wishList in
-                            filterTerms.contains(wishList.name)
-                        }) {
-                            self?.wishListStore = filteredWishLists
-                        }
-                        
-                    }
-                    guard let filterDistance = self?.filterDistance, let _ = self?.userCurrentLocation else {
-                        return
-                    }
-                    self?.filterMapPointsByDistance(numberOfKm: filterDistance)
-                }
+        networkManager.getData() { [weak self] wishLists, errorMessage in
+            if let error = errorMessage {
+                print(error)
             }
-            self?.mapViewControllerViewModelDelegate?.loadMapAnnotations()
+            if let wishLists = wishLists {
+                self?.wishListStore = wishLists
+                if let filteringInPlace = self?.filteringInPlace {
+                    if filteringInPlace {
+                        if let filterTerms = self?.filterTerms {
+                            if let filteredWishLists = self?.wishListStore.filter({ wishList in
+                                filterTerms.contains(wishList.name)
+                            }) {
+                                self?.wishListStore = filteredWishLists
+                            }
+                            
+                        }
+                        guard let filterDistance = self?.filterDistance, let _ = self?.userCurrentLocation else {
+                            return
+                        }
+                        self?.filterMapPointsByDistance(numberOfKm: filterDistance)
+                    }
+                }
+                self?.mapViewControllerViewModelDelegate?.loadMapAnnotations()
+            }
         }
     }
     

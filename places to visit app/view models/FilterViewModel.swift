@@ -31,9 +31,14 @@ class FilterViewModel {
     }
 
     func retrieveData() {
-        networkManager.getData() { [weak self] wishLists in
-            self?.wishListStore = wishLists
-            self?.filterViewModelDelegate?.updateCollectionView()
+        networkManager.getData() { [weak self] wishLists, errorMessage in
+            if let error = errorMessage {
+                print(error)
+            }
+            if let wishLists = wishLists {
+                self?.wishListStore = wishLists
+                self?.filterViewModelDelegate?.updateCollectionView()
+            }
         }
     }
     

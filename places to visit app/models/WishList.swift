@@ -7,7 +7,11 @@
 
 import Foundation
 
-class WishList: Codable {
+class WishList: Codable, Equatable {
+    static func == (lhs: WishList, rhs: WishList) -> Bool {
+        return lhs == rhs
+    }
+    
     var id: Int?
     var name: String
     var description: String

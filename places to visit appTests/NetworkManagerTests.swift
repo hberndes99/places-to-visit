@@ -11,9 +11,11 @@ import XCTest
 class NetworkManagerTests: XCTestCase {
     var networkManager: NetworkManager!
     var mockNetworkSession: MockNetworkSession!
+    var response: HTTPURLResponse!
     
     override func setUpWithError() throws {
-        mockNetworkSession = MockNetworkSession()
+        response = HTTPURLResponse(url: URL(string: "url")!, statusCode: 200, httpVersion: nil, headerFields: nil)
+        mockNetworkSession = MockNetworkSession(httpResponse: response)
         networkManager = NetworkManager(networkSessionObject: mockNetworkSession)
     }
 
@@ -24,13 +26,46 @@ class NetworkManagerTests: XCTestCase {
     func testGetData() {
         let expectation = XCTestExpectation(description: "")
         
-        networkManager.getData { wishList in
-            XCTAssertEqual(wishList.count, 2)
-            XCTAssertEqual(wishList[0].name, "coffee wish list")
+        networkManager.getData { wishLists, errorMessage in
+            XCTAssertEqual(wishLists?.count, 2)
+            XCTAssertEqual(wishLists?[0].name, "coffee wish list mock network session")
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 5)
     }
     
+    func testData_returnError() {
+        mockNetworkSession.networkError = NetworkErrors.networkError
+        networkManager = NetworkManager(networkSessionObject: mockNetworkSession)
+        let expectation = XCTestExpectation(description: "")
+        
+        networkManager.getData { wishLists, errorMessage in
+            XCTAssertEqual(wishLists, nil)
+            XCTAssertEqual(wishLists?[0].name, nil)
+            XCTAssertEqual(errorMessage, "error occured")
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5)
+    }
     
+    // test for bad response
+    func testGetData_badResponseCode() {
+        response = HTTPURLResponse(url: URL(string: "url")!, statusCode: 400, httpVersion: nil, headerFields: nil)
+        mockNetworkSession = MockNetworkSession(httpResponse: response)
+        networkManager = NetworkManager(networkSessionObject: mockNetworkSession)
+        let expectation = XCTestExpectation(description: "")
+        
+        networkManager.getData { wishLists, errorMessage in
+            XCTAssertEqual(wishLists, nil)
+            XCTAssertEqual(wishLists?[0].name, nil)
+            XCTAssertEqual(errorMessage, "bad response")
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5)
+    }
+    // test for other requests
+}
+
+enum NetworkErrors: Error {
+    case networkError
 }

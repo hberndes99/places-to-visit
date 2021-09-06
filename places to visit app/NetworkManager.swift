@@ -15,22 +15,22 @@ class NetworkManager: NetworkManagerProtocol {
         self.networkSessionObject = networkSessionObject
     }
     
-    func getData(completion: @escaping ([WishList]) -> Void) {
+    func getData(completion: @escaping (_ wishLists: [WishList]?, _ errorMessage: String?) -> Void) {
         let url = URL(string: "\(NetworkManager.localHostUrl)places/wishlists/")
         let task = networkSessionObject.dataTask(with: url!) { data, response, error in
-            if let error = error {
-                print("error: \(error.localizedDescription)")
+            if error != nil {
+                completion(nil, "error occured")
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
-                print("bad response")
+                completion(nil, "bad response")
                 return
             }
             if let data = data {
                 let jsonDecoder = JSONDecoder()
                 if let decodedData = try? jsonDecoder.decode([WishList].self, from: data) {
-                    completion(decodedData)
+                    completion(decodedData, nil)
                 }
             }
         }
@@ -94,7 +94,7 @@ class NetworkManager: NetworkManagerProtocol {
 
 
 protocol NetworkManagerProtocol {
-    func getData(completion: @escaping ([WishList]) -> Void)
+    func getData(completion: @escaping (_ wishLists: [WishList]?, _ errorMessage: String?) -> Void)
     func postData<T: Codable>(dataToPost: T, endpoint: String, completion: @escaping (T) -> ())
     func deleteItem(endpoint: String, id: Int)
 }
@@ -122,6 +122,4 @@ extension URLSession: NetworkSession {
     func dataTask(with url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> NetworkTask {
         return dataTask(with: url, completionHandler: completion)
     }
-    
-    
 }

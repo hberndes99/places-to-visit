@@ -24,7 +24,7 @@ class DetailWishListViewModelTests: XCTestCase {
     }
     
     func testRetrieveData() {
-        var mockDetailWishListViewModelDelegate = MockDetailWishListViewModelDelegate()
+        let mockDetailWishListViewModelDelegate = MockDetailWishListViewModelDelegate()
         detailWishListViewModel.detailWishListViewModelDelegate = mockDetailWishListViewModelDelegate
         detailWishListViewModel.retrieveData()
         
