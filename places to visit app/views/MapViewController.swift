@@ -65,14 +65,15 @@ class MapViewController: UIViewController {
         
         setUpLeftBarButtons()
         setUpConstraints()
-        updateMapAnnotations()
+        loadMapAnnotations()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         mapViewControllerViewModel.retrieveData()
-        updateMapAnnotations()
+        //updateMapAnnotations()
     }
     
+    /*
     func updateMapAnnotations() {
         if let mapView = mapView {
             mapView.removeAnnotations(mapView.annotations)
@@ -81,6 +82,7 @@ class MapViewController: UIViewController {
             }
         }
     }
+ */
     
     func setUpConstraints() {
         NSLayoutConstraint.activate([
@@ -104,7 +106,7 @@ class MapViewController: UIViewController {
     
     @objc func removeFiltersButtonTapped() {
         mapViewControllerViewModel.clearFilters()
-        updateMapAnnotations()
+        loadMapAnnotations()
         setUpLeftBarButtons()
     }
     
@@ -148,11 +150,12 @@ extension MapViewController: FilterViewControllerDelegate {
 
 extension MapViewController: MapViewControllerViewModelDelegate {
     func updateMapWithFilters() {
-        updateMapAnnotations()
+        loadMapAnnotations()
         setUpLeftBarButtons()
     }
     func loadMapAnnotations() {
         DispatchQueue.main.async {
+            self.mapView.removeAnnotations(self.mapView.annotations)
             for wishList in self.mapViewControllerViewModel.wishListStore {
                 self.mapView.addAnnotations(wishList.items)
             }
